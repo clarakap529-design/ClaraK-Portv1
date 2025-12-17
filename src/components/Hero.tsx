@@ -80,7 +80,7 @@ export function Hero() {
         {/* Profile Image */}
         <div className="relative shrink-0" data-name="Mask group">
           <div className="h-[340.355px] w-[382px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[61.56px_11.495px] mask-size-[320px_320px]" data-name="Clarak-profile 2" style={{ maskImage: `url('${imgClarakProfile2}')` }}>
-            <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgClarakProfile3} />
+            <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" style={{ objectPosition: '30% 30%' }} src={imgClarakProfile3} />
           </div>
         </div>
 
@@ -222,6 +222,7 @@ export function Hero() {
             <img 
               alt="Profile" 
               className="w-full h-full object-cover" 
+              style={{ objectPosition: '40% 30%' }}
               src={imgClarakProfile3} 
             />
           </div>

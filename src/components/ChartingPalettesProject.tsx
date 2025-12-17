@@ -57,11 +57,11 @@ export function ChartingPalettesProject() {
           transition={{ delay: 0.3 }}
         >
           <div className="flex gap-2 mb-4">
-            <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase bg-[#2d6383] text-white px-4 py-1 rounded-[12px] inline-block">
-              Data Viz
+            <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab] inline-block">
+              #DataViz
             </p>
-            <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase bg-[#2d6383] text-white px-4 py-1 rounded-[12px] inline-block">
-              Design System
+            <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab] inline-block">
+              #DesignSystem
             </p>
           </div>
           <h2 className="font-['Roboto_Slab',serif] text-[40px] tracking-[1.6px] mb-6 text-[#2e2e2e]">

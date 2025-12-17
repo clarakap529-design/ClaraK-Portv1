@@ -2,6 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowLeft } from 'lucide-react';
 import { ChartingPalettesProject } from './ChartingPalettesProject';
+import { DebuggingProject } from './DebuggingProject';
 
 const projectDetails = {
   'analytics-agent': {
@@ -123,7 +124,8 @@ const projectDetails = {
       'Interactive stack trace visualization',
       'Suggested fix recommendations',
       'Real-time performance monitoring'
-    ]
+    ],
+    isCustomLayout: true
   }
 };
 
@@ -154,6 +156,11 @@ export function ProjectDetail() {
     return <ChartingPalettesProject />;
   }
 
+  // Use custom layout for debugging project
+  if (projectId === 'debugging') {
+    return <DebuggingProject />;
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -182,8 +189,8 @@ export function ProjectDetail() {
         >
           <div className="flex gap-2 mb-4">
             {project.tags.map((tag, index) => (
-              <p key={index} className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase bg-[#c76129] text-white px-4 py-1.5 rounded-[12px] inline-block">
-                {tag}
+              <p key={index} className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab] inline-block">
+                #{tag}
               </p>
             ))}
           </div>

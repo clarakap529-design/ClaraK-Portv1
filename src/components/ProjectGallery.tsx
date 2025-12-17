@@ -69,7 +69,7 @@ export function ProjectGallery() {
     : projects.filter(p => p.category === filter);
 
   return (
-    <section id="projects" className="pt-10 pb-20 bg-white">
+    <section id="projects" className="pt-10 pb-20 bg-[#f2e1cd]">
       <div className="w-full mx-auto">
         <div className="text-center mb-12">
           <h2 className="mb-4 text-[#2d6383] font-['Roboto_Slab',serif] text-[40px] font-bold">Featured Projects</h2>
@@ -86,6 +86,10 @@ export function ProjectGallery() {
                 <div className="flex flex-col gap-6">
                   <h4 className="font-['Roboto_Slab',serif] text-[40px] tracking-[1.6px]\">Analytics Agent</h4>
                   <p className="font-['Inter',sans-serif] text-[18px] tracking-[-0.09px] text-[rgba(0,0,0,0.55)] leading-[1.45]">Call out a feature, benefit, or value of your site, then link to a page where people can learn more about it.</p>
+                  <div className="flex gap-2">
+                    <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab]">#Analytics</p>
+                    <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab]">#DataViz</p>
+                  </div>
                 </div>
                 <button 
                   onClick={() => navigate('/project/analytics-agent')}
@@ -105,6 +109,10 @@ export function ProjectGallery() {
                 <div className="flex flex-col gap-6">
                   <h4 className="font-['Roboto_Slab',serif] text-[40px] tracking-[1.6px]\">Report Authoring</h4>
                   <p className="font-['Inter',sans-serif] text-[18px] tracking-[-0.09px] text-[rgba(0,0,0,0.55)] leading-[1.45]">Call out a feature, benefit, or value of your site, then link to a page where people can learn more about it.</p>
+                  <div className="flex gap-2">
+                    <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab]">#Reporting</p>
+                    <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab]">#Analytics</p>
+                  </div>
                 </div>
                 <button 
                   onClick={() => navigate('/project/report-authoring')}
@@ -124,6 +132,10 @@ export function ProjectGallery() {
                 <div className="flex flex-col gap-6">
                   <h4 className="font-['Roboto_Slab',serif] text-[40px] tracking-[1.6px] text-[#2e2e2e]">Data Visualization</h4>
                   <p className="font-['Inter',sans-serif] text-[18px] tracking-[-0.09px] text-[rgba(0,0,0,0.55)] leading-[1.45]">A comprehensive color palette system for accessible, meaningful data visualization across enterprise products.</p>
+                  <div className="flex gap-2">
+                    <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab]">#DataViz</p>
+                    <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab]">#DesignSystem</p>
+                  </div>
                 </div>
                 <button 
                   onClick={() => navigate('/project/charting-palettes')}
@@ -143,6 +155,10 @@ export function ProjectGallery() {
                 <div className="flex flex-col gap-6">
                   <h4 className="font-['Roboto_Slab',serif] text-[40px] tracking-[1.6px] text-[#2e2e2e]\">Data Management</h4>
                   <p className="font-['Inter',sans-serif] text-[18px] tracking-[-0.09px] text-[rgba(0,0,0,0.55)] leading-[1.45]">Call out a feature, benefit, or value of your site, then link to a page where people can learn more about it.</p>
+                  <div className="flex gap-2">
+                    <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab]">#Analytics</p>
+                    <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab]">#DataViz</p>
+                  </div>
                 </div>
                 <button 
                   onClick={() => navigate('/project/data-management')}
@@ -162,6 +178,10 @@ export function ProjectGallery() {
                 <div className="flex flex-col gap-6">
                   <h4 className="font-['Roboto_Slab',serif] text-[40px] tracking-[1.6px]\">Debugging</h4>
                   <p className="font-['Inter',sans-serif] text-[18px] tracking-[-0.09px] text-[rgba(0,0,0,0.55)] leading-[1.45]">Call out a feature, benefit, or value of your site, then link to a page where people can learn more about it.</p>
+                  <div className="flex gap-2">
+                    <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab]">#Analytics</p>
+                    <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab]">#AI</p>
+                  </div>
                 </div>
                 <button 
                   onClick={() => navigate('/project/debugging')}
