@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react';
 import { Hero } from './Hero';
 import { ProjectGallery } from './ProjectGallery';
 import { AICompanion } from './AICompanion';
+import { Contact } from './Contact';
 
 export function Home() {
   const [currentSection, setCurrentSection] = useState('hero');
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['hero', 'projects', 'about'];
+      const sections = ['hero', 'projects', 'contact', 'about'];
       const scrollPosition = window.scrollY + window.innerHeight / 2;
 
       for (const section of sections) {
@@ -31,6 +32,7 @@ export function Home() {
     <>
       <Hero />
       <ProjectGallery />
+      <Contact />
       <AICompanion currentSection={currentSection} />
     </>
   );

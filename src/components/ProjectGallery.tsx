@@ -84,7 +84,7 @@ export function ProjectGallery() {
         <div className="flex flex-col w-full">
           {/* Reporting Insights */}
           <div className="w-full">
-            <div className="flex flex-col lg:flex-row gap-16 items-center max-w-7xl mx-auto px-8 lg:px-22 py-12 lg:py-20">
+            <div className="flex flex-col lg:flex-row gap-16 items-center max-w-7xl mx-auto px-8 lg:px-[88px] py-12 lg:py-20">
               <div className="overflow-hidden rounded-[8px] shadow-[0px_4px_10px_2px_rgba(0,0,0,0.25)] shrink-0 w-full lg:w-[600px]">
                 <img src={reportingInsightsImg} alt="Reporting Insights" className="w-full h-auto block" />
               </div>
@@ -107,7 +107,7 @@ export function ProjectGallery() {
 
           {/* Report Authoring */}
           <div className="w-full">
-            <div className="flex flex-col lg:flex-row-reverse gap-16 items-center max-w-7xl mx-auto px-8 lg:px-22 py-12 lg:py-20">
+            <div className="flex flex-col lg:flex-row-reverse gap-16 items-center max-w-7xl mx-auto px-8 lg:px-[88px] py-12 lg:py-20">
               <div className="overflow-hidden rounded-[8px] shadow-[0px_4px_10px_2px_rgba(0,0,0,0.25)] shrink-0 w-full lg:w-[600px]">
                 <img src={reportAuthoringImg} alt="Report Authoring" className="w-full h-auto block" />
               </div>
@@ -130,7 +130,7 @@ export function ProjectGallery() {
 
           {/* Data Visualization */}
           <div className="w-full">
-            <div className="flex flex-col lg:flex-row gap-16 items-center max-w-7xl mx-auto px-8 lg:px-22 py-12 lg:py-20">
+            <div className="flex flex-col lg:flex-row gap-16 items-center max-w-7xl mx-auto px-8 lg:px-[88px] py-12 lg:py-20">
               <div className="overflow-hidden rounded-[8px] shadow-[0px_4px_10px_2px_rgba(0,0,0,0.25)] shrink-0 w-full lg:w-[600px]">
                 <img src={dataVizImg} alt="Canvas Color & Style Guidelines" className="w-full h-auto block" />
               </div>
