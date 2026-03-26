@@ -42,7 +42,7 @@ export function ProjectGallery() {
     <section id="projects" className="pt-10 pb-20">
       <div className="mx-auto w-full">
         <div className="mb-12 px-4 text-center md:px-8">
-          <h2 className="font-roboto-slab mb-4 text-[40px] font-semibold leading-[1.15] text-black">
+          <h2 className="mb-4">
             Featured Projects
           </h2>
           <p

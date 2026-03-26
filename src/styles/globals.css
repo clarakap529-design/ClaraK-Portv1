@@ -163,6 +163,16 @@
   }
 }
 
+@layer base {
+  h2 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: -0.84px;
+  }
+}
+
 /* Ensure exported Tailwind arbitrary font classes for Roboto Slab
    (e.g. font-['Roboto_Slab',serif]) always resolve to the correct family. */
 [class*="Roboto_Slab"] {

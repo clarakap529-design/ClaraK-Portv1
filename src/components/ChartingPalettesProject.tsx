@@ -129,7 +129,7 @@ export function ChartingPalettesProject() {
             {/* Goals Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mt-6 mb-10">
               <div className="bg-[#f8fafb] border border-[#e1e8ed] rounded-[16px] p-6">
-                <h3 className="font-['Roboto_Slab',serif] text-[20px] tracking-[1px] mb-3 text-[#2e2e2e] leading-[30px]">
+                <h3 className="font-['Roboto_Slab',serif] text-[32px] tracking-[0.4px] mb-3 text-[#2e2e2e] leading-[1.2]">
                   Product-level Goals
                 </h3>
                 <ul className="space-y-2 list-disc ml-6">
@@ -146,7 +146,7 @@ export function ChartingPalettesProject() {
               </div>
               
               <div className="bg-[#f8fafb] border border-[#e1e8ed] rounded-[16px] p-6">
-                <h3 className="font-['Roboto_Slab',serif] text-[20px] tracking-[1px] mb-3 text-[#2e2e2e] leading-[30px]">
+                <h3 className="font-['Roboto_Slab',serif] text-[32px] tracking-[0.4px] mb-3 text-[#2e2e2e] leading-[1.2]">
                   Platform-level Goals
                 </h3>
                 <ul className="space-y-2 list-disc ml-6">
@@ -168,8 +168,8 @@ export function ChartingPalettesProject() {
             {/* Updated Color Palette Section */}
             <div className="mb-10">
               <p className="font-['Inter',sans-serif] text-[16px] leading-[1.45] text-black mb-4">One of the first deliverables was a modernized, accessible color palette for data visualization — replacing the legacy defaults with a system designed around perceptual clarity, color-blindness simulation, and WCAG AA compliance.</p>
-              <h3 className="font-['Roboto_Slab',serif] text-[34px] md:text-[40px] tracking-[0.4px] md:tracking-[0.6px] mb-1 text-[#2e2e2e] leading-[1.2]">Colors</h3>
-              <h4 className="text-[18px] font-bold py-2">
+              <h3 className="font-['Roboto_Slab',serif] text-[32px] tracking-[0.4px] mb-1 text-[#2e2e2e] leading-[1.2]">Colors</h3>
+              <h4 className="mt-4 text-[18px] font-medium py-2">
                 Original color palette (2016)
               </h4>
 
@@ -205,7 +205,7 @@ export function ChartingPalettesProject() {
               <p className="font-['Inter',sans-serif] text-[16px] leading-[1.45] text-black mb-6">To support the decision-making process, I created several Loveable prototypes to evaluate palette options, simulate color blindness conditions, and preview them across common chart types.</p>
 
               {/* Prototype Thumbnails */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 py-2">
+              <div className="mt-4 mb-4 grid grid-cols-1 md:grid-cols-3 gap-4 py-2">
                 {[imgPrototype1, imgPrototype2, imgPrototype3].map((img, i) => (
                   <div
                     key={i}
@@ -218,8 +218,8 @@ export function ChartingPalettesProject() {
               </div>
 
               {/* Updated Palette - Categorical only */}
-              <h4 className="text-[18px] font-bold py-2">Updated accessible color palette</h4>
-              <div className="overflow-x-auto pb-2">
+              <h4 className="mt-4 text-[18px] font-medium py-2">Updated accessible color palette</h4>
+              <div className="overflow-x-auto pb-2 mb-4">
                 <div className="flex gap-2 min-w-max mx-auto">
                   {categoricalColors.map((color, i) => (
                     <div key={i} className="flex flex-col items-center">
@@ -233,12 +233,12 @@ export function ChartingPalettesProject() {
                 </div>
               </div>
 
-              <h3 className="font-['Roboto_Slab',serif] text-[34px] md:text-[40px] tracking-[0.4px] md:tracking-[0.6px] mb-1 text-[#2e2e2e] mt-6 leading-[1.2]">Style Guide (for Aurora Library)</h3>
+              <h3 className="font-['Roboto_Slab',serif] text-[32px] tracking-[0.4px] mb-1 text-[#2e2e2e] mt-4 leading-[1.2]">Style Guide (for Aurora Library)</h3>
               <p className="font-['Inter',sans-serif] text-[16px] leading-[1.45] text-black mt-2 mb-4">During my charting audit, I discovered three distinct implementations of the Workday charting library — each with its own styles and patterns. Rather than defaulting to one over the others, I synthesized the common ground across all three to propose a standardized style guide that could work for everyone.</p>
 
               {/* Aurora Charts - Official Library */}
               <div className="my-6">
-                <h4 className="text-[18px] font-bold py-2">
+                <h4 className="mt-4 text-[18px] font-medium py-2">
                   Aurora (Workday's official charting library)
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
@@ -262,7 +262,7 @@ export function ChartingPalettesProject() {
               </div>
 
               {/* Style Guide Carousel */}
-              <h4 className="text-[18px] font-bold py-2">
+              <h4 className="mt-4 text-[18px] font-medium py-2">
                 Font & Style guide
               </h4>
               {(() => {
@@ -319,9 +319,9 @@ export function ChartingPalettesProject() {
                 );
               })()}
 
-              <h3 className="font-['Roboto_Slab',serif] text-[36px] md:text-[44px] tracking-[0.4px] md:tracking-[0.6px] mb-1 text-[#2e2e2e] mt-10 leading-[1.2]">How to Choose a Chart</h3>
+              <h3 className="font-['Roboto_Slab',serif] text-[32px] tracking-[0.4px] mb-1 text-[#2e2e2e] mt-10 leading-[1.2]">How to Choose a Chart</h3>
               <p className="font-['Inter',sans-serif] text-[16px] leading-[1.45] text-black mt-2">Through my audit and conversations with the seven other designers in the selection committee, a recurring theme emerged that app teams had no clear guidance on which charting library to use or when.</p>
-              <h4 className="text-[18px] font-bold py-2 mt-4">Other charting libraries</h4>
+              <h4 className="mt-4 text-[18px] font-medium py-2">Other charting libraries</h4>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {bespokeCharts.map((chart, index) => (
                   <div key={index} className="flex flex-col gap-2 items-start">
@@ -348,7 +348,7 @@ export function ChartingPalettesProject() {
                 <img src={imgDecisionTree} alt="Decision tree for choosing a charting library" className="w-full h-auto object-contain" />
               </div>
 
-              <h3 className="font-['Roboto_Slab',serif] text-[42px] md:text-[52px] tracking-[0.8px] md:tracking-[1px] mb-2 mt-14 md:mt-16 text-[#2d6383] leading-[1.2]">The Platform-Level</h3>
+              <h3 className="font-['Roboto_Slab',serif] text-[32px] tracking-[0.4px] mb-2 mt-14 md:mt-16 text-[#2e2e2e] leading-[1.2]">The Platform-Level</h3>
               <p className="font-['Inter',sans-serif] text-[16px] leading-[1.45] text-black mb-7 mt-2">My diagram revealed that a truly unified charting library wasn't just a design problem — it was an organizational and architectural one. The scope raised hard questions across every layer.</p>
 
               {/* Usage Guidelines */}
@@ -400,7 +400,7 @@ export function ChartingPalettesProject() {
             transition={{ duration: 0.6 }}
             className="text-left pt-6 inline-flex flex-col"
           >
-            <h3 className="font-['Roboto_Slab',serif] text-[32px] tracking-[1.6px] mb-6 text-[#2e2e2e]">Interested in hearing what happened?</h3>
+            <h3 className="font-['Roboto_Slab',serif] text-[32px] tracking-[0.4px] mb-6 text-[#2e2e2e] leading-[1.2]">Interested in hearing what happened?</h3>
             {!userReply ? (
               <div className="flex flex-col gap-3 items-start">
                 <button

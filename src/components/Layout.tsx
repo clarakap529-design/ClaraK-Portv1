@@ -78,7 +78,7 @@ export function Layout({ children }: LayoutProps) {
     <div className="min-h-screen bg-white">
       {/* Fixed Navigation */}
       <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 bg-[#e8eef5]">
-        <div className="max-w-[1400px] mx-auto px-8 py-6 flex items-center justify-between">
+        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-6 md:px-8">
           {/* Logo/Home Button */}
           <button 
             onClick={() => navigate('/')}

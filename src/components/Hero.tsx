@@ -101,7 +101,9 @@ export function Hero() {
         >
           {/* Intro Text */}
           <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full" data-name="Intro">
-            <p className="font-['Caveat:Bold',sans-serif] font-bold leading-[1.25] relative shrink-0 text-[#2d6383] text-[40px] tracking-[1.6px] w-full">Hi, my name is Clara. I'm good at making complex data feel friendly.</p>
+            <h1 className="relative w-full font-['Noteworthy',serif] text-[36px] font-bold leading-[1.25] tracking-[0.72px] text-[#2d6383]">
+              Hi, my name is Clara. I'm good at making complex data feel friendly.
+            </h1>
             
             {/* Divider line */}
             <motion.div 
