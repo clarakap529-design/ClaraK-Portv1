@@ -1,7 +1,6 @@
 import { Check, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { useState } from 'react';
 
 // Import thumbnail images
@@ -16,7 +15,6 @@ import imgImage110 from "figma:asset/e9f67eaa1eff5d1c086b71bd07ef85f37e28da35.pn
 import imgPrototype1 from "figma:asset/2006a35b6ad8684f507a82f5696b4da1fe2d0fd4.png";
 import imgPrototype2 from "figma:asset/6b16a97db5138230ea1cd167ee6298756ed73ec8.png";
 import imgPrototype3 from "figma:asset/1c505bcd09fa2fdba79689871f7d803991e803f8.png";
-import imgStyleGuide1 from "figma:asset/0a1f2a2958c6af4c4a008abdea5cee549423cf4a.png";
 import imgStyleGuide2 from "figma:asset/f76886f468de54e23802bbe7ffba5ea153e570ad.png";
 import imgStyleGuide3 from "figma:asset/4d90570911f5ab8aaa2e2ce6a20d9529d03ffc0a.png";
 import imgStyleGuide4 from "figma:asset/94ecc8fa1f6af706bb0e99effd21b65d919343c7.png";
@@ -25,15 +23,6 @@ import imgStyleGuide6 from "figma:asset/c682a85a2dce35feca78064de68613e6ba1d4a44
 import imgStyleGuide7 from "figma:asset/1dfbf21b2e60153c245d237d352bde9d98e7f057.png";
 import imgDefaultTypography from "figma:asset/555db8680678882a74f287b815eaa07c21085add.png";
 import imgDecisionTree from "figma:asset/f75671d87c70410e87ebf83f11ede032613a9e83.png";
-
-const chartData = [
-  { id: 'jan', month: 'Jan', sales: 4200, costs: 2800, profit: 1400 },
-  { id: 'feb', month: 'Feb', sales: 3800, costs: 2600, profit: 1200 },
-  { id: 'mar', month: 'Mar', sales: 5100, costs: 3200, profit: 1900 },
-  { id: 'apr', month: 'Apr', sales: 4600, costs: 2900, profit: 1700 },
-  { id: 'may', month: 'May', sales: 5800, costs: 3500, profit: 2300 },
-  { id: 'jun', month: 'Jun', sales: 6200, costs: 3800, profit: 2400 },
-];
 
 const categoricalColors = [
   { color: '#1BADB9', label: 'Teal 500' },
@@ -52,16 +41,6 @@ const categoricalColors = [
   { color: '#D44040', label: 'Coral 600' },
   { color: '#1A4A28', label: 'Green 800' },
   { color: '#9C6A1A', label: 'Amber 700' },
-];
-
-const sequentialColors = [
-  '#e8f1f7', '#cbe3ef', '#add4e7', '#8ec5de', '#6eb6d6',
-  '#4ea7cd', '#2d97c4', '#2d6383'
-];
-
-const divergingColors = [
-  '#c85e5e', '#db8e7e', '#edc09f', '#f5e8d8', '#dceee8',
-  '#b3dcd1', '#85c9b9', '#4fb5a0'
 ];
 
 export function ChartingPalettesProject() {
