@@ -127,11 +127,11 @@ export function ChartingPalettesProject() {
             </div>
 
             {/* Goals Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mt-6 mb-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mt-0 mb-10">
               <div className="bg-[#f8fafb] border border-[#e1e8ed] rounded-[16px] p-6">
-                <h3 className="font-['Roboto_Slab',serif] text-[32px] tracking-[0.4px] mb-3 text-[#2e2e2e] leading-[1.2]">
+                <h4 className="mt-4 text-[18px] font-medium py-2 text-[#2e2e2e]">
                   Product-level Goals
-                </h3>
+                </h4>
                 <ul className="space-y-2 list-disc ml-6">
                   <li className="font-['Inter',sans-serif] text-[16px] text-black leading-[22px]">
                     Define a visual style guide to unify data visualization across products
@@ -146,9 +146,9 @@ export function ChartingPalettesProject() {
               </div>
               
               <div className="bg-[#f8fafb] border border-[#e1e8ed] rounded-[16px] p-6">
-                <h3 className="font-['Roboto_Slab',serif] text-[32px] tracking-[0.4px] mb-3 text-[#2e2e2e] leading-[1.2]">
+                <h4 className="mt-4 text-[18px] font-medium py-2 text-[#2e2e2e]">
                   Platform-level Goals
-                </h3>
+                </h4>
                 <ul className="space-y-2 list-disc ml-6">
                   <li className="font-['Inter',sans-serif] text-[16px] text-black leading-[22px]">
                     Define clear guidelines for chart selection and library implementation across design, product, and engineering
@@ -219,7 +219,7 @@ export function ChartingPalettesProject() {
 
               {/* Updated Palette - Categorical only */}
               <h4 className="mt-4 text-[18px] font-medium py-2">Updated accessible color palette</h4>
-              <div className="overflow-x-auto pb-2 mb-4">
+              <div className="overflow-x-auto pb-2 mb-8">
                 <div className="flex gap-2 min-w-max mx-auto">
                   {categoricalColors.map((color, i) => (
                     <div key={i} className="flex flex-col items-center">
@@ -319,7 +319,7 @@ export function ChartingPalettesProject() {
                 );
               })()}
 
-              <h3 className="font-['Roboto_Slab',serif] text-[32px] tracking-[0.4px] mb-1 text-[#2e2e2e] mt-10 leading-[1.2]">How to Choose a Chart</h3>
+              <h3 className="font-['Roboto_Slab',serif] text-[32px] tracking-[0.4px] mb-1 text-[#2e2e2e] mt-14 leading-[1.2]">How to Choose a Chart</h3>
               <p className="font-['Inter',sans-serif] text-[16px] leading-[1.45] text-black mt-2">Through my audit and conversations with the seven other designers in the selection committee, a recurring theme emerged that app teams had no clear guidance on which charting library to use or when.</p>
               <h4 className="mt-4 text-[18px] font-medium py-2">Other charting libraries</h4>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -340,9 +340,12 @@ export function ChartingPalettesProject() {
                   </div>
                 ))}
               </div>
-              <p className="font-['Inter',sans-serif] text-[16px] leading-[1.45] text-black mt-4 mb-8">I designed a decision tree to give designers and engineers a simple, opinionated framework for selecting the right library for their use case.</p>
+              <p className="font-['Inter',sans-serif] text-[16px] leading-[1.45] text-black mt-8 mb-12">I designed a decision tree to give designers and engineers a simple, opinionated framework for selecting the right library for their use case.</p>
+              <h4 className="mt-4 text-[18px] font-medium py-2 text-[#2e2e2e]">
+                Library decision tree
+              </h4>
               <div
-                className="w-full rounded-lg overflow-hidden cursor-pointer hover:opacity-90 transition-opacity mb-6"
+                className="w-full rounded-lg overflow-hidden cursor-pointer hover:opacity-90 transition-opacity mb-6 mt-4"
                 onClick={() => setSelectedImage(imgDecisionTree)}
               >
                 <img src={imgDecisionTree} alt="Decision tree for choosing a charting library" className="w-full h-auto object-contain" />
