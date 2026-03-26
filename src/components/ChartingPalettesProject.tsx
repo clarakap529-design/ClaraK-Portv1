@@ -92,8 +92,8 @@ export function ChartingPalettesProject() {
       className="min-h-screen bg-white"
     >
       {/* Hero Section */}
-      <div className="pt-20 pb-16 bg-[#fdf0e8]">
-        <div className="max-w-5xl mx-auto px-8">
+      <div className="pt-14 pb-10 md:pt-16 md:pb-12 bg-[#fdf0e8]">
+        <div className="max-w-5xl mx-auto px-4 md:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -107,11 +107,11 @@ export function ChartingPalettesProject() {
                 #DesignSystem
               </p>
             </div>
-            <h1 className="font-['Roboto_Slab',serif] text-[40px] tracking-[1.6px] mb-6 text-[#2e2e2e] leading-[60px]">
+            <h1 className="font-['Roboto_Slab',serif] text-[34px] md:text-[40px] tracking-[0.6px] md:tracking-[1px] mb-4 md:mb-5 text-[#2e2e2e] leading-[1.2]">
               Data Visualizations
             </h1>
-            <div className="font-['Inter',sans-serif] font-medium text-[22px] leading-[32px] text-[rgba(0,0,0,0.7)] max-w-3xl">
-              <p className="mb-4">Workday's data visualization had grown organically across product lines, leaving behind a fragmented ecosystem of mismatched styles, conflicting interactions, and no central ownership.</p>
+            <div className="font-['Inter',sans-serif] font-medium text-[18px] md:text-[20px] leading-[1.45] text-[rgba(0,0,0,0.72)] max-w-3xl">
+              <p className="mb-3">Workday's data visualization had grown organically across product lines, leaving behind a fragmented ecosystem of mismatched styles, conflicting interactions, and no central ownership.</p>
               <p>
                 As a designer on the Reporting team — one of the teams maintaining a charting library — I recognized it early on this wasn't a design debt problem. It was a platform risk.
               </p>
@@ -122,7 +122,7 @@ export function ChartingPalettesProject() {
 
       {/* Content Sections */}
       <div className="bg-white">
-        <div className="max-w-5xl mx-auto px-8 py-20">
+        <div className="max-w-5xl mx-auto px-4 md:px-8 py-12 md:py-16">
           
           {/* Problem Section */}
           <motion.section
@@ -130,12 +130,12 @@ export function ChartingPalettesProject() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="mb-24"
+            className="mb-16"
           >
-            <h2 className="font-['Roboto_Slab',serif] text-[40px] tracking-[1.6px] mb-6 text-[#2d6383] leading-[60px]">
+            <h2 className="font-['Roboto_Slab',serif] text-[40px] tracking-[0.8px] mb-4 md:mb-5 text-[#2d6383] leading-[1.2]">
               Problem
             </h2>
-            <div className="font-['Inter',sans-serif] text-[16px] leading-[22px] text-black mb-8 space-y-4">
+            <div className="font-['Inter',sans-serif] text-[16px] leading-[1.5] md:leading-[1.45] text-black mb-6 md:mb-7 space-y-3">
               <p>
                 The challenge ran deeper than visual inconsistency. Workday's decentralized approach meant every product team was making independent decisions — about components, interactions, and implementation — with no shared foundation to build from. Charts looked different, behaved differently, and were built differently depending on the application and data source.
               </p>
@@ -148,7 +148,7 @@ export function ChartingPalettesProject() {
             </div>
 
             {/* Goals Grid */}
-            <div className="grid md:grid-cols-2 gap-6 mt-8 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mt-6 mb-10">
               <div className="bg-[#f8fafb] border border-[#e1e8ed] rounded-[16px] p-6">
                 <h3 className="font-['Roboto_Slab',serif] text-[20px] tracking-[1px] mb-3 text-[#2e2e2e] leading-[30px]">
                   Product-level Goals
@@ -184,18 +184,18 @@ export function ChartingPalettesProject() {
               </div>
             </div>
 
-            <h2 className="font-['Roboto_Slab',serif] text-[40px] tracking-[1.6px] mb-6 text-[#2d6383] leading-[60px]">The Product-Level</h2>
+            <h2 className="font-['Roboto_Slab',serif] text-[40px] tracking-[0.8px] mb-4 md:mb-5 text-[#2d6383] leading-[1.2]">The Product-Level</h2>
 
             {/* Updated Color Palette Section */}
-            <div className="mb-12">
-              <p className="font-['Inter',sans-serif] text-[16px] leading-[22px] text-black mb-4">One of the first deliverables was a modernized, accessible color palette for data visualization — replacing the legacy defaults with a system designed around perceptual clarity, color-blindness simulation, and WCAG AA compliance.</p>
-              <h3 className="font-['Roboto_Slab',serif] text-[26px] tracking-[1px] mb-1 text-[#2e2e2e]">Colors</h3>
+            <div className="mb-10">
+              <p className="font-['Inter',sans-serif] text-[16px] leading-[1.45] text-black mb-4">One of the first deliverables was a modernized, accessible color palette for data visualization — replacing the legacy defaults with a system designed around perceptual clarity, color-blindness simulation, and WCAG AA compliance.</p>
+              <h3 className="font-['Roboto_Slab',serif] text-[34px] md:text-[40px] tracking-[0.4px] md:tracking-[0.6px] mb-1 text-[#2e2e2e] leading-[1.2]">Colors</h3>
               <h4 className="text-[18px] font-bold py-2">
                 Original color palette (2016)
               </h4>
 
               {/* Legacy palette swatches */}
-              <div className="flex gap-2 mb-6 pb-4">
+              <div className="grid grid-cols-4 sm:grid-cols-7 md:grid-cols-14 gap-2 mb-5 pb-2">
                 {[
                   { color: '#b2e0d4', label: 'viz 01' },
                   { color: '#6dbfaa', label: 'viz 02' },
@@ -214,7 +214,7 @@ export function ChartingPalettesProject() {
                 ].map(({ color, label }) => (
                   <div key={label} className="flex flex-col items-center gap-1">
                     <div
-                      className="w-12 h-12 rounded-[8px] border border-gray-200"
+                      className="w-10 h-10 md:w-12 md:h-12 rounded-[8px] border border-gray-200"
                       style={{ backgroundColor: color }}
                     />
                     <span className="font-['Inter',sans-serif] text-[10px] text-[rgba(0,0,0,0.55)] text-center">{label}</span>
@@ -222,11 +222,11 @@ export function ChartingPalettesProject() {
                 ))}
               </div>
 
-              <p className="font-['Inter',sans-serif] text-[16px] leading-[22px] text-black mb-4">To ensure alignment, I organized a selection committee comprised of designers each&nbsp;&nbsp;representing a product pillar.</p>
-              <p className="font-['Inter',sans-serif] text-[16px] leading-[22px] text-black mb-8">To support the decision-making process, I created several Loveable prototypes to evaluate palette options, simulate color blindness conditions, and preview them across common chart types.</p>
+              <p className="font-['Inter',sans-serif] text-[16px] leading-[1.45] text-black mb-3">To ensure alignment, I organized a selection committee comprised of designers each&nbsp;&nbsp;representing a product pillar.</p>
+              <p className="font-['Inter',sans-serif] text-[16px] leading-[1.45] text-black mb-6">To support the decision-making process, I created several Loveable prototypes to evaluate palette options, simulate color blindness conditions, and preview them across common chart types.</p>
 
               {/* Prototype Thumbnails */}
-              <div className="flex gap-4 mb-8 py-3">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 py-2">
                 {[imgPrototype1, imgPrototype2, imgPrototype3].map((img, i) => (
                   <div
                     key={i}
@@ -240,12 +240,12 @@ export function ChartingPalettesProject() {
 
               {/* Updated Palette - Categorical only */}
               <h4 className="text-[18px] font-bold py-2">Updated accessible color palette</h4>
-              <div className="flex justify-center">
-                <div className="flex gap-2">
+              <div className="overflow-x-auto pb-2">
+                <div className="flex gap-2 min-w-max mx-auto">
                   {categoricalColors.map((color, i) => (
                     <div key={i} className="flex flex-col items-center">
                       <div
-                        className="w-12 h-12 rounded-[8px] border border-gray-200"
+                        className="w-10 h-10 md:w-12 md:h-12 rounded-[8px] border border-gray-200"
                         style={{ backgroundColor: color.color }}
                       />
                       <span className="font-['Inter',sans-serif] text-[10px] text-[rgba(0,0,0,0.55)] text-center whitespace-nowrap">{color.label}</span>
@@ -254,19 +254,19 @@ export function ChartingPalettesProject() {
                 </div>
               </div>
 
-              <h3 className="font-['Roboto_Slab',serif] text-[26px] tracking-[1px] mb-1 text-[#2e2e2e] mt-8">Style Guide (for Aurora Library)</h3>
-              <p className="font-['Inter',sans-serif] text-[16px] leading-[22px] text-black mt-2 mb-4">During my charting audit, I discovered three distinct implementations of the Workday charting library — each with its own styles and patterns. Rather than defaulting to one over the others, I synthesized the common ground across all three to propose a standardized style guide that could work for everyone.</p>
+              <h3 className="font-['Roboto_Slab',serif] text-[34px] md:text-[40px] tracking-[0.4px] md:tracking-[0.6px] mb-1 text-[#2e2e2e] mt-6 leading-[1.2]">Style Guide (for Aurora Library)</h3>
+              <p className="font-['Inter',sans-serif] text-[16px] leading-[1.45] text-black mt-2 mb-4">During my charting audit, I discovered three distinct implementations of the Workday charting library — each with its own styles and patterns. Rather than defaulting to one over the others, I synthesized the common ground across all three to propose a standardized style guide that could work for everyone.</p>
 
               {/* Aurora Charts - Official Library */}
-              <div className="my-8">
+              <div className="my-6">
                 <h4 className="text-[18px] font-bold py-2">
                   Aurora (Workday's official charting library)
                 </h4>
-                <div className="flex gap-6 items-center justify-center">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
                   {auroraCharts.map((chart, index) => (
-                    <div key={index} className="flex flex-col gap-2 items-start w-[320px]">
+                    <div key={index} className="flex flex-col gap-2 items-start w-full">
                       <div 
-                        className="w-full h-[220px] overflow-hidden rounded-lg cursor-pointer hover:opacity-90 transition-opacity border border-gray-300 shadow-md"
+                        className="w-full h-[200px] md:h-[220px] overflow-hidden rounded-lg cursor-pointer hover:opacity-90 transition-opacity border border-gray-300 shadow-md"
                         onClick={() => setSelectedImage(chart.src)}
                       >
                         <img src={chart.src} alt={chart.title} className="w-full h-full object-cover" />
@@ -309,7 +309,7 @@ export function ChartingPalettesProject() {
                       </button>
                       <div
                         className="flex-1 overflow-hidden border-b border-gray-200 cursor-pointer hover:opacity-90 transition-opacity"
-                        style={{ height: '500px', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }}
+                        style={{ height: 'clamp(280px, 55vw, 500px)', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }}
                         onClick={() => setSelectedImage(slide.src)}
                       >
                         <img src={slide.src} alt={slide.caption} className="w-full h-full object-contain object-center bg-white py-6" />
@@ -340,14 +340,14 @@ export function ChartingPalettesProject() {
                 );
               })()}
 
-              <h3 className="font-['Roboto_Slab',serif] text-[26px] tracking-[1px] mb-1 text-[#2e2e2e] mt-12">How to Choose a Chart</h3>
-              <p className="font-['Inter',sans-serif] text-[16px] leading-[22px] text-black mt-2">Through my audit and conversations with the seven other designers in the selection committee, a recurring theme emerged that app teams had no clear guidance on which charting library to use or when.</p>
+              <h3 className="font-['Roboto_Slab',serif] text-[36px] md:text-[44px] tracking-[0.4px] md:tracking-[0.6px] mb-1 text-[#2e2e2e] mt-10 leading-[1.2]">How to Choose a Chart</h3>
+              <p className="font-['Inter',sans-serif] text-[16px] leading-[1.45] text-black mt-2">Through my audit and conversations with the seven other designers in the selection committee, a recurring theme emerged that app teams had no clear guidance on which charting library to use or when.</p>
               <h4 className="text-[18px] font-bold py-2 mt-4">Other charting libraries</h4>
-              <div className="grid grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {bespokeCharts.map((chart, index) => (
                   <div key={index} className="flex flex-col gap-2 items-start">
                     <div 
-                      className="w-full h-[220px] overflow-hidden rounded-lg cursor-pointer hover:opacity-90 transition-opacity border border-gray-300 shadow-md"
+                      className="w-full h-[200px] md:h-[220px] overflow-hidden rounded-lg cursor-pointer hover:opacity-90 transition-opacity border border-gray-300 shadow-md"
                       onClick={() => setSelectedImage(chart.src)}
                     >
                       <img src={chart.src} alt={chart.title} className="w-full h-full object-cover" />
@@ -361,7 +361,7 @@ export function ChartingPalettesProject() {
                   </div>
                 ))}
               </div>
-              <p className="font-['Inter',sans-serif] text-[16px] leading-[22px] text-black mt-4 mb-10">I designed a decision tree to give designers and engineers a simple, opinionated framework for selecting the right library for their use case.</p>
+              <p className="font-['Inter',sans-serif] text-[16px] leading-[1.45] text-black mt-4 mb-8">I designed a decision tree to give designers and engineers a simple, opinionated framework for selecting the right library for their use case.</p>
               <div
                 className="w-full rounded-lg overflow-hidden cursor-pointer hover:opacity-90 transition-opacity mb-6"
                 onClick={() => setSelectedImage(imgDecisionTree)}
@@ -369,11 +369,11 @@ export function ChartingPalettesProject() {
                 <img src={imgDecisionTree} alt="Decision tree for choosing a charting library" className="w-full h-auto object-contain" />
               </div>
 
-              <h3 className="font-['Roboto_Slab',serif] text-[40px] tracking-[1.6px] mb-2 mt-20 text-[#2d6383]">The Platform-Level</h3>
-              <p className="font-['Inter',sans-serif] text-[16px] leading-[22px] text-black mb-8 mt-3">My diagram revealed that a truly unified charting library wasn't just a design problem — it was an organizational and architectural one. The scope raised hard questions across every layer.</p>
+              <h3 className="font-['Roboto_Slab',serif] text-[42px] md:text-[52px] tracking-[0.8px] md:tracking-[1px] mb-2 mt-14 md:mt-16 text-[#2d6383] leading-[1.2]">The Platform-Level</h3>
+              <p className="font-['Inter',sans-serif] text-[16px] leading-[1.45] text-black mb-7 mt-2">My diagram revealed that a truly unified charting library wasn't just a design problem — it was an organizational and architectural one. The scope raised hard questions across every layer.</p>
 
               {/* Usage Guidelines */}
-              <div className="space-y-6 mt-8">
+              <div className="space-y-5 mt-6">
                 {[
                   {
                     borderColor: '#1BADB9',
@@ -400,9 +400,9 @@ export function ChartingPalettesProject() {
                     example: '',
                   },
                 ].map(({ borderColor, title, body, example }) => (
-                  <div key={title} className="pl-4 py-1" style={{ borderLeft: `3px solid ${borderColor}` }}>
-                    <h4 className="font-['Inter',sans-serif] text-[16px] text-black mb-1">{title}</h4>
-                    <p className="font-['Inter',sans-serif] text-[14px] leading-[22px] text-black mb-1">{body}</p>
+                  <div key={title} className="pl-3 py-1" style={{ borderLeft: `3px solid ${borderColor}` }}>
+                    <h4 className="font-['Inter',sans-serif] text-[16px] leading-[1.35] text-black mb-1">{title}</h4>
+                    <p className="font-['Inter',sans-serif] text-[14px] leading-[1.45] text-black mb-1">{body}</p>
                   </div>
                 ))}
               </div>

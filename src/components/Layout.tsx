@@ -12,7 +12,9 @@ export function Layout({ children }: LayoutProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
+  const [navHeight, setNavHeight] = useState(88);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLElement>(null);
 
   const scrollToSection = (sectionId: string) => {
     if (location.pathname !== '/') {
@@ -20,18 +22,30 @@ export function Layout({ children }: LayoutProps) {
       setTimeout(() => {
         const element = document.getElementById(sectionId);
         if (element) {
-          const offsetTop = element.offsetTop;
+          const offsetTop = element.offsetTop - navHeight - 8;
           window.scrollTo({ top: offsetTop, behavior: 'smooth' });
         }
       }, 100);
     } else {
       const element = document.getElementById(sectionId);
       if (element) {
-        const offsetTop = element.offsetTop;
+        const offsetTop = element.offsetTop - navHeight - 8;
         window.scrollTo({ top: offsetTop, behavior: 'smooth' });
       }
     }
   };
+
+  useEffect(() => {
+    const updateNavHeight = () => {
+      if (navRef.current) {
+        setNavHeight(navRef.current.offsetHeight);
+      }
+    };
+
+    updateNavHeight();
+    window.addEventListener('resize', updateNavHeight);
+    return () => window.removeEventListener('resize', updateNavHeight);
+  }, []);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -63,7 +77,7 @@ export function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-white">
       {/* Fixed Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#e8eef5]">
+      <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 bg-[#e8eef5]">
         <div className="max-w-[1400px] mx-auto px-8 py-6 flex items-center justify-between">
           {/* Logo/Home Button */}
           <button 
@@ -107,7 +121,7 @@ export function Layout({ children }: LayoutProps) {
       </nav>
 
       {/* Page Content */}
-      <div className="pt-[60px]">
+      <div style={{ paddingTop: `${navHeight}px` }}>
         {children}
       </div>
 
