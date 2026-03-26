@@ -2,6 +2,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ChartingPalettesProject } from './ChartingPalettesProject';
 import { DebuggingProject } from './DebuggingProject';
+import { ReportingInsightsProject } from './ReportingInsightsProject';
+import { ReportAuthoringProject } from './ReportAuthoringProject';
 
 const projectDetails = {
   'analytics-agent': {
@@ -148,6 +150,16 @@ export function ProjectDetail() {
         </div>
       </div>
     );
+  }
+
+  // Use custom layout for charting palettes project
+  if (projectId === 'analytics-agent') {
+    return <ReportingInsightsProject />;
+  }
+
+  // Use custom layout for report authoring project
+  if (projectId === 'report-authoring') {
+    return <ReportAuthoringProject />;
   }
 
   // Use custom layout for charting palettes project

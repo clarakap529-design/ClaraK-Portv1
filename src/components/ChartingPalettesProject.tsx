@@ -24,6 +24,12 @@ import imgStyleGuide7 from "figma:asset/1dfbf21b2e60153c245d237d352bde9d98e7f057
 import imgDefaultTypography from "figma:asset/555db8680678882a74f287b815eaa07c21085add.png";
 import imgDecisionTree from "figma:asset/f75671d87c70410e87ebf83f11ede032613a9e83.png";
 
+interface ChartingPalettesProjectProps {
+  heroTitle?: string;
+  heroTags?: string[];
+  heroParagraphs?: string[];
+}
+
 const categoricalColors = [
   { color: '#1BADB9', label: 'Teal 500' },
   { color: '#1C3A8E', label: 'Blue 800' },
@@ -43,7 +49,14 @@ const categoricalColors = [
   { color: '#9C6A1A', label: 'Amber 700' },
 ];
 
-export function ChartingPalettesProject() {
+export function ChartingPalettesProject({
+  heroTitle = 'Data Visualizations',
+  heroTags = ['#DataViz', '#DesignSystem'],
+  heroParagraphs = [
+    "Workday's data visualization had grown organically across product lines, leaving behind a fragmented ecosystem of mismatched styles, conflicting interactions, and no central ownership.",
+    "As a designer on the Reporting team - one of the teams maintaining a charting library - I recognized it early on this wasn't a design debt problem. It was a platform risk.",
+  ],
+}: ChartingPalettesProjectProps) {
   const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [carouselIndex, setCarouselIndex] = useState(0);
@@ -79,21 +92,21 @@ export function ChartingPalettesProject() {
             transition={{ delay: 0.3 }}
           >
             <div className="flex gap-2 mb-4">
-              <p className="font-['Roboto_Slab',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383]">
-                #DataViz
-              </p>
-              <p className="font-['Roboto_Slab',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383]">
-                #DesignSystem
-              </p>
+              {heroTags.map((tag) => (
+                <p key={tag} className="font-['Roboto_Slab',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383]">
+                  {tag}
+                </p>
+              ))}
             </div>
             <h1 className="font-['Roboto_Slab',serif] text-[34px] md:text-[40px] tracking-[0.6px] md:tracking-[1px] mb-4 md:mb-5 text-[#2e2e2e] leading-[1.2]">
-              Data Visualizations
+              {heroTitle}
             </h1>
             <div className="font-['Inter',sans-serif] font-medium text-[18px] md:text-[20px] leading-[1.45] text-[rgba(0,0,0,0.72)] max-w-3xl">
-              <p className="mb-3">Workday's data visualization had grown organically across product lines, leaving behind a fragmented ecosystem of mismatched styles, conflicting interactions, and no central ownership.</p>
-              <p>
-                As a designer on the Reporting team — one of the teams maintaining a charting library — I recognized it early on this wasn't a design debt problem. It was a platform risk.
-              </p>
+              {heroParagraphs.map((paragraph, idx) => (
+                <p key={idx} className={idx < heroParagraphs.length - 1 ? 'mb-3' : ''}>
+                  {paragraph}
+                </p>
+              ))}
             </div>
           </motion.div>
         </div>
@@ -112,11 +125,11 @@ export function ChartingPalettesProject() {
             className="mb-16"
           >
             <h2 className="font-['Roboto_Slab',serif] text-[40px] tracking-[0.8px] mb-4 md:mb-5 text-[#2d6383] leading-[1.2]">
-              Problem
+              The Starting Point
             </h2>
             <div className="font-['Inter',sans-serif] text-[16px] leading-[1.5] md:leading-[1.45] text-black mb-6 md:mb-7 space-y-3">
               <p>
-                The challenge ran deeper than visual inconsistency. Workday's decentralized approach meant every product team was making independent decisions — about components, interactions, and implementation — with no shared foundation to build from. Charts looked different, behaved differently, and were built differently depending on the application and data source.
+                The brief was simple: design an agentic experience using a chat ui. But the internal research and Early Adopter Program — said something different entirely.
               </p>
               <p>
                 For designers, it was a constant time sink — no centralized source of truth meant recreating charts from scratch, draining time and compromising the polish.

@@ -237,17 +237,77 @@ export function Hero() {
             Hi, my name is Clara. I'm good at making complex data feel friendly.
           </h1>
 
-          <div className="flex flex-wrap justify-center gap-[8px] items-center">
-            <p className="font-['Roboto:Italic',sans-serif] italic text-[#2e2e2e] text-[14px] tracking-[-0.42px]">
-              Suggested prompt:
-            </p>
-            <button
-              onClick={handlePromptClick}
-              className="bg-[#2d6383] px-8 py-3 rounded-[12px] text-white font-['Inter',sans-serif] text-[18px] hover:bg-[#2d6383]/90 transition-colors"
-            >
-              Why is she a great candidate?
-            </button>
-          </div>
+          <AnimatePresence>
+            {!isClicked && (
+              <motion.div
+                className="flex flex-wrap justify-center gap-[8px] items-center"
+                initial={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.25 }}
+              >
+                <p className="font-['Roboto:Italic',sans-serif] italic text-[#2e2e2e] text-[14px] tracking-[-0.42px]">
+                  Suggested prompt:
+                </p>
+                <button
+                  onClick={handlePromptClick}
+                  className="bg-[#2d6383] px-8 py-3 rounded-[12px] text-white font-['Inter',sans-serif] text-[18px] hover:bg-[#2d6383]/90 transition-colors"
+                >
+                  Why is she a great candidate?
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <AnimatePresence>
+            {isClicked && (
+              <motion.div
+                className="mt-1 self-end bg-white px-4 py-2 rounded-[12px] w-fit max-w-full text-right"
+                initial={{ opacity: 0, scale: 0.9, y: -10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: -10 }}
+                transition={{ duration: 0.35 }}
+              >
+                <p className="font-['Inter',sans-serif] text-[15px] text-[#2e2e2e]">
+                  Why is she a great candidate?
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <AnimatePresence>
+            {isLoading && (
+              <motion.div
+                className="mt-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+              >
+                <LoadingSparkle />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <AnimatePresence>
+            {showResponse && (
+              <motion.div
+                className="mt-4 text-left w-full"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 8 }}
+                transition={{ duration: 0.4 }}
+              >
+                <p className="font-['Roboto_Slab',serif] text-[16px] leading-[1.45] text-[#2d6383]">
+                  With over 12 years in UX design, Clara has extensive experience crafting enterprise solutions and
+                  AI-driven products at scale.
+                </p>
+                <p className="mt-2 font-['Roboto_Slab',serif] text-[16px] leading-[1.45] text-[#2d6383]">
+                  She specializes in Reporting & Analytics with a strong focus on Data Visualization and excels at
+                  making complex systems approachable.
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
       </div>
     </motion.section>
