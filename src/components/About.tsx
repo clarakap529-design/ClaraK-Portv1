@@ -41,7 +41,7 @@ export function About() {
   };
 
   return (
-    <section id="about" className="py-20 px-6 bg-slate-50">
+    <footer id="about" className="py-20 px-6 bg-[#DFEBEB]">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
@@ -94,6 +94,6 @@ export function About() {
           {/* Removed Ask Me Anything section */}
         </div>
       </div>
-    </section>
+    </footer>
   );
 }

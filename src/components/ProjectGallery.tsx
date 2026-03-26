@@ -1,3 +1,7 @@
+import dataVizImg from 'figma:asset/a6198fb6ffaebbaa65a0b7943591db25673c727c.png'
+import reportingInsightsImg from 'figma:asset/10a69fecb80ac4b1c361d6f9d6079c8f3917f3fa.png'
+import analyticsAgentImg from 'figma:asset/29a840826a5a625d3ee9117076cd0ba7062285d2.png';
+import reportAuthoringImg from 'figma:asset/85a431214830fbf245e9c6aad3f30e337322bef0.png';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ProjectCard } from './ProjectCard';
@@ -64,131 +68,85 @@ export function ProjectGallery() {
   const navigate = useNavigate();
   const categories = ['All', 'Data Viz', 'Reporting', 'Analytics', 'AI'];
 
-  const filteredProjects = filter === 'all' 
-    ? projects 
+  const filteredProjects = filter === 'all'
+    ? projects
     : projects.filter(p => p.category === filter);
 
   return (
-    <section id="projects" className="pt-10 pb-20 bg-[#f2e1cd]">
+    <section id="projects" className="pt-10 pb-20">
       <div className="w-full mx-auto">
         <div className="text-center mb-12">
-          <h2 className="mb-4 text-[#2d6383] font-['Roboto_Slab',serif] text-[40px] font-bold">Featured Projects</h2>
-          <p className="font-['Roboto',sans-serif] text-[16px] tracking-[-0.48px] text-[#2e2e2e] whitespace-nowrap mx-auto text-center" style={{ fontVariationSettings: "'wdth' 100" }}>Each project is a story of problem-solving and creativity. Click the AI icon to hear the story behind the work.</p>
+          <h2 className="mb-4 text-black font-['Roboto_Slab',serif] text-[40px] font-bold">Featured Projects</h2>
+          <p className="font-['Roboto',sans-serif] text-[16px] tracking-[-0.48px] text-[#2e2e2e] mx-auto text-center max-w-3xl" style={{ fontVariationSettings: "'wdth' 100" }}>These projects highlight the breadth of my enterprise work — from shaping agentic AI product vision to navigating complex platform-level design challenges. Grounded in 12+ years of UX experience, and a constant curiosity to learn, adapt, and push the work further.</p>
         </div>
 
         {/* Project Cards */}
         <div className="flex flex-col w-full">
-          {/* Analytics Agent */}
-          <div className="bg-[#f2e1cd] w-full">
+          {/* Reporting Insights */}
+          <div className="w-full">
             <div className="flex flex-col lg:flex-row gap-16 items-center max-w-7xl mx-auto px-8 lg:px-22 py-12 lg:py-20">
-              <div className="bg-white h-[360px] rounded-[24px] shadow-[0px_4px_10px_2px_rgba(0,0,0,0.4)] shrink-0 w-full lg:w-[530px]" />
-              <div className="flex flex-col gap-12 flex-1">
-                <div className="flex flex-col gap-6">
-                  <h4 className="font-['Roboto_Slab',serif] text-[40px] tracking-[1.6px]\">Analytics Agent</h4>
-                  <p className="font-['Inter',sans-serif] text-[18px] tracking-[-0.09px] text-[rgba(0,0,0,0.55)] leading-[1.45]">Call out a feature, benefit, or value of your site, then link to a page where people can learn more about it.</p>
+              <div className="overflow-hidden rounded-[8px] shadow-[0px_4px_10px_2px_rgba(0,0,0,0.25)] shrink-0 w-full lg:w-[600px]">
+                <img src={reportingInsightsImg} alt="Reporting Insights" className="w-full h-auto block" />
+              </div>
+              <div className="flex flex-col gap-6 flex-1">
+                <div className="flex flex-col gap-2">
                   <div className="flex gap-2">
-                    <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab]">#Analytics</p>
-                    <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab]">#DataViz</p>
+                    <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab]">#Reporting</p>
+                    <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab]">#agentic</p>
                   </div>
+                  <h4 className="font-['Roboto_Slab',serif] text-[40px] tracking-[1.6px]">Reporting Insights</h4>
+                  <p className="font-['Inter',sans-serif] text-[18px] tracking-[-0.09px] text-[rgba(0,0,0,0.55)] leading-[1.45]">Shaped the evolution of a chat interface into a vision for an AI Analysis Agent</p>
                 </div>
-                <button 
+                <button
                   onClick={() => navigate('/project/analytics-agent')}
-                  className="bg-black text-white px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[18px] tracking-[-0.09px] leading-[1.45] self-start hover:bg-gray-800 transition-colors"
-                >
-                  Call to action
-                </button>
+                  className="bg-[#2d6383] text-white px-8 py-3 rounded-[12px] font-['Inter',sans-serif] text-[18px] tracking-[-0.09px] leading-[1.45] self-start hover:bg-[#2d6383]/90 transition-colors"
+                >View</button>
               </div>
             </div>
           </div>
 
           {/* Report Authoring */}
-          <div className="bg-[#dfebeb] w-full">
+          <div className="w-full">
             <div className="flex flex-col lg:flex-row-reverse gap-16 items-center max-w-7xl mx-auto px-8 lg:px-22 py-12 lg:py-20">
-              <div className="bg-white h-[360px] rounded-[24px] shadow-[0px_4px_10px_2px_rgba(0,0,0,0.4)] shrink-0 w-full lg:w-[530px]" />
-              <div className="flex flex-col gap-12 flex-1">
-                <div className="flex flex-col gap-6">
-                  <h4 className="font-['Roboto_Slab',serif] text-[40px] tracking-[1.6px]\">Report Authoring</h4>
-                  <p className="font-['Inter',sans-serif] text-[18px] tracking-[-0.09px] text-[rgba(0,0,0,0.55)] leading-[1.45]">Call out a feature, benefit, or value of your site, then link to a page where people can learn more about it.</p>
+              <div className="overflow-hidden rounded-[8px] shadow-[0px_4px_10px_2px_rgba(0,0,0,0.25)] shrink-0 w-full lg:w-[600px]">
+                <img src={reportAuthoringImg} alt="Report Authoring" className="w-full h-auto block" />
+              </div>
+              <div className="flex flex-col gap-6 flex-1">
+                <div className="flex flex-col gap-2">
                   <div className="flex gap-2">
-                    <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab]">#Reporting</p>
-                    <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab]">#Analytics</p>
+                    <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab]">#reporting</p>
+                    <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab]">#RESEARCH</p>
                   </div>
+                  <h4 className="font-['Roboto_Slab',serif] text-[40px] tracking-[1.6px]">Report Authoring</h4>
+                  <p className="font-['Inter',sans-serif] text-[18px] tracking-[-0.09px] text-[rgba(0,0,0,0.55)] leading-[1.45]">Self-initiated effort to map the unmapped report authoring experience — surfacing critical friction points that validated and shaped our AI workstreams</p>
                 </div>
-                <button 
+                <button
                   onClick={() => navigate('/project/report-authoring')}
-                  className="bg-black text-white px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[18px] tracking-[-0.09px] leading-[1.45] self-start hover:bg-gray-800 transition-colors"
-                >
-                  Call to action
-                </button>
+                  className="bg-[#2d6383] text-white px-8 py-3 rounded-[12px] font-['Inter',sans-serif] text-[18px] tracking-[-0.09px] leading-[1.45] self-start hover:bg-[#2d6383]/90 transition-colors"
+                >View</button>
               </div>
             </div>
           </div>
 
           {/* Data Visualization */}
-          <div className="bg-[#fbdee0] w-full">
+          <div className="w-full">
             <div className="flex flex-col lg:flex-row gap-16 items-center max-w-7xl mx-auto px-8 lg:px-22 py-12 lg:py-20">
-              <div className="bg-white h-[360px] rounded-[24px] shadow-[0px_4px_10px_2px_rgba(0,0,0,0.4)] shrink-0 w-full lg:w-[530px]" />
-              <div className="flex flex-col gap-12 flex-1">
-                <div className="flex flex-col gap-6">
+              <div className="overflow-hidden rounded-[8px] shadow-[0px_4px_10px_2px_rgba(0,0,0,0.25)] shrink-0 w-full lg:w-[600px]">
+                <img src={dataVizImg} alt="Canvas Color & Style Guidelines" className="w-full h-auto block" />
+              </div>
+              <div className="flex flex-col gap-6 flex-1">
+                <div className="flex flex-col gap-2">
+                  <div className="flex gap-2">
+                    <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab]">#DataViz</p>
+                    <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab]">#DesignStrategy</p>
+                  </div>
                   <h4 className="font-['Roboto_Slab',serif] text-[40px] tracking-[1.6px] text-[#2e2e2e]">Data Visualization</h4>
-                  <p className="font-['Inter',sans-serif] text-[18px] tracking-[-0.09px] text-[rgba(0,0,0,0.55)] leading-[1.45]">A comprehensive color palette system for accessible, meaningful data visualization across enterprise products.</p>
-                  <div className="flex gap-2">
-                    <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab]">#DataViz</p>
-                    <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab]">#DesignSystem</p>
-                  </div>
+                  <p className="font-['Inter',sans-serif] text-[18px] tracking-[-0.09px] text-[rgba(0,0,0,0.55)] leading-[1.45]">A color palette refresh uncovered a fragmented charting ecosystem — sparking platform-level strategic discussions around governance and standardization</p>
                 </div>
-                <button 
+                <button
                   onClick={() => navigate('/project/charting-palettes')}
-                  className="bg-black text-white px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[18px] tracking-[-0.09px] leading-[1.45] self-start hover:bg-gray-800 transition-colors"
-                >
-                  View Case Study
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Data Management */}
-          <div className="bg-[#dfebeb] w-full">
-            <div className="flex flex-col lg:flex-row-reverse gap-16 items-center max-w-7xl mx-auto px-8 lg:px-22 py-12 lg:py-20">
-              <div className="bg-white h-[360px] rounded-[24px] shadow-[0px_4px_10px_2px_rgba(0,0,0,0.4)] shrink-0 w-full lg:w-[530px]" />
-              <div className="flex flex-col gap-12 flex-1">
-                <div className="flex flex-col gap-6">
-                  <h4 className="font-['Roboto_Slab',serif] text-[40px] tracking-[1.6px] text-[#2e2e2e]\">Data Management</h4>
-                  <p className="font-['Inter',sans-serif] text-[18px] tracking-[-0.09px] text-[rgba(0,0,0,0.55)] leading-[1.45]">Call out a feature, benefit, or value of your site, then link to a page where people can learn more about it.</p>
-                  <div className="flex gap-2">
-                    <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab]">#Analytics</p>
-                    <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab]">#DataViz</p>
-                  </div>
-                </div>
-                <button 
-                  onClick={() => navigate('/project/data-management')}
-                  className="bg-black text-white px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[18px] tracking-[-0.09px] leading-[1.45] self-start hover:bg-gray-800 transition-colors"
-                >
-                  Call to action
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Debugging */}
-          <div className="bg-[#f2f2f7] w-full">
-            <div className="flex flex-col lg:flex-row gap-16 items-center max-w-7xl mx-auto px-8 lg:px-22 py-12 lg:py-20">
-              <div className="bg-white h-[360px] rounded-[24px] shadow-[0px_4px_10px_2px_rgba(0,0,0,0.4)] shrink-0 w-full lg:w-[530px]" />
-              <div className="flex flex-col gap-12 flex-1">
-                <div className="flex flex-col gap-6">
-                  <h4 className="font-['Roboto_Slab',serif] text-[40px] tracking-[1.6px]\">Debugging</h4>
-                  <p className="font-['Inter',sans-serif] text-[18px] tracking-[-0.09px] text-[rgba(0,0,0,0.55)] leading-[1.45]">Call out a feature, benefit, or value of your site, then link to a page where people can learn more about it.</p>
-                  <div className="flex gap-2">
-                    <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab]">#Analytics</p>
-                    <p className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab]">#AI</p>
-                  </div>
-                </div>
-                <button 
-                  onClick={() => navigate('/project/debugging')}
-                  className="bg-black text-white px-4 py-3 rounded-[12px] font-['Inter',sans-serif] text-[18px] tracking-[-0.09px] leading-[1.45] self-start hover:bg-gray-800 transition-colors"
-                >
-                  Call to action
-                </button>
+                  className="bg-[#2d6383] text-white px-8 py-3 rounded-[12px] font-['Inter',sans-serif] text-[18px] tracking-[-0.09px] leading-[1.45] self-start hover:bg-[#2d6383]/90 transition-colors"
+                >View</button>
               </div>
             </div>
           </div>

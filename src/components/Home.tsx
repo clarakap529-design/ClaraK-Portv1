@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Hero } from './Hero';
 import { ProjectGallery } from './ProjectGallery';
-import { About } from './About';
 import { AICompanion } from './AICompanion';
 
 export function Home() {
@@ -32,7 +31,6 @@ export function Home() {
     <>
       <Hero />
       <ProjectGallery />
-      <About />
       <AICompanion currentSection={currentSection} />
     </>
   );

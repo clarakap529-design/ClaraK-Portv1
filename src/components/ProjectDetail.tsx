@@ -1,6 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { ArrowLeft } from 'lucide-react';
 import { ChartingPalettesProject } from './ChartingPalettesProject';
 import { DebuggingProject } from './DebuggingProject';
 
@@ -170,37 +169,28 @@ export function ProjectDetail() {
       style={{ backgroundColor: project.backgroundColor }}
     >
       {/* Hero Section */}
-      <div className="pt-32 pb-16 px-8 lg:px-22 max-w-7xl mx-auto">
-        <motion.button
-          onClick={() => navigate('/')}
-          className="flex items-center gap-2 mb-8 text-black hover:underline"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.2 }}
-        >
-          <ArrowLeft className="size-5" />
-          <span className="font-['Inter',sans-serif] text-[16px]">Back to Projects</span>
-        </motion.button>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-        >
-          <div className="flex gap-2 mb-4">
-            {project.tags.map((tag, index) => (
-              <p key={index} className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab] inline-block">
-                #{tag}
-              </p>
-            ))}
-          </div>
-          <h1 className="font-['Roboto_Slab',serif] text-[64px] tracking-[1.6px] mb-6 text-[#2e2e2e]">
-            {project.title}
-          </h1>
-          <p className="font-['Inter',sans-serif] text-[24px] leading-[1.5] text-[rgba(0,0,0,0.7)] max-w-3xl">
-            {project.overview}
-          </p>
-        </motion.div>
+      <div className="pt-[88px] pb-16 bg-white">
+        <div className="max-w-5xl mx-auto px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          >
+            <div className="flex gap-2 mb-4">
+              {project.tags.map((tag, index) => (
+                <p key={index} className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab] inline-block">
+                  #{tag}
+                </p>
+              ))}
+            </div>
+            <h2 className="font-['Roboto_Slab',serif] text-[64px] tracking-[1.6px] mb-6 text-[#2e2e2e]">
+              {project.title}
+            </h2>
+            <p className="font-['Inter',sans-serif] text-[24px] leading-[1.5] text-[rgba(0,0,0,0.7)] max-w-3xl">
+              {project.overview}
+            </p>
+          </motion.div>
+        </div>
       </div>
 
       {/* Project Image Placeholder */}
@@ -208,9 +198,12 @@ export function ProjectDetail() {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="max-w-7xl mx-auto px-8 lg:px-22 mb-20"
+        style={{ backgroundColor: project.backgroundColor }}
+        className="pb-20"
       >
-        <div className="bg-white h-[500px] rounded-[24px] shadow-[0px_4px_20px_4px_rgba(0,0,0,0.15)] w-full" />
+        <div className="max-w-5xl mx-auto px-8">
+          <div className="bg-white h-[500px] rounded-[24px] shadow-[0px_4px_20px_4px_rgba(0,0,0,0.15)] w-full" />
+        </div>
       </motion.div>
 
       {/* Content Sections */}
@@ -307,7 +300,7 @@ export function ProjectDetail() {
                   document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
                 }, 100);
               }}
-              className="bg-[#2d6383] text-white px-8 py-4 rounded-[12px] font-['Inter',sans-serif] text-[18px] hover:bg-[#3d7393] transition-colors"
+              className="bg-[#2d6383] text-white px-8 py-3 rounded-[12px] font-['Inter',sans-serif] text-[18px] hover:bg-[#2d6383]/90 transition-colors"
             >
               Get in Touch
             </button>

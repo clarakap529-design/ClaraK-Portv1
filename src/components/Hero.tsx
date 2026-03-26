@@ -73,7 +73,7 @@ export function Hero() {
   return (
     <motion.section 
       id="hero" 
-      className="bg-[#e8eef5] relative w-full overflow-hidden pt-0 pb-0 flex items-center justify-center h-[480px]"
+      className="bg-[#e8eef5] relative w-full overflow-hidden pt-0 pb-0 flex items-center justify-center h-[480px] -mt-[40px]"
     >
       {/* Centered content container */}
       <div className="hidden lg:flex items-center gap-[56px] max-w-[1440px] mx-auto px-[160px]" style={{ width: '1050px', marginLeft: 'calc(50% - 525px - 164px)' }}>
@@ -125,13 +125,10 @@ export function Hero() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="flex flex-col font-['Roboto:Italic',sans-serif] font-normal h-full italic justify-center leading-[0] relative shrink-0 text-[#2e2e2e] text-[14px] tracking-[-0.42px] w-[113px]" style={{ fontVariationSettings: "'wdth' 100" }}>
-                  <p className="leading-[1.25]">Suggested prompt:</p>
-                </div>
                 <div className="relative">
                   <motion.button
                     onClick={handlePromptClick}
-                    className="bg-[#2d6383] box-border content-stretch flex gap-[10px] items-center justify-center px-[16px] py-[8px] relative rounded-[16px] shrink-0 hover:bg-[#3d7393] transition-colors cursor-pointer"
+                    className="bg-[#2d6383] box-border content-stretch flex gap-[10px] items-center justify-center px-8 py-3 relative rounded-[12px] shrink-0 hover:bg-[#2d6383]/90 transition-colors cursor-pointer"
                     animate={{
                       boxShadow: [
                         '0 0 0 0px rgba(199, 97, 41, 0)',
@@ -146,7 +143,7 @@ export function Hero() {
                     }}
                   >
                     <div className="flex flex-col font-['Roboto:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[14px] text-nowrap text-white tracking-[-0.42px]" style={{ fontVariationSettings: "'wdth' 100" }}>
-                      <p className="leading-[1.25] whitespace-pre">Why is she a great candidate?</p>
+                      <p className="leading-[1.25] whitespace-pre font-['Inter',sans-serif] text-[18px]">Why is she a great candidate?</p>
                     </div>
                   </motion.button>
                 </div>
@@ -244,7 +241,7 @@ export function Hero() {
             </p>
             <button
               onClick={handlePromptClick}
-              className="bg-[#2d6383] px-[16px] py-[8px] rounded-[16px] text-white text-[14px] hover:bg-[#3d7393] transition-colors"
+              className="bg-[#2d6383] px-8 py-3 rounded-[12px] text-white font-['Inter',sans-serif] text-[18px] hover:bg-[#2d6383]/90 transition-colors"
             >
               Why is she a great candidate?
             </button>
