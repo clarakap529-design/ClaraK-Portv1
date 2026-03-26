@@ -129,13 +129,10 @@ export function ChartingPalettesProject({
             </h2>
             <div className="font-['Inter',sans-serif] text-[16px] leading-[1.5] md:leading-[1.45] text-black mb-6 md:mb-7 space-y-3">
               <p>
-                The brief was simple: design an agentic experience using a chat ui. But the internal research and Early Adopter Program — said something different entirely.
+                In September 2024, Workday launched Analyze & Act under a new Ingenuity program — a technical experiment to query tabular report data using an LLM. The initial scope was deliberately narrow: limited data sources, constrained report types, a simple chat UI. But when I ran internal research and engaged our Early Adopter customers, a clearer picture emerged.
               </p>
               <p>
-                For designers, it was a constant time sink — no centralized source of truth meant recreating charts from scratch, draining time and compromising the polish.
-              </p>
-              <p>
-                For end-users, the cost was trust. When data looks and behaves unpredictably, confidence in what it's telling you erodes.
+                Users didn't want a chatbot. They expected much more from an analysis agent. That gap became the real design challenge.
               </p>
             </div>
 
