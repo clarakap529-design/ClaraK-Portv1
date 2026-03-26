@@ -59,9 +59,8 @@ export function Contact() {
 
   return (
     <section id="contact" className="py-20 px-6 bg-white">
-      <div className="max-w-3xl mx-auto">
-        <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl p-8 shadow-xl">
-          <div className="bg-white rounded-xl p-6 min-h-[400px] flex flex-col">
+      <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl p-8 shadow-xl">
+        <div className="bg-white rounded-xl p-6 min-h-[400px] flex flex-col">
             <div className="flex-1 space-y-4 mb-6">
               <AnimatePresence mode="wait">
                 {!isSubmitted ? (
@@ -173,7 +172,6 @@ export function Contact() {
                 </button>
               </form>
             )}
-          </div>
         </div>
       </div>
     </section>
