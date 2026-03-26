@@ -76,7 +76,7 @@ export function ProjectGallery() {
     <section id="projects" className="pt-10 pb-20">
       <div className="w-full mx-auto">
         <div className="text-center mb-12">
-          <h2 className="mb-4 text-black font-['Roboto_Slab',serif] text-[40px] font-bold">Featured Projects</h2>
+          <h2 className="font-roboto-slab mb-4 text-black text-[40px] font-semibold tracking-normal leading-[1.15]">Featured Projects</h2>
           <p className="font-['Roboto',sans-serif] text-[16px] tracking-[-0.48px] text-[#2e2e2e] mx-auto text-center max-w-3xl" style={{ fontVariationSettings: "'wdth' 100" }}>These projects highlight the breadth of my enterprise work — from shaping agentic AI product vision to navigating complex platform-level design challenges. Grounded in 12+ years of UX experience, and a constant curiosity to learn, adapt, and push the work further.</p>
         </div>
 
