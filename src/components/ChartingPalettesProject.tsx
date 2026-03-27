@@ -24,10 +24,23 @@ import imgStyleGuide7 from "figma:asset/1dfbf21b2e60153c245d237d352bde9d98e7f057
 import imgDefaultTypography from "figma:asset/555db8680678882a74f287b815eaa07c21085add.png";
 import imgDecisionTree from "figma:asset/f75671d87c70410e87ebf83f11ede032613a9e83.png";
 
+export interface PersonaCardData {
+  name: string;
+  subtitle: string;
+  imageSrc: string;
+  imageAlt: string;
+  goals: string;
+  painPoints: string;
+}
+
 interface ChartingPalettesProjectProps {
   heroTitle?: string;
   heroTags?: string[];
   heroParagraphs?: string[];
+  /** Hero strip background (e.g. reporting case study header) */
+  heroBgClass?: string;
+  /** Optional persona cards shown after “The Starting Point”, before “The Product-Level” */
+  personas?: PersonaCardData[];
 }
 
 const categoricalColors = [
@@ -56,6 +69,8 @@ export function ChartingPalettesProject({
     "Workday's data visualization had grown organically across product lines, leaving behind a fragmented ecosystem of mismatched styles, conflicting interactions, and no central ownership.",
     "As a designer on the Reporting team - one of the teams maintaining a charting library - I recognized it early on this wasn't a design debt problem. It was a platform risk.",
   ],
+  heroBgClass = 'bg-[#fdf0e8]',
+  personas,
 }: ChartingPalettesProjectProps) {
   const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -84,14 +99,14 @@ export function ChartingPalettesProject({
       className="min-h-screen bg-white"
     >
       {/* Hero Section */}
-      <div className="pt-14 pb-10 md:pt-16 md:pb-12 bg-[#fdf0e8]">
+      <div className={`pt-14 pb-10 md:pt-16 md:pb-12 ${heroBgClass}`}>
         <div className="max-w-5xl mx-auto px-4 md:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <div className="flex gap-2 mb-4">
+            <div className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-2">
               {heroTags.map((tag) => (
                 <p key={tag} className="font-['Roboto_Slab',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383]">
                   {tag}
@@ -136,42 +151,48 @@ export function ChartingPalettesProject({
               </p>
             </div>
 
-            {/* Goals Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mt-0 mb-10">
-              <div className="bg-[#f8fafb] border border-[#e1e8ed] rounded-[16px] p-6">
-                <h4 className="mt-4 text-[18px] font-medium py-2 text-[#2e2e2e]">
-                  Product-level Goals
-                </h4>
-                <ul className="space-y-2 list-disc ml-6">
-                  <li className="font-['Inter',sans-serif] text-[16px] text-black leading-[22px]">
-                    Define a visual style guide to unify data visualization across products
-                  </li>
-                  <li className="font-['Inter',sans-serif] text-[16px] text-black leading-[22px]">
-                    Modernize the default color palette with accessible colors
-                  </li>
-                  <li className="font-['Inter',sans-serif] text-[16px] text-black leading-[22px]">
-                    Provide clear usage guidelines around library adoption
-                  </li>
-                </ul>
+            {personas && personas.length > 0 && (
+              <div className="mb-12 md:mb-14">
+                <h3 className="font-['Roboto_Slab',serif] text-[32px] tracking-[0.4px] mb-4 text-[#2e2e2e] leading-[1.2]">
+                  Main User Personas
+                </h3>
+                <p className="font-['Inter',sans-serif] text-[16px] leading-[1.5] md:leading-[1.45] text-black mb-6">
+                  These two personas represent Workday's core business domains — Human Capital Management (HCM) and Finance — each with their own workflows and use case-specific pain points.
+                </p>
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                  {personas.map((persona) => (
+                    <div
+                      key={persona.name}
+                      className="flex flex-col gap-8 rounded-2xl border border-gray-200 bg-white p-8 shadow-sm md:flex-row md:items-start"
+                    >
+                      <div className="flex w-full shrink-0 flex-col items-center text-center md:w-48">
+                        <img
+                          src={persona.imageSrc}
+                          alt={persona.imageAlt}
+                          className="mb-4 h-20 w-20 rounded-full object-cover"
+                        />
+                        <p className="mb-1 font-['Inter',sans-serif] text-base font-bold text-gray-900">
+                          {persona.name}
+                        </p>
+                        <p className="font-['Inter',sans-serif] text-sm text-[#4A7C7A]">
+                          {persona.subtitle}
+                        </p>
+                      </div>
+                      <div className="min-w-0 flex-1 space-y-4">
+                        <div>
+                          <p className="mb-1 text-sm font-bold text-gray-900">Goals:</p>
+                          <p className="text-sm leading-relaxed text-gray-600">{persona.goals}</p>
+                        </div>
+                        <div>
+                          <p className="mb-1 text-sm font-bold text-gray-900">Pain points:</p>
+                          <p className="text-sm leading-relaxed text-gray-600">{persona.painPoints}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-              
-              <div className="bg-[#f8fafb] border border-[#e1e8ed] rounded-[16px] p-6">
-                <h4 className="mt-4 text-[18px] font-medium py-2 text-[#2e2e2e]">
-                  Platform-level Goals
-                </h4>
-                <ul className="space-y-2 list-disc ml-6">
-                  <li className="font-['Inter',sans-serif] text-[16px] text-black leading-[22px]">
-                    Define clear guidelines for chart selection and library implementation across design, product, and engineering
-                  </li>
-                  <li className="font-['Inter',sans-serif] text-[16px] text-black leading-[22px]">
-                    Audit cross-product chart portability — library limitations, data source compatibility, and auditing risks
-                  </li>
-                  <li className="font-['Inter',sans-serif] text-[16px] text-black leading-[22px]">
-                    Build a sustainable ownership & governance model
-                  </li>
-                </ul>
-              </div>
-            </div>
+            )}
 
             <h2 className="font-['Roboto_Slab',serif] text-[40px] tracking-[0.8px] mb-4 md:mb-5 text-[#2d6383] leading-[1.2]">The Product-Level</h2>
 
