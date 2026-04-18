@@ -10,6 +10,7 @@ import imgPrototype1 from "figma:asset/2006a35b6ad8684f507a82f5696b4da1fe2d0fd4.
 import imgPrototype2 from "figma:asset/6b16a97db5138230ea1cd167ee6298756ed73ec8.png";
 import imgPrototype3 from "figma:asset/1c505bcd09fa2fdba79689871f7d803991e803f8.png";
 import imgHowItPlaysOut from '../assets/how-it-plays-out.png';
+import imgChartPluginDesignSupport from '../assets/chart-plugin-design-support.png';
 import imgClosingCarouselSlide2 from '../assets/carousel-slide-2-sana-show-steps.png';
 import imgClosingCarouselSlide3 from '../assets/carousel-slide-3-platform-framework.png';
 import imgTrack2Basic from '../assets/track2-basic.png';
@@ -30,6 +31,14 @@ import imgTrack2AiCanvasCarousel2 from '../assets/track2-ai-canvas-carousel-2.pn
 import imgTrack2AiCanvasCarousel3 from '../assets/track2-ai-canvas-carousel-3.png';
 import imgTrack2AiCanvasCarousel4 from '../assets/track2-ai-canvas-carousel-4.png';
 import imgTrack2AiCanvasCarousel5 from '../assets/track2-ai-canvas-carousel-5.png';
+import imgDatavizMainChart1 from '../assets/dataviz-main-chart-1.png';
+import imgDirectToAuroraDiscoveryBoard from '../assets/directtoaurora-discovery-board.png';
+import imgDatavizFunnel3 from '../assets/dataviz-funnel-3.png';
+import imgDatavizHover4 from '../assets/dataviz-hover-4.png';
+import imgDatavizHover5 from '../assets/dataviz-hover-5.png';
+import imgDatavizPadding6 from '../assets/dataviz-padding-6.png';
+import imgDatavizClick7 from '../assets/dataviz-click-7.png';
+import imgDatavizClick8 from '../assets/dataviz-click-8.png';
 
 type ClosingUseCaseCarouselSlide = {
   src: string;
@@ -52,6 +61,25 @@ const CLOSING_USE_CASE_CAROUSEL_SLIDES: ClosingUseCaseCarouselSlide[] = [
     src: imgClosingCarouselSlide3,
     caption: 'Platform Framework → Product Customization',
     sub: 'Report-scoped search and an explanation step for answer transparency',
+  },
+];
+
+/** Shown under the Style Guide intro on the Data Viz case study; swap slides when you export final Figma frames. */
+const DEFAULT_STYLE_GUIDE_CAROUSEL_SLIDES: ClosingUseCaseCarouselSlide[] = [
+  {
+    src: imgChartPluginDesignSupport,
+    caption: 'Style Guide',
+    sub: 'Typography, axes, legend, and annotation specs for grouped charts',
+  },
+  {
+    src: imgHowItPlaysOut,
+    caption: 'How it plays out',
+    sub: 'Divider lines, baselines, and type ramp on chart chrome',
+  },
+  {
+    src: imgClosingCarouselSlide3,
+    caption: 'Platform framework',
+    sub: 'How tokens map to product surfaces',
   },
 ];
 
@@ -86,7 +114,8 @@ function ClosingUseCaseCarouselSection({
   slides,
   onOpenLightbox,
 }: {
-  title: string;
+  /** Omit to render only the carousel (e.g. under Style Guide intro). */
+  title?: string;
   titleClassName?: string;
   /** Optional body copy rendered below the title, above the thumbnail grid. */
   introAfterTitle?: string;
@@ -98,7 +127,7 @@ function ClosingUseCaseCarouselSection({
 
   return (
     <>
-      <h4 className={titleClassName}>{title}</h4>
+      {title ? <h4 className={titleClassName}>{title}</h4> : null}
 
       {introAfterTitle ? (
         <p className="mt-2 mb-5 md:mb-6 w-full text-pretty font-['Inter',sans-serif] text-[14px] leading-[1.5] md:leading-[1.45] text-black">
@@ -210,6 +239,166 @@ export interface SummaryInsightRowData {
   imageAlt?: string;
 }
 
+/** One cell in the Data Viz “fragmentation audit” screenshot grid (top of case study). */
+export interface FragmentationAuditCellData {
+  title: string;
+  subtitle: string;
+  imageSrc: string;
+  imageAlt?: string;
+}
+
+const CASE_STUDY_HERO_BLUE_TITLE_CLASS =
+  "font-['Roboto_Slab',serif] text-[40px] tracking-[0.8px] case-study-h3-pad-hero text-[#2d6383] leading-[1.2]";
+
+const DEFAULT_UNIFIED_STYLE_GUIDE_LEAD_TITLE = 'Unified Style Guide & Usage Guidelines';
+const DEFAULT_UNIFIED_STYLE_GUIDE_LEAD_SUBTITLE = 'Updated accessible color palette';
+const DEFAULT_UNIFIED_STYLE_GUIDE_LEAD_BODY =
+  'We developed three specialized palettes, each optimized for different data visualization scenarios. Each palette underwent rigorous testing for contrast ratios, color blindness simulation, and perceptual uniformity.';
+
+const DEFAULT_FRAGMENTATION_PROBLEM_INTRO =
+  'Workday has a fragmented implementation of data visualization throughout our product. The data vizes are inconsistent with their styles & interactions. Additionally, there’s no central owner to manage the libraries or provide guidance in usage';
+
+const DEFAULT_STARTING_POINT_GOALS: string[] = [
+  'Style guide',
+  'Usage guidelines',
+  'Recommendations for design library',
+  'Clear ownership and governance plan',
+];
+
+const DEFAULT_STARTING_POINT_OUTCOMES: string[] = [
+  'Cohesive platform-level plan',
+  'Reduce confusion and complexity in data visualization implementations',
+];
+
+/** Default 8-up grid: first three match Aurora audit; remaining cells use representative thumbnails until you swap assets. */
+const DEFAULT_FRAGMENTATION_AUDIT_CELLS: FragmentationAuditCellData[] = [
+  {
+    title: 'Aurora thru GWT (RW)',
+    subtitle: 'eg. Report Writer, Dashboards',
+    imageSrc: imgScreenshot20260216At105144Am2,
+    imageAlt: 'Aurora charting via GWT in Report Writer',
+  },
+  {
+    title: 'Directly to Aurora',
+    subtitle: 'Discovery Boards',
+    imageSrc: imgScreenshot20251006At93728Am11,
+    imageAlt: 'Discovery Boards charting',
+  },
+  {
+    title: 'Aurora thru Cards Framework',
+    subtitle: 'EG. any Hub, Strategic Sourcing',
+    imageSrc: imgOverviewAllCountries11,
+    imageAlt: 'Aurora via Cards Framework',
+  },
+  {
+    title: 'D3',
+    subtitle: 'eg. Prism',
+    imageSrc: imgPrototype1,
+    imageAlt: 'D3 chart example',
+  },
+  {
+    title: 'reCharts',
+    subtitle: 'eg. Peakon',
+    imageSrc: imgPrototype2,
+    imageAlt: 'reCharts example',
+  },
+  {
+    title: 'Nivo',
+    subtitle: 'eg. Vindly',
+    imageSrc: imgPrototype3,
+    imageAlt: 'Nivo chart example',
+  },
+  {
+    title: 'Plotly',
+    subtitle: 'eg. Sana',
+    imageSrc: imgClosingCarouselSlide2,
+    imageAlt: 'Plotly / Sana visualization',
+  },
+  {
+    title: 'Highcharts',
+    subtitle: 'Resource Scheduling',
+    imageSrc: imgTrack2Dashboard,
+    imageAlt: 'Highcharts scheduling visualization',
+  },
+];
+
+/**
+ * Portfolio route (`/project/charting-palettes`): eight audit screenshots + captions
+ * matching the case study hero (“Problem” through Goals/Outcomes).
+ */
+export const chartingPalettesRouteFragmentationCells: FragmentationAuditCellData[] = [
+  {
+    title: 'Aurora thru GWT (RW)',
+    subtitle: 'eg. Report Writer, Dashboards',
+    imageSrc: imgDatavizMainChart1,
+    imageAlt: 'Aurora charting via GWT in Report Writer',
+  },
+  {
+    title: 'Directly to Aurora',
+    subtitle: 'Discovery Boards',
+    imageSrc: imgDirectToAuroraDiscoveryBoard,
+    imageAlt:
+      'BI Discovery Board with dual axis and combo charts: builder panel, viz grid, and controls',
+  },
+  {
+    title: 'Aurora thru Cards Framework',
+    subtitle: 'EG. any Hub, Strategic Sourcing',
+    imageSrc: imgDatavizFunnel3,
+    imageAlt: 'Aurora via Cards Framework',
+  },
+  {
+    title: 'D3',
+    subtitle: 'eg. Prism',
+    imageSrc: imgDatavizHover4,
+    imageAlt: 'D3 chart example',
+  },
+  {
+    title: 'reCharts',
+    subtitle: 'eg. Peakon',
+    imageSrc: imgDatavizHover5,
+    imageAlt: 'reCharts example',
+  },
+  {
+    title: 'Nivo',
+    subtitle: 'eg. Vindly',
+    imageSrc: imgDatavizPadding6,
+    imageAlt: 'Nivo chart example',
+  },
+  {
+    title: 'Plotly',
+    subtitle: 'eg. Sana',
+    imageSrc: imgDatavizClick7,
+    imageAlt: 'Plotly / Sana visualization',
+  },
+  {
+    title: 'Highcharts',
+    subtitle: 'Resource Scheduling',
+    imageSrc: imgDatavizClick8,
+    imageAlt: 'Highcharts scheduling visualization',
+  },
+];
+
+function FragmentationAuditCard({ cell }: { cell: FragmentationAuditCellData }) {
+  return (
+    <div className="flex flex-col items-center gap-2.5">
+      <div className="flex h-[min(220px,42vw)] min-h-[168px] w-full items-center justify-center overflow-hidden rounded-2xl bg-white p-3 shadow-[0_4px_14px_rgba(0,0,0,0.06)] ring-1 ring-black/[0.06] sm:h-[200px] sm:min-h-[180px] md:h-[220px]">
+        <img
+          src={cell.imageSrc}
+          alt={cell.imageAlt ?? cell.title}
+          draggable={false}
+          className="max-h-full max-w-full object-contain object-center"
+        />
+      </div>
+      <p className="w-full text-center font-['Inter',sans-serif] text-[14px] font-bold leading-[1.35] text-[#333333]">
+        {cell.title}
+      </p>
+      <p className="w-full text-center font-['Inter',sans-serif] text-[12px] leading-[1.45] text-[rgba(0,0,0,0.62)]">
+        {cell.subtitle}
+      </p>
+    </div>
+  );
+}
+
 function parseVimeoVideoId(input: string): string {
   const trimmed = input.trim();
   const fromUrl = trimmed.match(/vimeo\.com\/(?:video\/)?(\d+)/);
@@ -224,8 +413,23 @@ interface ChartingPalettesProjectProps {
   heroParagraphs?: string[];
   /** Hero strip background (e.g. reporting case study header) */
   heroBgClass?: string;
-  /** Body copy under “The Starting Point” — one `<p>` per string */
+  /** Body copy under “The Starting Point” — one `<p>` per string (when `showFragmentationAuditGrid` is false). */
   startingPointParagraphs?: string[];
+  /**
+   * When true (default), shows the Data Viz “fragmentation audit”: blue hero title, intro, 8-cell screenshot grid, Goals/Outcomes cards.
+   * Set false for case studies that use the simpler Starting Point (e.g. Reporting Insights).
+   */
+  showFragmentationAuditGrid?: boolean;
+  /** Blue hero title when `showFragmentationAuditGrid` is true (default: “The Starting Point”). */
+  startingPointHeroTitle?: string;
+  /** Intro paragraph under the hero title when the audit grid is shown. */
+  fragmentationProblemIntro?: string;
+  /** Optional override for the 8-cell audit grid. */
+  fragmentationAuditCells?: FragmentationAuditCellData[];
+  /** Goals card bullets when the audit grid is shown. */
+  startingPointGoals?: string[];
+  /** Outcomes card bullets when the audit grid is shown. */
+  startingPointOutcomes?: string[];
   /** Optional persona cards shown after “The Starting Point” */
   personas?: PersonaCardData[];
   /** Intro paragraph below “Main User Personas” (shown when `personas` is non-empty) */
@@ -237,8 +441,19 @@ interface ChartingPalettesProjectProps {
   /** Intro copy under that heading — one `<p>` per string */
   colorPaletteIntroParagraphs?: string[];
   /**
-   * When false, hides the Colors heading, intro, prototype media, and accessible swatches (Data Viz route).
-   * Reporting Insights sets this true and overrides titles for the MVP block.
+   * When true (default), shows the blue “Unified Style Guide & Usage Guidelines” lead block above the Colors heading.
+   * Set false when the Colors section uses a different parent title (e.g. Reporting Insights “The MVP”).
+   */
+  showUnifiedStyleGuideLead?: boolean;
+  /** Main title for that lead block (Roboto Slab hero blue). */
+  unifiedStyleGuideLeadTitle?: string;
+  /** Subtitle under the main title (Roboto Slab, dark). */
+  unifiedStyleGuideLeadSubtitle?: string;
+  /** Body paragraph under the subtitle. */
+  unifiedStyleGuideLeadBody?: string;
+  /**
+   * When false, hides the Colors heading, intro, prototype media, and accessible swatches.
+   * Default true (e.g. Data Visualization). Reporting Insights keeps it on and overrides titles / Vimeo embeds.
    */
   showColorPaletteSection?: boolean;
   /**
@@ -256,6 +471,13 @@ interface ChartingPalettesProjectProps {
   styleGuideSectionTitle?: string;
   /** Body copy under that heading. */
   styleGuideSectionIntro?: string;
+  /**
+   * When true (default), shows a carousel of annotated style-guide frames under `styleGuideSectionIntro`.
+   * Set false when that section is repurposed (e.g. Reporting “Research Findings”).
+   */
+  showStyleGuideCarousel?: boolean;
+  /** Optional slides for the style-guide carousel; defaults to bundled thumbnails. */
+  styleGuideCarouselSlides?: ClosingUseCaseCarouselSlide[];
   /** Optional `<h4>` directly under the style-guide intro paragraph. */
   styleGuideAfterIntroHeading?: string;
   /** Optional staggered quote rows (screenshot + quote + tags) below the intro heading; grey band section. */
@@ -329,6 +551,12 @@ export function ChartingPalettesProject({
     "Workday's data visualization had grown organically across product lines, leaving behind a fragmented ecosystem of mismatched styles, conflicting interactions, and no central ownership.",
     "As a designer on the Reporting team - one of the teams maintaining a charting library - I recognized it early on this wasn't a design debt problem. It was a platform risk.",
   ],
+  showFragmentationAuditGrid = true,
+  startingPointHeroTitle = 'The Starting Point',
+  fragmentationProblemIntro = DEFAULT_FRAGMENTATION_PROBLEM_INTRO,
+  fragmentationAuditCells,
+  startingPointGoals = DEFAULT_STARTING_POINT_GOALS,
+  startingPointOutcomes = DEFAULT_STARTING_POINT_OUTCOMES,
   personas,
   personasIntro,
   colorPaletteSectionTitle = 'Colors',
@@ -337,6 +565,10 @@ export function ChartingPalettesProject({
     'To ensure alignment, I organized a selection committee comprised of designers each representing a product pillar.',
     'To support the decision-making process, I created several Loveable prototypes to evaluate palette options, simulate color blindness conditions, and preview them across common chart types.',
   ],
+  showUnifiedStyleGuideLead = true,
+  unifiedStyleGuideLeadTitle = DEFAULT_UNIFIED_STYLE_GUIDE_LEAD_TITLE,
+  unifiedStyleGuideLeadSubtitle = DEFAULT_UNIFIED_STYLE_GUIDE_LEAD_SUBTITLE,
+  unifiedStyleGuideLeadBody = DEFAULT_UNIFIED_STYLE_GUIDE_LEAD_BODY,
   showColorPaletteSection = true,
   mvpPrototypeVimeoIds,
   mvpPrototypeSectionTitle,
@@ -344,6 +576,8 @@ export function ChartingPalettesProject({
   showAccessiblePaletteSwatches = true,
   styleGuideSectionTitle = 'Style Guide (for Aurora Library)',
   styleGuideSectionIntro = 'During my charting audit, I discovered three distinct implementations of the Workday charting library — each with its own styles and patterns. Rather than defaulting to one over the others, I synthesized the common ground across all three to propose a standardized style guide that could work for everyone.',
+  showStyleGuideCarousel = true,
+  styleGuideCarouselSlides,
   styleGuideAfterIntroHeading,
   styleGuideIssuePatternCards,
   showAuroraThroughChartSelection = true,
@@ -369,6 +603,10 @@ export function ChartingPalettesProject({
     selectedImage === imgTrack2Basic ||
     selectedImage === imgTrack2Dashboard ||
     selectedImage === imgTrack2AiCanvas;
+
+  const fragmentationCells = fragmentationAuditCells ?? DEFAULT_FRAGMENTATION_AUDIT_CELLS;
+  const styleGuideCarouselSlidesResolved =
+    styleGuideCarouselSlides ?? DEFAULT_STYLE_GUIDE_CAROUSEL_SLIDES;
 
   const auroraCharts = [
     { src: imgScreenshot20260216At105144Am2, title: 'Aurora thru GWT (RW)', subtitle: 'eg. Report Writer, Dashboards' },
@@ -427,14 +665,80 @@ export function ChartingPalettesProject({
             transition={{ duration: 0.6 }}
             className="mb-16"
           >
-            <h3 className="font-['Roboto_Slab',serif] text-[28px] tracking-[0.4px] case-study-h3-pad-5 text-[#2e2e2e] leading-[1.2]">
-              The Starting Point
-            </h3>
-            <div className="font-['Inter',sans-serif] text-[14px] leading-[1.5] md:leading-[1.45] text-black mb-6 md:mb-7 space-y-3">
-              {startingPointParagraphs.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
-            </div>
+            {showFragmentationAuditGrid ? (
+              <>
+                <h3 className="case-study-h3-pad-hero mb-4 font-['Roboto_Slab',serif] text-[34px] leading-[1.2] tracking-[0.6px] text-[#3e6b89] md:mb-5 md:text-[40px] md:tracking-[0.8px]">
+                  {startingPointHeroTitle}
+                </h3>
+                <p className="mb-10 max-w-4xl font-['Inter',sans-serif] text-[16px] font-normal leading-[1.55] text-[#333333] md:mb-11 md:text-[17px] md:leading-[1.5]">
+                  {fragmentationProblemIntro}
+                </p>
+                <div
+                  className="mb-12 space-y-10 md:mb-14 md:space-y-12"
+                  role="region"
+                  aria-label="Fragmented data visualization implementations"
+                >
+                  {(() => {
+                    const splitAfter = 6;
+                    const topRowCells =
+                      fragmentationCells.length > splitAfter
+                        ? fragmentationCells.slice(0, splitAfter)
+                        : fragmentationCells;
+                    const bottomRowCells =
+                      fragmentationCells.length > splitAfter ? fragmentationCells.slice(splitAfter) : [];
+                    return (
+                      <>
+                        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-9 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-10">
+                          {topRowCells.map((cell) => (
+                            <FragmentationAuditCard key={cell.title} cell={cell} />
+                          ))}
+                        </div>
+                        {bottomRowCells.length > 0 ? (
+                          <div className="mx-auto grid w-full max-w-[820px] grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-x-10">
+                            {bottomRowCells.map((cell) => (
+                              <FragmentationAuditCard key={cell.title} cell={cell} />
+                            ))}
+                          </div>
+                        ) : null}
+                      </>
+                    );
+                  })()}
+                </div>
+                <div className="mb-12 grid grid-cols-1 gap-6 md:mb-14 md:grid-cols-2 md:gap-8">
+                  <div className="rounded-2xl bg-[#f8f9fa] px-6 py-6 md:px-8 md:py-7">
+                    <h4 className="mb-4 font-['Roboto_Slab',serif] text-[20px] font-semibold leading-[1.25] text-[#2e2e2e] md:text-[22px]">
+                      Goals
+                    </h4>
+                    <ul className="list-disc space-y-2.5 pl-5 font-['Inter',sans-serif] text-[14px] leading-[1.5] text-[#333333] marker:text-[#333333]">
+                      {startingPointGoals.map((g) => (
+                        <li key={g}>{g}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="rounded-2xl bg-[#f8f9fa] px-6 py-6 md:px-8 md:py-7">
+                    <h4 className="mb-4 font-['Roboto_Slab',serif] text-[20px] font-semibold leading-[1.25] text-[#2e2e2e] md:text-[22px]">
+                      Outcomes
+                    </h4>
+                    <ul className="list-disc space-y-2.5 pl-5 font-['Inter',sans-serif] text-[14px] leading-[1.5] text-[#333333] marker:text-[#333333]">
+                      {startingPointOutcomes.map((o) => (
+                        <li key={o}>{o}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <h3 className="font-['Roboto_Slab',serif] text-[28px] tracking-[0.4px] case-study-h3-pad-5 text-[#2e2e2e] leading-[1.2]">
+                  The Starting Point
+                </h3>
+                <div className="mb-6 space-y-3 font-['Inter',sans-serif] text-[14px] leading-[1.5] text-black md:mb-7 md:leading-[1.45]">
+                  {startingPointParagraphs.map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                  ))}
+                </div>
+              </>
+            )}
 
             {personas && personas.length > 0 && (
               <div className="mb-12 md:mb-14">
@@ -489,6 +793,37 @@ export function ChartingPalettesProject({
             <div className="mb-10">
               {showColorPaletteSection ? (
                 <>
+                  {showUnifiedStyleGuideLead ? (
+                    <div
+                      className={
+                        showFragmentationAuditGrid
+                          ? 'mb-8 mt-10 border-t border-[#e8eaed] pt-10 md:mb-10 md:mt-14 md:pt-12'
+                          : 'mb-8 md:mb-10'
+                      }
+                    >
+                      <h2
+                        className={
+                          showFragmentationAuditGrid
+                            ? "case-study-h3-pad-hero mb-3 font-['Roboto_Slab',serif] text-[34px] leading-[1.2] tracking-[0.6px] text-[#3e6b89] md:mb-4 md:text-[40px] md:tracking-[0.8px]"
+                            : `${CASE_STUDY_HERO_BLUE_TITLE_CLASS} mb-3 md:mb-4`
+                        }
+                      >
+                        {unifiedStyleGuideLeadTitle}
+                      </h2>
+                      <h3 className="mb-3 font-['Roboto_Slab',serif] text-[20px] font-semibold leading-[1.3] tracking-[0.3px] text-[#2e2e2e] md:mb-4 md:text-[22px]">
+                        {unifiedStyleGuideLeadSubtitle}
+                      </h3>
+                      <p
+                        className={`max-w-4xl font-['Inter',sans-serif] leading-[1.55] md:leading-[1.5] ${
+                          showFragmentationAuditGrid
+                            ? 'text-[16px] text-[#333333] md:text-[17px]'
+                            : 'w-full max-w-none text-[14px] text-[rgba(0,0,0,0.72)]'
+                        }`}
+                      >
+                        {unifiedStyleGuideLeadBody}
+                      </p>
+                    </div>
+                  ) : null}
                   {colorPaletteParentSectionTitle ? (
                     <h2 className="font-['Roboto_Slab',serif] text-[40px] tracking-[0.8px] case-study-h3-pad-hero text-[#2d6383] leading-[1.2] mt-8 md:mt-10">
                       {colorPaletteParentSectionTitle}
@@ -496,7 +831,7 @@ export function ChartingPalettesProject({
                   ) : null}
                   <h3
                     className={`font-['Roboto_Slab',serif] text-[28px] tracking-[0.4px] case-study-h3-pad-5 text-[#2e2e2e] leading-[1.2] ${
-                      colorPaletteParentSectionTitle ? 'mt-2' : ''
+                      colorPaletteParentSectionTitle ? 'mt-2' : showUnifiedStyleGuideLead ? 'mt-2 md:mt-3' : ''
                     }`}
                   >
                     {colorPaletteSectionTitle}
@@ -572,7 +907,9 @@ export function ChartingPalettesProject({
 
                   {showAccessiblePaletteSwatches ? (
                     <>
-                      <h4 className="mt-4 text-[18px] font-medium py-2">Updated accessible color palette</h4>
+                      <h4 className="mt-4 py-2 text-[18px] font-medium text-[#2e2e2e]">
+                        {showUnifiedStyleGuideLead ? 'Categorical palette' : 'Updated accessible color palette'}
+                      </h4>
                       <div className="overflow-x-auto pb-2 mb-8">
                         <div className="flex gap-2 min-w-max mx-auto">
                           {categoricalColors.map((color, i) => (
@@ -599,6 +936,14 @@ export function ChartingPalettesProject({
                 {styleGuideSectionTitle}
               </h3>
               <p className="font-['Inter',sans-serif] text-[14px] leading-[1.45] text-black mt-2 mb-4">{styleGuideSectionIntro}</p>
+              {showStyleGuideCarousel && styleGuideCarouselSlidesResolved.length > 0 ? (
+                <div className="mb-8 md:mb-10">
+                  <ClosingUseCaseCarouselSection
+                    slides={styleGuideCarouselSlidesResolved}
+                    onOpenLightbox={setSelectedImage}
+                  />
+                </div>
+              ) : null}
               {styleGuideAfterIntroHeading &&
               !(styleGuideIssuePatternCards && styleGuideIssuePatternCards.length > 0) ? (
                 <h4 className="text-center text-[18px] font-medium text-[#2e2e2e] mb-4">

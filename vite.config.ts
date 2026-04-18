@@ -5,6 +5,7 @@
   import path from 'path';
 
   export default defineConfig({
+    publicDir: 'public',
     plugins: [react(), tailwindcss()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
@@ -90,6 +91,7 @@
     },
     server: {
       port: 3000,
+      strictPort: true,
       open: true,
     },
   });

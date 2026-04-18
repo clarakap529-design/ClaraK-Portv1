@@ -1,6 +1,9 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { ChartingPalettesProject } from './ChartingPalettesProject';
+import {
+  ChartingPalettesProject,
+  chartingPalettesRouteFragmentationCells,
+} from './ChartingPalettesProject';
 import { DebuggingProject } from './DebuggingProject';
 import { ReportingInsightsProject } from './ReportingInsightsProject';
 import { ReportAuthoringProject } from './ReportAuthoringProject';
@@ -52,20 +55,22 @@ const projectDetails = {
     category: 'Reporting',
     tags: ['Reporting', 'Analytics'],
     backgroundColor: '#dfebeb',
-    overview: 'A collaborative platform for creating, editing, and sharing data-driven reports with intelligent automation.',
-    challenge: 'Creating professional reports was time-consuming and required jumping between multiple tools.',
-    solution: 'We built an integrated authoring experience with AI-assisted writing, automatic data updates, and real-time collaboration.',
+    overview:
+      'Report authoring in Workday spans two dated screens while Data Source Findability and Report Authoring 2.0 advanced on parallel roadmaps—research and journey mapping surfaced the real problems.',
+    challenge:
+      'Two teams owned overlapping report-authoring workflows with no shared map of handoffs, friction, or end-to-end experience.',
+    solution:
+      'Recruited internal users, ran interviews, and synthesized findings into a five-phase journey map so both initiatives could be judged against the same reality.',
     impact: [
-      'Report creation time reduced by 50%',
-      'Collaboration efficiency improved by 80%',
-      'Template reuse increased by 200%'
+      'Single end-to-end journey map spanning five phases',
+      'Shared framing for two parallel product initiatives',
+      'Research grounded in implementers, analysts, builders, and consumers',
     ],
     features: [
-      'Drag-and-drop report builder',
-      'AI-powered content suggestions',
-      'Real-time collaboration',
-      'Automated data refresh'
-    ]
+      'Cross-role interviews across the authoring workflow',
+      'Participant mapping for implementers vs. internal analysts',
+      'Journey synthesis for requirements through consumption',
+    ],
   },
   'data-visualization': {
     title: 'Data Visualization',
@@ -162,9 +167,18 @@ export function ProjectDetail() {
     return <ReportAuthoringProject />;
   }
 
-  // Use custom layout for charting palettes project
+  // Data Visualization case study — full ChartingPalettes template (Colors, style guide, Track 2, CTA).
+  // Aurora 3-up is hidden here; the fragmentation audit grid above already covers those paths.
   if (projectId === 'charting-palettes') {
-    return <ChartingPalettesProject showEndCta showColorPaletteSection={false} />;
+    return (
+      <ChartingPalettesProject
+        showEndCta
+        showFragmentationAuditGrid
+        showAuroraThroughChartSelection={false}
+        startingPointHeroTitle="Problem"
+        fragmentationAuditCells={chartingPalettesRouteFragmentationCells}
+      />
+    );
   }
 
   // Use custom layout for debugging project
