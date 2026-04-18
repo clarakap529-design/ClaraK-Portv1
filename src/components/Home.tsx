@@ -29,6 +29,14 @@ export function Home() {
 
   return (
     <>
+      {import.meta.env.DEV ? (
+        <p
+          className="mx-auto max-w-5xl px-4 py-1 text-center font-['Inter',sans-serif] text-[11px] text-[rgba(0,0,0,0.5)]"
+          data-dev-hmr-check="home"
+        >
+          Dev: edit and save Home.tsx — this line should update without a full refresh (HMR check).
+        </p>
+      ) : null}
       <Hero />
       <ProjectGallery />
       <AICompanion currentSection={currentSection} />

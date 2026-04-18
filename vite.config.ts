@@ -91,7 +91,8 @@
     },
     server: {
       port: 3000,
-      strictPort: true,
+      /** Prefer 3000, but if another dev server is still running, use the next free port instead of failing. */
+      strictPort: false,
       open: true,
     },
   });

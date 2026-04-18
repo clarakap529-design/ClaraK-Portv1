@@ -3,8 +3,6 @@ import { motion } from 'motion/react';
 import { useState, type ReactNode } from 'react';
 
 // Import thumbnail images
-import imgScreenshot20260216At105144Am2 from "figma:asset/a4b3ac0215db4332e80b6fc41e9c7d95900e2edb.png";
-import imgScreenshot20251006At93728Am11 from "figma:asset/8ff3ae8c343c0d4519aadf5ddb26ab21ffb959de.png";
 import imgOverviewAllCountries11 from "figma:asset/b5735599f29d6f021c8acc9c1efb3a1f4ad3300f.png";
 import imgPrototype1 from "figma:asset/2006a35b6ad8684f507a82f5696b4da1fe2d0fd4.png";
 import imgPrototype2 from "figma:asset/6b16a97db5138230ea1cd167ee6298756ed73ec8.png";
@@ -31,8 +29,15 @@ import imgTrack2AiCanvasCarousel2 from '../assets/track2-ai-canvas-carousel-2.pn
 import imgTrack2AiCanvasCarousel3 from '../assets/track2-ai-canvas-carousel-3.png';
 import imgTrack2AiCanvasCarousel4 from '../assets/track2-ai-canvas-carousel-4.png';
 import imgTrack2AiCanvasCarousel5 from '../assets/track2-ai-canvas-carousel-5.png';
-import imgDatavizMainChart1 from '../assets/dataviz-main-chart-1.png';
+import imgAuroraThruGwtRwOmsbiComposite from '../assets/omsbi-11d-composite-aurora-gwt-rw.png';
 import imgDirectToAuroraDiscoveryBoard from '../assets/directtoaurora-discovery-board.png';
+import imgD3Charts from '../assets/d3-charts.png';
+import imgRecharts from '../assets/recharts.png';
+import imgNivo from '../assets/nivo.png';
+import imgPlotly from '../assets/plotly.png';
+import imgPsaHighcharts from '../assets/psa-highcharts.png';
+import imgDatavizMainChart1 from '../assets/dataviz-main-chart-1.png';
+import imgDatavizDonut2 from '../assets/dataviz-donut -2.png';
 import imgDatavizFunnel3 from '../assets/dataviz-funnel-3.png';
 import imgDatavizHover4 from '../assets/dataviz-hover-4.png';
 import imgDatavizHover5 from '../assets/dataviz-hover-5.png';
@@ -67,19 +72,44 @@ const CLOSING_USE_CASE_CAROUSEL_SLIDES: ClosingUseCaseCarouselSlide[] = [
 /** Shown under the Style Guide intro on the Data Viz case study; swap slides when you export final Figma frames. */
 const DEFAULT_STYLE_GUIDE_CAROUSEL_SLIDES: ClosingUseCaseCarouselSlide[] = [
   {
-    src: imgChartPluginDesignSupport,
-    caption: 'Style Guide',
-    sub: 'Typography, axes, legend, and annotation specs for grouped charts',
+    src: imgDatavizMainChart1,
+    caption: 'Main chart',
+    sub: '',
   },
   {
-    src: imgHowItPlaysOut,
-    caption: 'How it plays out',
-    sub: 'Divider lines, baselines, and type ramp on chart chrome',
+    src: imgDatavizDonut2,
+    caption: 'Donut',
+    sub: '',
   },
   {
-    src: imgClosingCarouselSlide3,
-    caption: 'Platform framework',
-    sub: 'How tokens map to product surfaces',
+    src: imgDatavizFunnel3,
+    caption: 'Funnel',
+    sub: '',
+  },
+  {
+    src: imgDatavizHover4,
+    caption: 'Hover',
+    sub: '',
+  },
+  {
+    src: imgDatavizHover5,
+    caption: 'Hover',
+    sub: '',
+  },
+  {
+    src: imgDatavizPadding6,
+    caption: 'Padding',
+    sub: '',
+  },
+  {
+    src: imgDatavizClick7,
+    caption: 'Click',
+    sub: '',
+  },
+  {
+    src: imgDatavizClick8,
+    caption: 'Click',
+    sub: '',
   },
 ];
 
@@ -112,7 +142,6 @@ function ClosingUseCaseCarouselSection({
   titleClassName = 'mt-0 text-[18px] font-semibold text-[#2e2e2e] text-left w-full',
   introAfterTitle,
   slides,
-  onOpenLightbox,
 }: {
   /** Omit to render only the carousel (e.g. under Style Guide intro). */
   title?: string;
@@ -120,7 +149,6 @@ function ClosingUseCaseCarouselSection({
   /** Optional body copy rendered below the title, above the thumbnail grid. */
   introAfterTitle?: string;
   slides: ClosingUseCaseCarouselSlide[];
-  onOpenLightbox: (src: string) => void;
 }) {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const activeSlide = slides[Math.min(activeSlideIndex, Math.max(slides.length - 1, 0))];
@@ -137,7 +165,7 @@ function ClosingUseCaseCarouselSection({
 
       <div className="py-3">
         <div className="mx-auto w-full max-w-4xl md:max-w-5xl">
-          <div className="relative flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <button
               type="button"
               onClick={() => setActiveSlideIndex((activeSlideIndex - 1 + slides.length) % slides.length)}
@@ -146,24 +174,21 @@ function ClosingUseCaseCarouselSection({
             >
               <ChevronLeft size={18} className="text-[#2d6383]" />
             </button>
-            <button
-              type="button"
-              onClick={() => onOpenLightbox(activeSlide.src)}
-              className="min-w-0 flex-1 cursor-pointer overflow-hidden rounded-lg border border-gray-200 shadow-md transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2d6383] focus-visible:ring-offset-2"
-              aria-label={`Open full size: ${activeSlide.caption}`}
-            >
+            <div className="min-w-0 flex-1">
+              <div className="w-full overflow-hidden rounded-lg border border-gray-200 shadow-md">
               {/*
                 Fixed aspect matches the tallest slide at full width (920×526) so slides 2–3
                 (wider/shorter ratios) don’t shrink the carousel frame when swapping slides.
               */}
-              <div className="relative aspect-[920/526] w-full overflow-hidden bg-[#f8fafb]">
-                <img
-                  src={activeSlide.src}
-                  alt={activeSlide.caption}
-                  className="absolute inset-0 h-full w-full object-contain object-center"
-                />
+                <div className="relative aspect-[920/526] w-full overflow-hidden bg-white">
+                  <img
+                    src={activeSlide.src}
+                    alt={activeSlide.caption}
+                    className="absolute inset-0 h-full w-full object-contain object-center"
+                  />
+                </div>
               </div>
-            </button>
+            </div>
             <button
               type="button"
               onClick={() => setActiveSlideIndex((activeSlideIndex + 1) % slides.length)}
@@ -275,13 +300,14 @@ const DEFAULT_FRAGMENTATION_AUDIT_CELLS: FragmentationAuditCellData[] = [
   {
     title: 'Aurora thru GWT (RW)',
     subtitle: 'eg. Report Writer, Dashboards',
-    imageSrc: imgScreenshot20260216At105144Am2,
-    imageAlt: 'Aurora charting via GWT in Report Writer',
+    imageSrc: imgAuroraThruGwtRwOmsbiComposite,
+    imageAlt:
+      'OMSBI composite report: clustered bar chart by cost center with current period, last year, and variance; table below',
   },
   {
     title: 'Directly to Aurora',
     subtitle: 'Discovery Boards',
-    imageSrc: imgScreenshot20251006At93728Am11,
+    imageSrc: imgDirectToAuroraDiscoveryBoard,
     imageAlt: 'Discovery Boards charting',
   },
   {
@@ -293,31 +319,31 @@ const DEFAULT_FRAGMENTATION_AUDIT_CELLS: FragmentationAuditCellData[] = [
   {
     title: 'D3',
     subtitle: 'eg. Prism',
-    imageSrc: imgPrototype1,
+    imageSrc: imgD3Charts,
     imageAlt: 'D3 chart example',
   },
   {
     title: 'reCharts',
     subtitle: 'eg. Peakon',
-    imageSrc: imgPrototype2,
+    imageSrc: imgRecharts,
     imageAlt: 'reCharts example',
   },
   {
     title: 'Nivo',
     subtitle: 'eg. Vindly',
-    imageSrc: imgPrototype3,
+    imageSrc: imgNivo,
     imageAlt: 'Nivo chart example',
   },
   {
     title: 'Plotly',
     subtitle: 'eg. Sana',
-    imageSrc: imgClosingCarouselSlide2,
+    imageSrc: imgPlotly,
     imageAlt: 'Plotly / Sana visualization',
   },
   {
     title: 'Highcharts',
     subtitle: 'Resource Scheduling',
-    imageSrc: imgTrack2Dashboard,
+    imageSrc: imgPsaHighcharts,
     imageAlt: 'Highcharts scheduling visualization',
   },
 ];
@@ -330,8 +356,9 @@ export const chartingPalettesRouteFragmentationCells: FragmentationAuditCellData
   {
     title: 'Aurora thru GWT (RW)',
     subtitle: 'eg. Report Writer, Dashboards',
-    imageSrc: imgDatavizMainChart1,
-    imageAlt: 'Aurora charting via GWT in Report Writer',
+    imageSrc: imgAuroraThruGwtRwOmsbiComposite,
+    imageAlt:
+      'OMSBI composite report: clustered bar chart by cost center with current period, last year, and variance; table below',
   },
   {
     title: 'Directly to Aurora',
@@ -343,50 +370,74 @@ export const chartingPalettesRouteFragmentationCells: FragmentationAuditCellData
   {
     title: 'Aurora thru Cards Framework',
     subtitle: 'EG. any Hub, Strategic Sourcing',
-    imageSrc: imgDatavizFunnel3,
+    imageSrc: imgOverviewAllCountries11,
     imageAlt: 'Aurora via Cards Framework',
   },
   {
     title: 'D3',
     subtitle: 'eg. Prism',
-    imageSrc: imgDatavizHover4,
+    imageSrc: imgD3Charts,
     imageAlt: 'D3 chart example',
   },
   {
     title: 'reCharts',
     subtitle: 'eg. Peakon',
-    imageSrc: imgDatavizHover5,
+    imageSrc: imgRecharts,
     imageAlt: 'reCharts example',
   },
   {
     title: 'Nivo',
     subtitle: 'eg. Vindly',
-    imageSrc: imgDatavizPadding6,
+    imageSrc: imgNivo,
     imageAlt: 'Nivo chart example',
   },
   {
     title: 'Plotly',
     subtitle: 'eg. Sana',
-    imageSrc: imgDatavizClick7,
+    imageSrc: imgPlotly,
     imageAlt: 'Plotly / Sana visualization',
   },
   {
     title: 'Highcharts',
     subtitle: 'Resource Scheduling',
-    imageSrc: imgDatavizClick8,
+    imageSrc: imgPsaHighcharts,
     imageAlt: 'Highcharts scheduling visualization',
   },
 ];
 
-function FragmentationAuditCard({ cell }: { cell: FragmentationAuditCellData }) {
+function FragmentationAuditCard({
+  cell,
+  onOpenLightbox,
+}: {
+  cell: FragmentationAuditCellData;
+  /** When set, the thumbnail is clickable (opens full-size preview). */
+  onOpenLightbox?: (src: string) => void;
+}) {
   return (
     <div className="flex flex-col items-center gap-2.5">
-      <div className="flex h-[min(220px,42vw)] min-h-[168px] w-full items-center justify-center overflow-hidden rounded-2xl bg-white p-3 shadow-[0_4px_14px_rgba(0,0,0,0.06)] ring-1 ring-black/[0.06] sm:h-[200px] sm:min-h-[180px] md:h-[220px]">
+      <div
+        className={`flex h-[min(220px,42vw)] min-h-[168px] w-full overflow-hidden rounded-2xl bg-white shadow-[0_4px_14px_rgba(0,0,0,0.06)] ring-1 ring-black/[0.06] sm:h-[200px] sm:min-h-[180px] md:h-[220px] ${
+          onOpenLightbox ? 'cursor-pointer transition-opacity hover:opacity-90' : ''
+        }`}
+        onClick={onOpenLightbox ? () => onOpenLightbox(cell.imageSrc) : undefined}
+        onKeyDown={
+          onOpenLightbox
+            ? (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  onOpenLightbox(cell.imageSrc);
+                }
+              }
+            : undefined
+        }
+        role={onOpenLightbox ? 'button' : undefined}
+        tabIndex={onOpenLightbox ? 0 : undefined}
+      >
         <img
           src={cell.imageSrc}
           alt={cell.imageAlt ?? cell.title}
           draggable={false}
-          className="max-h-full max-w-full object-contain object-center"
+          className="h-full min-h-0 w-full object-cover object-top"
         />
       </div>
       <p className="w-full text-center font-['Inter',sans-serif] text-[14px] font-bold leading-[1.35] text-[#333333]">
@@ -452,6 +503,11 @@ interface ChartingPalettesProjectProps {
   /** Body paragraph under the subtitle. */
   unifiedStyleGuideLeadBody?: string;
   /**
+   * When true (default), shows the compact `h3` under the unified style-guide hero title (`styleGuideSectionTitle`).
+   * Set false on the Data Viz case study to omit that line only.
+   */
+  showStyleGuideLeadSubtitleHeading?: boolean;
+  /**
    * When false, hides the Colors heading, intro, prototype media, and accessible swatches.
    * Default true (e.g. Data Visualization). Reporting Insights keeps it on and overrides titles / Vimeo embeds.
    */
@@ -510,6 +566,12 @@ interface ChartingPalettesProjectProps {
   /** Optional `<h3>` after that body copy (same typography as “The Starting Point” and other section `<h3>`s). */
   closingInterstitialSubheading?: string;
   /**
+   * When true (and no `closingInterstitialNote`), still renders the Track 1 narrative, closing carousel, and Track 2
+   * explorations — same block Reporting Insights unlocks via `closingInterstitialSubheading`. Use for Data Viz /
+   * charting-palettes when you want the full template without the muted interstitial band.
+   */
+  showCaseStudyTrack2Closing?: boolean;
+  /**
    * When true, shows the “Interested in hearing what happened?” CTA with animated reply (Data Viz case study only).
    */
   showEndCta?: boolean;
@@ -538,6 +600,90 @@ const categoricalColors = [
   { color: '#1A4A28', label: 'Green 800' },
   { color: '#9C6A1A', label: 'Amber 700' },
 ];
+
+/**
+ * Sequential tab: White → Teal 25–900. sRGB hex from Canvas `--cnvs-base-palette-teal-*` OKLCH (OKLab↔sRGB CSS Color 4).
+ */
+const sequentialColors = [
+  { color: '#FFFFFF', label: 'White' },
+  { color: '#eafeff', label: 'Teal 25' },
+  { color: '#d1fafe', label: 'Teal 50' },
+  { color: '#c7f3f8', label: 'Teal 100' },
+  { color: '#a1e4eb', label: 'Teal 200' },
+  { color: '#6fc9d3', label: 'Teal 300' },
+  { color: '#46b5c2', label: 'Teal 400' },
+  { color: '#009eac', label: 'Teal 500' },
+  { color: '#007581', label: 'Teal 600' },
+  { color: '#006570', label: 'Teal 700' },
+  { color: '#00515b', label: 'Teal 800' },
+  { color: '#00363e', label: 'Teal 900' },
+];
+
+/**
+ * Diverging palette: coral ramp → white, then azure ramp.
+ * Coral / Azure: sRGB hex from Canvas `--cnvs-base-palette-*` OKLCH via OKLab↔sRGB (CSS Color 4).
+ */
+const divergingPaletteRows: readonly (readonly { color: string; label: string }[])[] = [
+  [
+    { color: '#5b0b00', label: 'Coral 900' },
+    { color: '#811800', label: 'Coral 800' },
+    { color: '#9f2500', label: 'Coral 700' },
+    { color: '#c13600', label: 'Coral 600' },
+    { color: '#fc5b05', label: 'Coral 500' },
+    { color: '#fe7b50', label: 'Coral 400' },
+    { color: '#ff916e', label: 'Coral 300' },
+    { color: '#ffbaa5', label: 'Coral 200' },
+    { color: '#ffe2da', label: 'Coral 100' },
+    { color: '#fff8f5', label: 'Coral 25' },
+    { color: '#FFFFFF', label: 'White' },
+  ],
+  [
+    { color: '#f0fbff', label: 'Azure 25' },
+    { color: '#dcf5ff', label: 'Azure 50' },
+    { color: '#ccefff', label: 'Azure 100' },
+    { color: '#94dcff', label: 'Azure 200' },
+    { color: '#79c7fb', label: 'Azure 300' },
+    { color: '#4cb0f6', label: 'Azure 400' },
+    { color: '#1c98e8', label: 'Azure 500' },
+    { color: '#006eaa', label: 'Azure 600' },
+    { color: '#005e90', label: 'Azure 700' },
+    { color: '#004b6d', label: 'Azure 800' },
+    { color: '#003953', label: 'Azure 900' },
+  ],
+];
+
+type PaletteTabId = 'categorical' | 'sequential' | 'diverging';
+
+const PALETTE_TAB_DEFS: readonly {
+  id: PaletteTabId;
+  label: string;
+  description: string;
+}[] = [
+  {
+    id: 'categorical',
+    label: 'Categorical',
+    description:
+      'Categorical palette is used for distinct, unordered categories. Maximum perceptual distance between adjacent colors.',
+  },
+  {
+    id: 'sequential',
+    label: 'Sequential',
+    description:
+      'For ordered data with progressive values. Smooth gradient from light to dark.',
+  },
+  {
+    id: 'diverging',
+    label: 'Diverging',
+    description:
+      'For data with a meaningful midpoint. Two distinct hues diverging from a neutral center.',
+  },
+];
+
+function paletteSwatchesForTab(tab: PaletteTabId) {
+  if (tab === 'categorical') return categoricalColors;
+  if (tab === 'sequential') return sequentialColors;
+  return [];
+}
 
 export function ChartingPalettesProject({
   heroTitle = 'Data Visualizations',
@@ -569,6 +715,7 @@ export function ChartingPalettesProject({
   unifiedStyleGuideLeadTitle = DEFAULT_UNIFIED_STYLE_GUIDE_LEAD_TITLE,
   unifiedStyleGuideLeadSubtitle = DEFAULT_UNIFIED_STYLE_GUIDE_LEAD_SUBTITLE,
   unifiedStyleGuideLeadBody = DEFAULT_UNIFIED_STYLE_GUIDE_LEAD_BODY,
+  showStyleGuideLeadSubtitleHeading = true,
   showColorPaletteSection = true,
   mvpPrototypeVimeoIds,
   mvpPrototypeSectionTitle,
@@ -590,9 +737,11 @@ export function ChartingPalettesProject({
   closingInterstitialHeading,
   closingInterstitialHeadingParagraphs,
   closingInterstitialSubheading,
+  showCaseStudyTrack2Closing = false,
   showEndCta = false,
   replaceMainContent,
 }: ChartingPalettesProjectProps) {
+  const [paletteTab, setPaletteTab] = useState<PaletteTabId>('categorical');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [track2BasicCarouselIndex, setTrack2BasicCarouselIndex] = useState<number | null>(null);
   const [track2DashboardCarouselIndex, setTrack2DashboardCarouselIndex] = useState<number | null>(null);
@@ -609,10 +758,132 @@ export function ChartingPalettesProject({
     styleGuideCarouselSlides ?? DEFAULT_STYLE_GUIDE_CAROUSEL_SLIDES;
 
   const auroraCharts = [
-    { src: imgScreenshot20260216At105144Am2, title: 'Aurora thru GWT (RW)', subtitle: 'eg. Report Writer, Dashboards' },
-    { src: imgScreenshot20251006At93728Am11, title: 'Directly to Aurora', subtitle: 'Discovery Boards' },
+    {
+      src: imgAuroraThruGwtRwOmsbiComposite,
+      title: 'Aurora thru GWT (RW)',
+      subtitle: 'eg. Report Writer, Dashboards',
+    },
+    { src: imgDirectToAuroraDiscoveryBoard, title: 'Directly to Aurora', subtitle: 'Discovery Boards' },
     { src: imgOverviewAllCountries11, title: 'Aurora thru Cards Framework', subtitle: 'EG. any Hub, Strategic Sourcing' }
   ];
+
+  /** Aurora 3-up: fragmentation case study always; other case studies when explicitly enabled. */
+  const showAuroraLibraryTriptych = showFragmentationAuditGrid || showAuroraThroughChartSelection;
+
+  const track2ClosingSubheadingDisplay =
+    closingInterstitialSubheading ?? 'Track 1: Working Within the Platform Constraints';
+  const showTrack2ClosingBlock =
+    Boolean(closingInterstitialSubheading) || showCaseStudyTrack2Closing;
+
+  function renderTrack2ClosingBlock(subtitle: string) {
+    return (
+      <>
+        <h3 className="font-['Roboto_Slab',serif] text-[28px] tracking-[0.4px] case-study-h3-pad-5 text-[#2e2e2e] leading-[1.2]">
+          {subtitle}
+        </h3>
+        <p className="mb-4 font-['Inter',sans-serif] text-[14px] leading-[1.45] text-black">
+          The platform direction was changing week to week, with next-gen UI components and framework patterns still in
+          flux, so I had to align our product direction to a moving target while keeping momentum on delivery.
+        </p>
+        <ul className="mb-4 ml-6 list-disc space-y-2 pl-6 font-['Inter',sans-serif] text-[14px] leading-[1.45] text-black marker:text-[#2e2e2e]">
+          <li>Designing response patterns that make long-form AI outputs scannable and trustworthy.</li>
+          <li>Designing for long tabular data in the response without breaking readability or context.</li>
+          <li>
+            Defining new admin controls for more granular enablements and permission management at the report level.
+          </li>
+          <li>Making report context legible inside a stateless framework so users understand data scope.</li>
+        </ul>
+
+        <ClosingUseCaseCarouselSection
+          title="Adjusting the Show Steps template to provide context of the report"
+          introAfterTitle="Our agent can only query what's visible in the report — not external sources, not related reports, not broader Workday data. But the platform's default stateless pattern gives no indication of that boundary. For an analytics agent, that ambiguity is dangerous. Users come in with mixed expectations — assuming the agent will eventually traverse across reports or pull from a wider dataset. If the interface doesn't clearly communicate what data is actually being queried, users can't trust the answer and a misunderstanding becomes a liability."
+          slides={CLOSING_USE_CASE_CAROUSEL_SLIDES}
+        />
+
+        <h3 className="font-['Roboto_Slab',serif] text-[28px] tracking-[0.4px] case-study-h3-pad-5 text-[#2e2e2e] leading-[1.2] mt-6">
+          Track 2: Scaling for the Vision State
+        </h3>
+        <p className="font-['Inter',sans-serif] text-[14px] leading-[1.45] text-black mb-4">
+          The next phase requires a future-state model that closes the gap between what users asked for and what the
+          first release could support. These are the core capabilities needed to address those unmet analysis needs.
+        </p>
+        <ul className="mb-2 ml-6 list-disc space-y-2 pl-6 font-['Inter',sans-serif] text-[14px] leading-[1.45] text-black marker:text-[#2e2e2e]">
+          <li>
+            AI-driven breadth traversal that can query outside the current report and pull in relevant connected
+            context.
+          </li>
+          <li>
+            User-directed multi-report analysis that combines data from separate reporting sources into one analysis
+            flow.
+          </li>
+          <li>
+            Prompt-driven data manipulation that lets users filter, shape, and iterate without leaving Workday.
+          </li>
+          <li>
+            Recurring analysis automation for monthly/quarterly cycles, including proactive summaries and narrative
+            insights.
+          </li>
+        </ul>
+        <h4 className="mt-6 font-['Inter',sans-serif] text-[18px] font-semibold text-[#2e2e2e]">
+          Design exploration to support recurring analysis
+        </h4>
+        <div className="mt-4 space-y-6">
+          <div className="space-y-2">
+            <p className="font-['Inter',sans-serif] text-[14px] font-bold text-[#2e2e2e]">Basic</p>
+            <button
+              type="button"
+              onClick={() => setTrack2BasicCarouselIndex(0)}
+              className="w-full cursor-pointer overflow-hidden rounded-[2px] border border-gray-200 bg-[#f0f7f7] text-left shadow-md transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2d6383] focus-visible:ring-offset-2"
+              aria-label="Open Basic flow image carousel"
+            >
+              <img
+                src={imgTrack2Basic}
+                alt="Track 2 Basic flow"
+                draggable={false}
+                className="block h-auto w-full select-none object-contain"
+              />
+            </button>
+          </div>
+          <div className="space-y-2">
+            <p className="font-['Inter',sans-serif] text-[14px] font-bold text-[#2e2e2e]">
+              Redirect to create a report-backed Dashboard
+            </p>
+            <button
+              type="button"
+              onClick={() => setTrack2DashboardCarouselIndex(0)}
+              className="w-full cursor-pointer overflow-hidden rounded-[2px] border border-gray-200 bg-[#f0f7f7] text-left shadow-md transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2d6383] focus-visible:ring-offset-2"
+              aria-label="Open dashboard-backed flow image carousel"
+            >
+              <img
+                src={imgTrack2Dashboard}
+                alt="Track 2 dashboard-backed report flow"
+                draggable={false}
+                className="block h-auto w-full select-none object-contain"
+              />
+            </button>
+          </div>
+          <div className="space-y-2">
+            <p className="font-['Inter',sans-serif] text-[14px] font-bold text-[#2e2e2e]">
+              Leverage experimental &apos;AI canvas&apos; concept
+            </p>
+            <button
+              type="button"
+              onClick={() => setTrack2AiCanvasCarouselIndex(0)}
+              className="w-full cursor-pointer overflow-hidden rounded-[2px] border border-gray-200 bg-[#f0f7f7] text-left shadow-md transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2d6383] focus-visible:ring-offset-2"
+              aria-label="Open AI canvas flow image carousel"
+            >
+              <img
+                src={imgTrack2AiCanvas}
+                alt="Track 2 AI-Canvas pattern flow"
+                draggable={false}
+                className="block h-auto w-full select-none object-contain"
+              />
+            </button>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <motion.div
@@ -694,9 +965,14 @@ export function ChartingPalettesProject({
                           ))}
                         </div>
                         {bottomRowCells.length > 0 ? (
-                          <div className="mx-auto grid w-full max-w-[820px] grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-x-10">
+                          <div className="flex flex-col gap-8 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-6 sm:gap-y-9 lg:gap-x-8 lg:gap-y-10">
                             {bottomRowCells.map((cell) => (
-                              <FragmentationAuditCard key={cell.title} cell={cell} />
+                              <div
+                                key={cell.title}
+                                className="w-full min-w-0 sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-4rem)/3)]"
+                              >
+                                <FragmentationAuditCard cell={cell} />
+                              </div>
                             ))}
                           </div>
                         ) : null}
@@ -810,9 +1086,6 @@ export function ChartingPalettesProject({
                       >
                         {unifiedStyleGuideLeadTitle}
                       </h2>
-                      <h3 className="mb-3 font-['Roboto_Slab',serif] text-[20px] font-semibold leading-[1.3] tracking-[0.3px] text-[#2e2e2e] md:mb-4 md:text-[22px]">
-                        {unifiedStyleGuideLeadSubtitle}
-                      </h3>
                       <p
                         className={`max-w-4xl font-['Inter',sans-serif] leading-[1.55] md:leading-[1.5] ${
                           showFragmentationAuditGrid
@@ -848,9 +1121,96 @@ export function ChartingPalettesProject({
                     </p>
                   ))}
 
+                  {showAccessiblePaletteSwatches ? (
+                    <div className="mb-6">
+                      {!showUnifiedStyleGuideLead ? (
+                        <h4 className="mb-3 py-2 text-[18px] font-medium text-[#2e2e2e]">
+                          Updated accessible color palette
+                        </h4>
+                      ) : null}
+                      <div className="border-b border-[#e8eaed]">
+                        <div
+                          className="flex flex-wrap justify-center gap-1"
+                          role="tablist"
+                          aria-label="Palette type"
+                        >
+                          {PALETTE_TAB_DEFS.map((def) => {
+                            const isActive = paletteTab === def.id;
+                            return (
+                              <button
+                                key={def.id}
+                                type="button"
+                                role="tab"
+                                id={`palette-tab-${def.id}`}
+                                aria-selected={isActive}
+                                aria-controls={`palette-panel-${def.id}`}
+                                tabIndex={isActive ? 0 : -1}
+                                onClick={() => setPaletteTab(def.id)}
+                                className={`rounded-t-lg px-4 py-2.5 font-['Inter',sans-serif] text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3e6b89] ${
+                                  isActive
+                                    ? 'bg-[#3e6b89] text-white'
+                                    : 'bg-transparent text-[#5c5c5c] hover:bg-[#f5f6f8] hover:text-[#2e2e2e]'
+                                }`}
+                              >
+                                {def.label}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                      {(() => {
+                        const activeDef =
+                          PALETTE_TAB_DEFS.find((d) => d.id === paletteTab) ?? PALETTE_TAB_DEFS[0];
+                        const swatches = paletteSwatchesForTab(activeDef.id);
+                        const swatchTile = (color: { color: string; label: string }, key: string) => (
+                          <div key={key} className="flex flex-col items-center">
+                            <div
+                              className="h-10 w-10 rounded-[8px] border border-gray-200 md:h-12 md:w-12"
+                              style={{ backgroundColor: color.color }}
+                            />
+                            <span className="whitespace-nowrap text-center font-['Inter',sans-serif] text-[10px] text-[rgba(0,0,0,0.55)]">
+                              {color.label}
+                            </span>
+                          </div>
+                        );
+                        return (
+                          <div
+                            role="tabpanel"
+                            id={`palette-panel-${activeDef.id}`}
+                            aria-labelledby={`palette-tab-${activeDef.id}`}
+                            className="border-b border-[#e8eaed] pt-4 pb-6"
+                          >
+                            <div className="mb-6 overflow-x-auto text-center">
+                              <p className="inline-block whitespace-nowrap font-['Inter',sans-serif] text-[14px] leading-[1.55] text-[#333333]">
+                                {activeDef.description}
+                              </p>
+                            </div>
+                            {activeDef.id === 'diverging' ? (
+                              <div className="flex flex-col items-center gap-4">
+                                {divergingPaletteRows.map((row, ri) => (
+                                  <div key={ri} className="w-full overflow-x-auto pb-1">
+                                    <div className="mx-auto flex min-w-max justify-center gap-2">
+                                      {row.map((c, i) => swatchTile(c, `diverging-${ri}-${i}`))}
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            ) : (
+                              <div className="overflow-x-auto pb-2">
+                                <div className="mx-auto flex min-w-max justify-center gap-2">
+                                  {swatches.map((color, i) => swatchTile(color, `swatch-${i}`))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })()}
+                    </div>
+                  ) : null}
+
                   {/* Prototype media: Vimeo embeds (Reporting) or image thumbnails (default) */}
                   {mvpVimeoIds.length > 0 ? (
-                    <div className="mt-4 mb-4 py-2">
+                    <div className="mb-4 py-2">
                       {mvpPrototypeSectionTitle ? (
                         <h4 className="text-[18px] font-medium text-[#2e2e2e] mb-4">
                           {mvpPrototypeSectionTitle}
@@ -888,7 +1248,11 @@ export function ChartingPalettesProject({
                       </div>
                     </div>
                   ) : (
-                    <div className="mt-4 mb-4 grid grid-cols-1 md:grid-cols-3 gap-4 py-2">
+                    <>
+                      <p className="mb-3 font-['Inter',sans-serif] text-[14px] leading-[1.55] text-[#333333]">
+                        I used Loveable to create several accessibility checking tools.
+                      </p>
+                      <div className="mb-4 grid grid-cols-1 gap-4 py-2 md:grid-cols-3">
                       {[imgPrototype1, imgPrototype2, imgPrototype3].map((img, i) => (
                         <div
                           key={i}
@@ -902,45 +1266,28 @@ export function ChartingPalettesProject({
                           />
                         </div>
                       ))}
-                    </div>
-                  )}
-
-                  {showAccessiblePaletteSwatches ? (
-                    <>
-                      <h4 className="mt-4 py-2 text-[18px] font-medium text-[#2e2e2e]">
-                        {showUnifiedStyleGuideLead ? 'Categorical palette' : 'Updated accessible color palette'}
-                      </h4>
-                      <div className="overflow-x-auto pb-2 mb-8">
-                        <div className="flex gap-2 min-w-max mx-auto">
-                          {categoricalColors.map((color, i) => (
-                            <div key={i} className="flex flex-col items-center">
-                              <div
-                                className="w-10 h-10 md:w-12 md:h-12 rounded-[8px] border border-gray-200"
-                                style={{ backgroundColor: color.color }}
-                              />
-                              <span className="font-['Inter',sans-serif] text-[10px] text-[rgba(0,0,0,0.55)] text-center whitespace-nowrap">{color.label}</span>
-                            </div>
-                          ))}
-                        </div>
                       </div>
                     </>
-                  ) : null}
+                  )}
                 </>
               ) : null}
 
               <h3
                 className={`font-['Roboto_Slab',serif] text-[28px] tracking-[0.4px] case-study-h3-pad-1 text-[#2e2e2e] leading-[1.2] ${
-                  showColorPaletteSection ? 'mt-10 md:mt-12' : 'mt-8 md:mt-10'
+                  showColorPaletteSection
+                    ? showAuroraLibraryTriptych
+                      ? 'mt-2 md:mt-3'
+                      : 'mt-10 md:mt-12'
+                    : 'mt-8 md:mt-10'
                 }`}
               >
-                {styleGuideSectionTitle}
+                Style Guide
               </h3>
               <p className="font-['Inter',sans-serif] text-[14px] leading-[1.45] text-black mt-2 mb-4">{styleGuideSectionIntro}</p>
               {showStyleGuideCarousel && styleGuideCarouselSlidesResolved.length > 0 ? (
                 <div className="mb-8 md:mb-10">
                   <ClosingUseCaseCarouselSection
                     slides={styleGuideCarouselSlidesResolved}
-                    onOpenLightbox={setSelectedImage}
                   />
                 </div>
               ) : null}
@@ -1005,39 +1352,10 @@ export function ChartingPalettesProject({
                 </div>
               ) : null}
 
-              {showAuroraThroughChartSelection ? (
-                <>
-                  {/* Aurora Charts - Official Library */}
-                  <div className="my-6">
-                    <h4 className="mt-4 text-[18px] font-medium py-2">
-                      Aurora (Workday's official charting library)
-                    </h4>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-                      {auroraCharts.map((chart, index) => (
-                        <div key={index} className="flex flex-col gap-2 items-start w-full">
-                          <div 
-                            className="w-full h-[200px] md:h-[220px] overflow-hidden rounded-lg cursor-pointer border border-gray-200 shadow-md transition-opacity hover:opacity-90"
-                            onClick={() => setSelectedImage(chart.src)}
-                          >
-                            <img src={chart.src} alt={chart.title} className="h-full w-full object-cover" />
-                          </div>
-                          <p className="font-['Inter',sans-serif] font-bold text-[12px] leading-[15px] text-black text-center w-full">
-                            {chart.title}
-                          </p>
-                          <p className="font-['Inter',sans-serif] font-medium text-[10px] leading-[15px] text-black text-center w-full">
-                            {chart.subtitle}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </>
-              ) : null}
-
               {platformSectionLead ? (
                 <p
                   className={`w-full font-['Inter',sans-serif] text-[14px] leading-[1.45] text-black ${
-                    showAuroraThroughChartSelection ? 'my-14 md:my-16' : 'my-8 md:my-10'
+                    showAuroraLibraryTriptych ? 'my-14 md:my-16' : 'my-8 md:my-10'
                   }`}
                 >
                   {platformSectionLead}
@@ -1045,7 +1363,7 @@ export function ChartingPalettesProject({
               ) : platformSectionTitleAsH4 ? (
                 <h4
                   className={`text-[18px] font-medium text-[#2e2e2e] mb-4 ${
-                    showAuroraThroughChartSelection ? 'mt-14 md:mt-16' : 'mt-8 md:mt-10'
+                    showAuroraLibraryTriptych ? 'mt-14 md:mt-16' : 'mt-8 md:mt-10'
                   }`}
                 >
                   {platformSectionTitle}
@@ -1053,7 +1371,7 @@ export function ChartingPalettesProject({
               ) : (
                 <h3
                   className={`font-['Roboto_Slab',serif] text-[28px] tracking-[0.4px] case-study-h3-pad-2 text-[#2e2e2e] leading-[1.2] ${
-                    showAuroraThroughChartSelection ? 'mt-14 md:mt-16' : 'mt-8 md:mt-10'
+                    showAuroraLibraryTriptych ? 'mt-14 md:mt-16' : 'mt-8 md:mt-10'
                   }`}
                 >
                   {platformSectionTitle}
@@ -1238,7 +1556,7 @@ export function ChartingPalettesProject({
               {closingInterstitialHeading ? (
                 <h2
                   className={`font-['Roboto_Slab',serif] text-[40px] tracking-[0.8px] case-study-h3-pad-hero text-[#2d6383] leading-[1.2] ${
-                    closingInterstitialHeadingParagraphs?.length || closingInterstitialSubheading
+                    closingInterstitialHeadingParagraphs?.length || showTrack2ClosingBlock
                       ? 'mb-3 md:mb-4'
                       : 'mb-6 md:mb-8'
                   }`}
@@ -1249,7 +1567,7 @@ export function ChartingPalettesProject({
               {closingInterstitialHeadingParagraphs && closingInterstitialHeadingParagraphs.length > 0 ? (
                 <div
                   className={`font-['Inter',sans-serif] text-[14px] leading-[1.5] md:leading-[1.45] text-black space-y-3 ${
-                    closingInterstitialSubheading ? 'mb-3 md:mb-4' : 'mb-6 md:mb-8'
+                    showTrack2ClosingBlock ? 'mb-3 md:mb-4' : 'mb-6 md:mb-8'
                   }`}
                 >
                   {closingInterstitialHeadingParagraphs.map((paragraph, index) => (
@@ -1257,115 +1575,10 @@ export function ChartingPalettesProject({
                   ))}
                 </div>
               ) : null}
-              {closingInterstitialSubheading ? (
-                <>
-                  <h3 className="font-['Roboto_Slab',serif] text-[28px] tracking-[0.4px] case-study-h3-pad-5 text-[#2e2e2e] leading-[1.2]">
-                    {closingInterstitialSubheading}
-                  </h3>
-                  <p className="mb-4 font-['Inter',sans-serif] text-[14px] leading-[1.45] text-black">
-                    The platform direction was changing week to week, with next-gen UI components and framework
-                    patterns still in flux, so I had to align our product direction to a moving target while keeping
-                    momentum on delivery.
-                  </p>
-                  <ul className="mb-4 ml-6 list-disc space-y-2 pl-6 font-['Inter',sans-serif] text-[14px] leading-[1.45] text-black marker:text-[#2e2e2e]">
-                    <li>Designing response patterns that make long-form AI outputs scannable and trustworthy.</li>
-                    <li>Designing for long tabular data in the response without breaking readability or context.</li>
-                    <li>
-                      Defining new admin controls for more granular enablements and permission management at the
-                      report level.
-                    </li>
-                    <li>Making report context legible inside a stateless framework so users understand data scope.</li>
-                  </ul>
-
-                  <ClosingUseCaseCarouselSection
-                    title="Adjusting the Show Steps template to provide context of the report"
-                    introAfterTitle="Our agent can only query what's visible in the report — not external sources, not related reports, not broader Workday data. But the platform's default stateless pattern gives no indication of that boundary. For an analytics agent, that ambiguity is dangerous. Users come in with mixed expectations — assuming the agent will eventually traverse across reports or pull from a wider dataset. If the interface doesn't clearly communicate what data is actually being queried, users can't trust the answer and a misunderstanding becomes a liability."
-                    slides={CLOSING_USE_CASE_CAROUSEL_SLIDES}
-                    onOpenLightbox={setSelectedImage}
-                  />
-
-                  <h3 className="font-['Roboto_Slab',serif] text-[28px] tracking-[0.4px] case-study-h3-pad-5 text-[#2e2e2e] leading-[1.2] mt-6">
-                    Track 2: Scaling for the Vision State
-                  </h3>
-                  <p className="font-['Inter',sans-serif] text-[14px] leading-[1.45] text-black mb-4">
-                    The next phase requires a future-state model that closes the gap between what users asked for and
-                    what the first release could support. These are the core capabilities needed to address those unmet
-                    analysis needs.
-                  </p>
-                  <ul className="mb-2 ml-6 list-disc space-y-2 pl-6 font-['Inter',sans-serif] text-[14px] leading-[1.45] text-black marker:text-[#2e2e2e]">
-                    <li>
-                      AI-driven breadth traversal that can query outside the current report and pull in relevant
-                      connected context.
-                    </li>
-                    <li>
-                      User-directed multi-report analysis that combines data from separate reporting sources into one
-                      analysis flow.
-                    </li>
-                    <li>
-                      Prompt-driven data manipulation that lets users filter, shape, and iterate without leaving
-                      Workday.
-                    </li>
-                    <li>
-                      Recurring analysis automation for monthly/quarterly cycles, including proactive summaries and
-                      narrative insights.
-                    </li>
-                  </ul>
-                  <h4 className="mt-6 font-['Inter',sans-serif] text-[18px] font-semibold text-[#2e2e2e]">
-                    Design exploration to support recurring analysis
-                  </h4>
-                  <div className="mt-4 space-y-6">
-                    <div className="space-y-2">
-                      <p className="font-['Inter',sans-serif] text-[14px] font-bold text-[#2e2e2e]">Basic</p>
-                      <button
-                        type="button"
-                        onClick={() => setTrack2BasicCarouselIndex(0)}
-                        className="w-full cursor-pointer overflow-hidden rounded-[2px] border border-gray-200 bg-[#f0f7f7] text-left shadow-md transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2d6383] focus-visible:ring-offset-2"
-                        aria-label="Open Basic flow image carousel"
-                      >
-                        <img
-                          src={imgTrack2Basic}
-                          alt="Track 2 Basic flow"
-                          draggable={false}
-                          className="block h-auto w-full select-none object-contain"
-                        />
-                      </button>
-                    </div>
-                    <div className="space-y-2">
-                      <p className="font-['Inter',sans-serif] text-[14px] font-bold text-[#2e2e2e]">Redirect to create a report-backed Dashboard</p>
-                      <button
-                        type="button"
-                        onClick={() => setTrack2DashboardCarouselIndex(0)}
-                        className="w-full cursor-pointer overflow-hidden rounded-[2px] border border-gray-200 bg-[#f0f7f7] text-left shadow-md transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2d6383] focus-visible:ring-offset-2"
-                        aria-label="Open dashboard-backed flow image carousel"
-                      >
-                        <img
-                          src={imgTrack2Dashboard}
-                          alt="Track 2 dashboard-backed report flow"
-                          draggable={false}
-                          className="block h-auto w-full select-none object-contain"
-                        />
-                      </button>
-                    </div>
-                    <div className="space-y-2">
-                      <p className="font-['Inter',sans-serif] text-[14px] font-bold text-[#2e2e2e]">Leverage experimental 'AI canvas' concept</p>
-                      <button
-                        type="button"
-                        onClick={() => setTrack2AiCanvasCarouselIndex(0)}
-                        className="w-full cursor-pointer overflow-hidden rounded-[2px] border border-gray-200 bg-[#f0f7f7] text-left shadow-md transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2d6383] focus-visible:ring-offset-2"
-                        aria-label="Open AI canvas flow image carousel"
-                      >
-                        <img
-                          src={imgTrack2AiCanvas}
-                          alt="Track 2 AI-Canvas pattern flow"
-                          draggable={false}
-                          className="block h-auto w-full select-none object-contain"
-                        />
-                      </button>
-                    </div>
-                  </div>
-                </>
-              ) : null}
+              {showTrack2ClosingBlock ? renderTrack2ClosingBlock(track2ClosingSubheadingDisplay) : null}
             </>
+          ) : showCaseStudyTrack2Closing ? (
+            <div className="mt-10 md:mt-12">{renderTrack2ClosingBlock(track2ClosingSubheadingDisplay)}</div>
           ) : null}
 
           </>

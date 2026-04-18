@@ -167,14 +167,15 @@ export function ProjectDetail() {
     return <ReportAuthoringProject />;
   }
 
-  // Data Visualization case study — full ChartingPalettes template (Colors, style guide, Track 2, CTA).
-  // Aurora 3-up is hidden here; the fragmentation audit grid above already covers those paths.
+  // Data Visualization case study — full ChartingPalettes template (including Track 2 + closing carousel).
   if (projectId === 'charting-palettes') {
     return (
       <ChartingPalettesProject
         showEndCta
         showFragmentationAuditGrid
+        showCaseStudyTrack2Closing={false}
         showAuroraThroughChartSelection={false}
+        showStyleGuideLeadSubtitleHeading={false}
         startingPointHeroTitle="Problem"
         fragmentationAuditCells={chartingPalettesRouteFragmentationCells}
       />
