@@ -55,7 +55,9 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
       <div className="p-6">
         <div className="text-sm text-blue-600 mb-2">{project.category}</div>
-        <h3 className="mb-2">{project.title}</h3>
+        <h3 className="font-['Roboto_Slab',serif] text-[28px] tracking-[0.4px] leading-[1.2] text-[#2e2e2e] mb-2">
+          {project.title}
+        </h3>
         <p className="text-slate-600 mb-4">{project.description}</p>
 
         <div className="flex flex-wrap gap-2">

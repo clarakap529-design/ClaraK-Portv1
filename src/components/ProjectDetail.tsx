@@ -164,7 +164,7 @@ export function ProjectDetail() {
 
   // Use custom layout for charting palettes project
   if (projectId === 'charting-palettes') {
-    return <ChartingPalettesProject />;
+    return <ChartingPalettesProject showEndCta showColorPaletteSection={false} />;
   }
 
   // Use custom layout for debugging project
@@ -302,7 +302,7 @@ export function ProjectDetail() {
             transition={{ duration: 0.6 }}
             className="text-center pt-12 border-t border-gray-200"
           >
-            <h3 className="font-['Roboto_Slab',serif] text-[32px] tracking-[1.6px] mb-6 text-[#2e2e2e]">
+            <h3 className="font-['Roboto_Slab',serif] text-[28px] tracking-[1.6px] mb-6 text-[#2e2e2e]">
               Interested in learning more?
             </h3>
             <button

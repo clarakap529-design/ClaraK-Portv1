@@ -73,7 +73,7 @@ export function Hero() {
   return (
     <motion.section 
       id="hero" 
-      className="bg-[#e8eef5] relative w-full overflow-hidden flex items-center justify-center min-h-[480px] py-8 -mt-[40px]"
+      className="bg-[#E0E8F0] relative w-full overflow-hidden flex items-center justify-center min-h-[480px] py-8 -mt-[40px]"
     >
       {/* Centered content container */}
       <div className="hidden lg:flex items-center gap-[56px] max-w-[1440px] mx-auto px-[160px]" style={{ width: '1050px', marginLeft: 'calc(50% - 525px - 164px)' }}>

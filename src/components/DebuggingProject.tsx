@@ -112,7 +112,7 @@ export function DebuggingProject() {
         transition={{ duration: 0.6 }}
         className="bg-[#dfebeb] py-10"
       >
-        <div className="max-w-7xl mx-auto px-12">
+        <div className="mx-auto max-w-5xl px-12">
           <h2 className="font-['Roboto_Slab',sans-serif] font-medium text-[32px] text-[#2d6383] text-center tracking-[-0.96px] leading-[1.25] mb-10">
             Known Technical Constraints
           </h2>
@@ -174,7 +174,7 @@ export function DebuggingProject() {
         transition={{ duration: 0.6 }}
         className="bg-white py-12"
       >
-        <div className="max-w-7xl mx-auto px-12">
+        <div className="mx-auto max-w-5xl px-12">
           <h2 className="font-['Roboto_Slab',sans-serif] font-medium text-[32px] text-center tracking-[-0.96px] leading-[1.25] mb-12">
             Considerations for UX Patterns
           </h2>
@@ -266,7 +266,7 @@ export function DebuggingProject() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="bg-[#e8eef5]"
+        className="bg-[#E0E8F0]"
       >
         <div className="py-12 px-12">
           <h2 className="font-['Roboto_Slab',sans-serif] font-medium text-[32px] text-center tracking-[-0.96px] leading-[1.25] mb-8">
@@ -321,7 +321,7 @@ export function DebuggingProject() {
         transition={{ duration: 0.6 }}
         className="bg-white py-12"
       >
-        <div className="max-w-7xl mx-auto px-12">
+        <div className="mx-auto max-w-5xl px-12">
           <h2 className="font-['Roboto_Slab',sans-serif] font-medium text-[32px] text-center tracking-[-0.96px] leading-[1.25] mb-8">
             Final Deliverable & Implemented Designs
           </h2>
@@ -348,7 +348,7 @@ export function DebuggingProject() {
         transition={{ duration: 0.6 }}
         className="bg-white text-center py-16 border-t border-gray-200"
       >
-        <h3 className="font-['Roboto_Slab',serif] text-[32px] tracking-[1.6px] mb-6 text-[#2e2e2e]">
+        <h3 className="font-['Roboto_Slab',serif] text-[28px] tracking-[1.6px] mb-6 text-[#2e2e2e]">
           Interested in learning more?
         </h3>
         <button

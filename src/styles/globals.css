@@ -44,7 +44,7 @@
   
   /* Custom Portfolio Colors */
   --portfolio-white: #ffffff;
-  --portfolio-blue-light: #e8eef5;
+  --portfolio-blue-light: #E0E8F0;
   --portfolio-blue: #6b96ac;
   --portfolio-blue-dark: #2d6383;
   --portfolio-teal-light: #dfebeb;
@@ -208,10 +208,11 @@
 
     h3 {
       font-family: 'Roboto Slab', serif;
-      font-size: 16px;
+      font-size: 28px;
       font-weight: 500;
-      line-height: 1.5;
-      letter-spacing: -0.48px;
+      line-height: 1.2;
+      letter-spacing: 0.4px;
+      color: #2e2e2e;
     }
 
     h4 {
@@ -260,5 +261,30 @@ html {
   }
   50% {
     border-color: rgba(199, 97, 41, 0.3);
+  }
+}
+
+/**
+ * Case study section headings: space below the title uses padding on the h3
+ * (not margin) so the gap is part of the heading’s box.
+ */
+@layer components {
+  .case-study-h3-pad-1 {
+    @apply pb-1;
+  }
+  .case-study-h3-pad-2 {
+    @apply pb-2;
+  }
+  .case-study-h3-pad-4 {
+    @apply pb-4;
+  }
+  .case-study-h3-pad-5 {
+    @apply pb-5;
+  }
+  .case-study-h3-pad-6 {
+    @apply pb-6;
+  }
+  .case-study-h3-pad-hero {
+    @apply pb-4 md:pb-5;
   }
 }
