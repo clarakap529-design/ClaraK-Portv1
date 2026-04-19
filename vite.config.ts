@@ -91,8 +91,12 @@
     },
     server: {
       port: 3000,
-      /** Prefer 3000, but if another dev server is still running, use the next free port instead of failing. */
-      strictPort: false,
+      /**
+       * Keep strict so the browser URL always matches the dev server you just started. With strictPort: false,
+       * Vite could move to :3001 while an old process still served stale bundles on :3000 — easy to confuse with “my
+       * edits didn’t apply.”
+       */
+      strictPort: true,
       open: true,
     },
   });

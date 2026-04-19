@@ -14,9 +14,12 @@ function DevServerHud() {
     >
       <p className="font-['Inter',sans-serif] font-semibold text-[#2d6383]">Vite dev server</p>
       <p className="mt-1 font-['Inter',sans-serif] text-[rgba(0,0,0,0.72)]">
-        Open the same URL this terminal prints (usually{' '}
-        <span className="whitespace-nowrap font-mono text-[11px]">http://localhost:3000</span>). If the UI looks
-        frozen, hard-refresh: Cmd+Shift+R.
+        This tab is{' '}
+        <span className="whitespace-nowrap font-mono text-[11px] text-[#2d6383]">
+          {typeof window !== 'undefined' ? window.location.origin : '…'}
+        </span>
+        . It must match the URL in the terminal where <span className="font-mono">npm run dev</span> is running. If
+        dev fails with “port in use,” stop the other process on that port, then restart. Hard-refresh: Cmd+Shift+R.
       </p>
     </div>
   );

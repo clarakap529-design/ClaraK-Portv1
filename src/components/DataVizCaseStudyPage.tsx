@@ -7,6 +7,7 @@ import { ChartingPalettesProject, chartingPalettesRouteFragmentationCells } from
  */
 export function DataVizCaseStudyPage() {
   return (
+    <div data-case-study="data-viz" className="contents">
     <ChartingPalettesProject
       showEndCta
       showPostCtaFollowup={false}
@@ -18,5 +19,6 @@ export function DataVizCaseStudyPage() {
       startingPointHeroTitle="Problem"
       fragmentationAuditCells={chartingPalettesRouteFragmentationCells}
     />
+    </div>
   );
 }
