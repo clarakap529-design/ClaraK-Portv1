@@ -1,11 +1,8 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
-import {
-  ChartingPalettesProject,
-  chartingPalettesRouteFragmentationCells,
-} from './ChartingPalettesProject';
+import { DataVizCaseStudyPage } from './DataVizCaseStudyPage';
 import { DebuggingProject } from './DebuggingProject';
-import { ReportingInsightsProject } from './ReportingInsightsProject';
+import { ReportingInsightsCaseStudyPage } from './ReportingInsightsCaseStudyPage';
 import { ReportAuthoringProject } from './ReportAuthoringProject';
 
 const projectDetails = {
@@ -159,7 +156,7 @@ export function ProjectDetail() {
 
   // Use custom layout for charting palettes project
   if (projectId === 'analytics-agent') {
-    return <ReportingInsightsProject />;
+    return <ReportingInsightsCaseStudyPage />;
   }
 
   // Use custom layout for report authoring project
@@ -167,19 +164,9 @@ export function ProjectDetail() {
     return <ReportAuthoringProject />;
   }
 
-  // Data Visualization case study — full ChartingPalettes template (including Track 2 + closing carousel).
+  // Data Viz — shared ChartingPalettes shell; no Track 1–2 / closing interstitial after the end CTA.
   if (projectId === 'charting-palettes') {
-    return (
-      <ChartingPalettesProject
-        showEndCta
-        showFragmentationAuditGrid
-        showCaseStudyTrack2Closing={false}
-        showAuroraThroughChartSelection={false}
-        showStyleGuideLeadSubtitleHeading={false}
-        startingPointHeroTitle="Problem"
-        fragmentationAuditCells={chartingPalettesRouteFragmentationCells}
-      />
-    );
+    return <DataVizCaseStudyPage />;
   }
 
   // Use custom layout for debugging project

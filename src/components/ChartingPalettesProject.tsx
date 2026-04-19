@@ -1,4 +1,4 @@
-import { Check, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useState, type ReactNode } from 'react';
 
@@ -11,24 +11,6 @@ import imgHowItPlaysOut from '../assets/how-it-plays-out.png';
 import imgChartPluginDesignSupport from '../assets/chart-plugin-design-support.png';
 import imgClosingCarouselSlide2 from '../assets/carousel-slide-2-sana-show-steps.png';
 import imgClosingCarouselSlide3 from '../assets/carousel-slide-3-platform-framework.png';
-import imgTrack2Basic from '../assets/track2-basic.png';
-import imgTrack2Dashboard from '../assets/track2-dashboard.png';
-import imgTrack2AiCanvas from '../assets/track2-ai-canvas.png';
-import imgTrack2BasicCarousel1Con from '../assets/track2-basic-carousel-1-con.png';
-import imgTrack2BasicCarousel2 from '../assets/track2-basic-carousel-2.png';
-import imgTrack2BasicCarousel3 from '../assets/track2-basic-carousel-3.png';
-import imgTrack2BasicCarousel4 from '../assets/track2-basic-carousel-4.png';
-import imgTrack2BasicCarousel5 from '../assets/track2-basic-carousel-5.png';
-import imgTrack2DashboardCarousel1 from '../assets/track2-dashboard-carousel-1.png';
-import imgTrack2DashboardCarousel2 from '../assets/track2-dashboard-carousel-2.png';
-import imgTrack2DashboardCarousel3 from '../assets/track2-dashboard-carousel-3.png';
-import imgTrack2DashboardCarousel4 from '../assets/track2-dashboard-carousel-4.png';
-import imgTrack2DashboardCarousel5 from '../assets/track2-dashboard-carousel-5.png';
-import imgTrack2AiCanvasCarousel1ProCon from '../assets/track2-ai-canvas-carousel-1-pro-con.png';
-import imgTrack2AiCanvasCarousel2 from '../assets/track2-ai-canvas-carousel-2.png';
-import imgTrack2AiCanvasCarousel3 from '../assets/track2-ai-canvas-carousel-3.png';
-import imgTrack2AiCanvasCarousel4 from '../assets/track2-ai-canvas-carousel-4.png';
-import imgTrack2AiCanvasCarousel5 from '../assets/track2-ai-canvas-carousel-5.png';
 import imgAuroraThruGwtRwOmsbiComposite from '../assets/omsbi-11d-composite-aurora-gwt-rw.png';
 import imgDirectToAuroraDiscoveryBoard from '../assets/directtoaurora-discovery-board.png';
 import imgD3Charts from '../assets/d3-charts.png';
@@ -111,30 +93,6 @@ const DEFAULT_STYLE_GUIDE_CAROUSEL_SLIDES: ClosingUseCaseCarouselSlide[] = [
     caption: 'Click',
     sub: '',
   },
-];
-
-const TRACK2_BASIC_CAROUSEL_IMAGES = [
-  imgTrack2BasicCarousel1Con,
-  imgTrack2BasicCarousel2,
-  imgTrack2BasicCarousel3,
-  imgTrack2BasicCarousel4,
-  imgTrack2BasicCarousel5,
-];
-
-const TRACK2_DASHBOARD_CAROUSEL_IMAGES = [
-  imgTrack2DashboardCarousel5,
-  imgTrack2DashboardCarousel2,
-  imgTrack2DashboardCarousel4,
-  imgTrack2DashboardCarousel3,
-  imgTrack2DashboardCarousel1,
-];
-
-const TRACK2_AI_CANVAS_CAROUSEL_IMAGES = [
-  imgTrack2AiCanvasCarousel1ProCon,
-  imgTrack2AiCanvasCarousel2,
-  imgTrack2AiCanvasCarousel3,
-  imgTrack2AiCanvasCarousel4,
-  imgTrack2AiCanvasCarousel5,
 ];
 
 function ClosingUseCaseCarouselSection({
@@ -567,14 +525,23 @@ interface ChartingPalettesProjectProps {
   closingInterstitialSubheading?: string;
   /**
    * When true (and no `closingInterstitialNote`), still renders the Track 1 narrative, closing carousel, and Track 2
-   * explorations — same block Reporting Insights unlocks via `closingInterstitialSubheading`. Use for Data Viz /
-   * charting-palettes when you want the full template without the muted interstitial band.
+   * explorations — same block Reporting Insights unlocks via `closingInterstitialSubheading`.
    */
   showCaseStudyTrack2Closing?: boolean;
+  /**
+   * When true, never renders the Track 1 / Track 2 follow-up block (overrides `closingInterstitialSubheading` and
+   * `showCaseStudyTrack2Closing`). Use for `/project/charting-palettes` (Data Viz) only.
+   */
+  hideCaseStudyTrackFollowUp?: boolean;
   /**
    * When true, shows the “Interested in hearing what happened?” CTA with animated reply (Data Viz case study only).
    */
   showEndCta?: boolean;
+  /**
+   * When false, hides all content that appears after the end CTA:
+   * closing note, closing heading/body, and Track 1 / Track 2 follow-up sections.
+   */
+  showPostCtaFollowup?: boolean;
   /**
    * When set, replaces the entire main column below the hero (Starting Point through closing sections).
    * Use for case studies that need a different IA while keeping the same hero strip (e.g. Report Authoring).
@@ -738,20 +705,15 @@ export function ChartingPalettesProject({
   closingInterstitialHeadingParagraphs,
   closingInterstitialSubheading,
   showCaseStudyTrack2Closing = false,
+  hideCaseStudyTrackFollowUp = false,
   showEndCta = false,
+  showPostCtaFollowup = true,
   replaceMainContent,
 }: ChartingPalettesProjectProps) {
   const [paletteTab, setPaletteTab] = useState<PaletteTabId>('categorical');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [track2BasicCarouselIndex, setTrack2BasicCarouselIndex] = useState<number | null>(null);
-  const [track2DashboardCarouselIndex, setTrack2DashboardCarouselIndex] = useState<number | null>(null);
-  const [track2AiCanvasCarouselIndex, setTrack2AiCanvasCarouselIndex] = useState<number | null>(null);
   const mvpVimeoIds = (mvpPrototypeVimeoIds ?? []).map((s) => s.trim()).filter(Boolean);
   const [userReply, setUserReply] = useState<string | null>(null);
-  const isTrack2ZoomImage =
-    selectedImage === imgTrack2Basic ||
-    selectedImage === imgTrack2Dashboard ||
-    selectedImage === imgTrack2AiCanvas;
 
   const fragmentationCells = fragmentationAuditCells ?? DEFAULT_FRAGMENTATION_AUDIT_CELLS;
   const styleGuideCarouselSlidesResolved =
@@ -773,7 +735,8 @@ export function ChartingPalettesProject({
   const track2ClosingSubheadingDisplay =
     closingInterstitialSubheading ?? 'Track 1: Working Within the Platform Constraints';
   const showTrack2ClosingBlock =
-    Boolean(closingInterstitialSubheading) || showCaseStudyTrack2Closing;
+    !hideCaseStudyTrackFollowUp &&
+    (Boolean(closingInterstitialSubheading) || showCaseStudyTrack2Closing);
 
   function renderTrack2ClosingBlock(subtitle: string) {
     return (
@@ -824,63 +787,6 @@ export function ChartingPalettesProject({
             insights.
           </li>
         </ul>
-        <h4 className="mt-6 font-['Inter',sans-serif] text-[18px] font-semibold text-[#2e2e2e]">
-          Design exploration to support recurring analysis
-        </h4>
-        <div className="mt-4 space-y-6">
-          <div className="space-y-2">
-            <p className="font-['Inter',sans-serif] text-[14px] font-bold text-[#2e2e2e]">Basic</p>
-            <button
-              type="button"
-              onClick={() => setTrack2BasicCarouselIndex(0)}
-              className="w-full cursor-pointer overflow-hidden rounded-[2px] border border-gray-200 bg-[#f0f7f7] text-left shadow-md transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2d6383] focus-visible:ring-offset-2"
-              aria-label="Open Basic flow image carousel"
-            >
-              <img
-                src={imgTrack2Basic}
-                alt="Track 2 Basic flow"
-                draggable={false}
-                className="block h-auto w-full select-none object-contain"
-              />
-            </button>
-          </div>
-          <div className="space-y-2">
-            <p className="font-['Inter',sans-serif] text-[14px] font-bold text-[#2e2e2e]">
-              Redirect to create a report-backed Dashboard
-            </p>
-            <button
-              type="button"
-              onClick={() => setTrack2DashboardCarouselIndex(0)}
-              className="w-full cursor-pointer overflow-hidden rounded-[2px] border border-gray-200 bg-[#f0f7f7] text-left shadow-md transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2d6383] focus-visible:ring-offset-2"
-              aria-label="Open dashboard-backed flow image carousel"
-            >
-              <img
-                src={imgTrack2Dashboard}
-                alt="Track 2 dashboard-backed report flow"
-                draggable={false}
-                className="block h-auto w-full select-none object-contain"
-              />
-            </button>
-          </div>
-          <div className="space-y-2">
-            <p className="font-['Inter',sans-serif] text-[14px] font-bold text-[#2e2e2e]">
-              Leverage experimental &apos;AI canvas&apos; concept
-            </p>
-            <button
-              type="button"
-              onClick={() => setTrack2AiCanvasCarouselIndex(0)}
-              className="w-full cursor-pointer overflow-hidden rounded-[2px] border border-gray-200 bg-[#f0f7f7] text-left shadow-md transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2d6383] focus-visible:ring-offset-2"
-              aria-label="Open AI canvas flow image carousel"
-            >
-              <img
-                src={imgTrack2AiCanvas}
-                alt="Track 2 AI-Canvas pattern flow"
-                draggable={false}
-                className="block h-auto w-full select-none object-contain"
-              />
-            </button>
-          </div>
-        </div>
       </>
     );
   }
@@ -1539,7 +1445,7 @@ export function ChartingPalettesProject({
             </motion.div>
           ) : null}
 
-          {closingInterstitialNote ? (
+          {showPostCtaFollowup && closingInterstitialNote ? (
             <>
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
@@ -1577,7 +1483,7 @@ export function ChartingPalettesProject({
               ) : null}
               {showTrack2ClosingBlock ? renderTrack2ClosingBlock(track2ClosingSubheadingDisplay) : null}
             </>
-          ) : showCaseStudyTrack2Closing ? (
+          ) : showPostCtaFollowup && showCaseStudyTrack2Closing && showTrack2ClosingBlock ? (
             <div className="mt-10 md:mt-12">{renderTrack2ClosingBlock(track2ClosingSubheadingDisplay)}</div>
           ) : null}
 
@@ -1585,240 +1491,6 @@ export function ChartingPalettesProject({
           )}
         </div>
       </div>
-
-      {track2BasicCarouselIndex !== null ? (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={() => setTrack2BasicCarouselIndex(null)}
-          className="fixed inset-0 z-50 cursor-pointer overflow-y-auto bg-black/80 p-4 sm:p-8"
-        >
-          <div
-            className="flex min-h-full items-center justify-center py-8 sm:py-12"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <motion.div
-              initial={{ scale: 0.96 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.96 }}
-              className="relative inline-block w-full max-w-[98vw]"
-            >
-              <button
-                type="button"
-                onClick={() => setTrack2BasicCarouselIndex(null)}
-                className="absolute -right-1 -top-10 z-[60] text-white transition-colors hover:text-gray-300 sm:-top-12"
-                aria-label="Close basic carousel modal"
-              >
-                <X size={32} />
-              </button>
-              <div className="flex items-center gap-2 sm:gap-3">
-                <button
-                  type="button"
-                  onClick={() =>
-                    setTrack2BasicCarouselIndex(
-                      (track2BasicCarouselIndex - 1 + TRACK2_BASIC_CAROUSEL_IMAGES.length) %
-                        TRACK2_BASIC_CAROUSEL_IMAGES.length,
-                    )
-                  }
-                  className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white/95 shadow-sm transition-colors hover:bg-white"
-                  aria-label="Previous basic slide"
-                >
-                  <ChevronLeft size={18} className="text-[#2d6383]" />
-                </button>
-                <div className="max-h-[96vh] flex-1 overflow-auto rounded-lg">
-                  <img
-                    src={TRACK2_BASIC_CAROUSEL_IMAGES[track2BasicCarouselIndex]}
-                    alt={`Basic flow step ${track2BasicCarouselIndex + 1}`}
-                    className="mx-auto block h-auto w-auto max-w-none"
-                  />
-                </div>
-                <button
-                  type="button"
-                  onClick={() =>
-                    setTrack2BasicCarouselIndex(
-                      (track2BasicCarouselIndex + 1) % TRACK2_BASIC_CAROUSEL_IMAGES.length,
-                    )
-                  }
-                  className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white/95 shadow-sm transition-colors hover:bg-white"
-                  aria-label="Next basic slide"
-                >
-                  <ChevronRight size={18} className="text-[#2d6383]" />
-                </button>
-              </div>
-              <div className="mt-3 flex justify-center gap-1.5">
-                {TRACK2_BASIC_CAROUSEL_IMAGES.map((_, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    onClick={() => setTrack2BasicCarouselIndex(index)}
-                    className={`h-1.5 w-1.5 rounded-full transition-colors ${
-                      index === track2BasicCarouselIndex ? 'bg-white' : 'bg-white/45'
-                    }`}
-                    aria-label={`Go to basic slide ${index + 1}`}
-                  />
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
-      ) : null}
-
-      {track2DashboardCarouselIndex !== null ? (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={() => setTrack2DashboardCarouselIndex(null)}
-          className="fixed inset-0 z-50 cursor-pointer overflow-y-auto bg-black/80 p-4 sm:p-8"
-        >
-          <div
-            className="flex min-h-full items-center justify-center py-8 sm:py-12"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <motion.div
-              initial={{ scale: 0.96 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.96 }}
-              className="relative inline-block w-full max-w-[98vw]"
-            >
-              <button
-                type="button"
-                onClick={() => setTrack2DashboardCarouselIndex(null)}
-                className="absolute -right-1 -top-10 z-[60] text-white transition-colors hover:text-gray-300 sm:-top-12"
-                aria-label="Close dashboard carousel modal"
-              >
-                <X size={32} />
-              </button>
-              <div className="flex items-center gap-2 sm:gap-3">
-                <button
-                  type="button"
-                  onClick={() =>
-                    setTrack2DashboardCarouselIndex(
-                      (track2DashboardCarouselIndex - 1 + TRACK2_DASHBOARD_CAROUSEL_IMAGES.length) %
-                        TRACK2_DASHBOARD_CAROUSEL_IMAGES.length,
-                    )
-                  }
-                  className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white/95 shadow-sm transition-colors hover:bg-white"
-                  aria-label="Previous dashboard slide"
-                >
-                  <ChevronLeft size={18} className="text-[#2d6383]" />
-                </button>
-                <div className="max-h-[96vh] flex-1 overflow-auto rounded-lg">
-                  <img
-                    src={TRACK2_DASHBOARD_CAROUSEL_IMAGES[track2DashboardCarouselIndex]}
-                    alt={`Dashboard flow step ${track2DashboardCarouselIndex + 1}`}
-                    className="mx-auto block h-auto w-auto max-w-none"
-                  />
-                </div>
-                <button
-                  type="button"
-                  onClick={() =>
-                    setTrack2DashboardCarouselIndex(
-                      (track2DashboardCarouselIndex + 1) % TRACK2_DASHBOARD_CAROUSEL_IMAGES.length,
-                    )
-                  }
-                  className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white/95 shadow-sm transition-colors hover:bg-white"
-                  aria-label="Next dashboard slide"
-                >
-                  <ChevronRight size={18} className="text-[#2d6383]" />
-                </button>
-              </div>
-              <div className="mt-3 flex justify-center gap-1.5">
-                {TRACK2_DASHBOARD_CAROUSEL_IMAGES.map((_, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    onClick={() => setTrack2DashboardCarouselIndex(index)}
-                    className={`h-1.5 w-1.5 rounded-full transition-colors ${
-                      index === track2DashboardCarouselIndex ? 'bg-white' : 'bg-white/45'
-                    }`}
-                    aria-label={`Go to dashboard slide ${index + 1}`}
-                  />
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
-      ) : null}
-
-      {track2AiCanvasCarouselIndex !== null ? (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={() => setTrack2AiCanvasCarouselIndex(null)}
-          className="fixed inset-0 z-50 cursor-pointer overflow-y-auto bg-black/80 p-4 sm:p-8"
-        >
-          <div
-            className="flex min-h-full items-center justify-center py-8 sm:py-12"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <motion.div
-              initial={{ scale: 0.96 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.96 }}
-              className="relative inline-block w-full max-w-[98vw]"
-            >
-              <button
-                type="button"
-                onClick={() => setTrack2AiCanvasCarouselIndex(null)}
-                className="absolute -right-1 -top-10 z-[60] text-white transition-colors hover:text-gray-300 sm:-top-12"
-                aria-label="Close AI canvas carousel modal"
-              >
-                <X size={32} />
-              </button>
-              <div className="flex items-center gap-2 sm:gap-3">
-                <button
-                  type="button"
-                  onClick={() =>
-                    setTrack2AiCanvasCarouselIndex(
-                      (track2AiCanvasCarouselIndex - 1 + TRACK2_AI_CANVAS_CAROUSEL_IMAGES.length) %
-                        TRACK2_AI_CANVAS_CAROUSEL_IMAGES.length,
-                    )
-                  }
-                  className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white/95 shadow-sm transition-colors hover:bg-white"
-                  aria-label="Previous AI canvas slide"
-                >
-                  <ChevronLeft size={18} className="text-[#2d6383]" />
-                </button>
-                <div className="max-h-[96vh] flex-1 overflow-auto rounded-lg">
-                  <img
-                    src={TRACK2_AI_CANVAS_CAROUSEL_IMAGES[track2AiCanvasCarouselIndex]}
-                    alt={`AI canvas flow step ${track2AiCanvasCarouselIndex + 1}`}
-                    className="mx-auto block h-auto w-auto max-w-none"
-                  />
-                </div>
-                <button
-                  type="button"
-                  onClick={() =>
-                    setTrack2AiCanvasCarouselIndex(
-                      (track2AiCanvasCarouselIndex + 1) % TRACK2_AI_CANVAS_CAROUSEL_IMAGES.length,
-                    )
-                  }
-                  className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white/95 shadow-sm transition-colors hover:bg-white"
-                  aria-label="Next AI canvas slide"
-                >
-                  <ChevronRight size={18} className="text-[#2d6383]" />
-                </button>
-              </div>
-              <div className="mt-3 flex justify-center gap-1.5">
-                {TRACK2_AI_CANVAS_CAROUSEL_IMAGES.map((_, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    onClick={() => setTrack2AiCanvasCarouselIndex(index)}
-                    className={`h-1.5 w-1.5 rounded-full transition-colors ${
-                      index === track2AiCanvasCarouselIndex ? 'bg-white' : 'bg-white/45'
-                    }`}
-                    aria-label={`Go to AI canvas slide ${index + 1}`}
-                  />
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
-      ) : null}
 
       {/* Image Modal */}
       {selectedImage && (
@@ -1847,21 +1519,11 @@ export function ChartingPalettesProject({
               >
                 <X size={32} />
               </button>
-              {isTrack2ZoomImage ? (
-                <div className="max-h-[96vh] max-w-[98vw] overflow-auto rounded-lg shadow-2xl">
-                  <img
-                    src={selectedImage}
-                    alt="Full size image"
-                    className="mx-auto block h-auto w-auto max-w-none"
-                  />
-                </div>
-              ) : (
-                <img
-                  src={selectedImage}
-                  alt="Full size image"
-                  className="block h-auto w-auto max-h-[96vh] max-w-[98vw] rounded-lg object-contain shadow-2xl"
-                />
-              )}
+              <img
+                src={selectedImage}
+                alt="Full size image"
+                className="block h-auto w-auto max-h-[96vh] max-w-[98vw] rounded-lg object-contain shadow-2xl"
+              />
             </motion.div>
           </div>
         </motion.div>
