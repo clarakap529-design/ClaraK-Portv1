@@ -26,8 +26,11 @@ function DevServerHud() {
 }
 
 export default function App() {
+  const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
+  const routerBasename = basePath === '' ? undefined : basePath;
+
   return (
-    <Router>
+    <Router basename={routerBasename}>
       <ScrollToTop />
       <DevServerHud />
       <Layout>

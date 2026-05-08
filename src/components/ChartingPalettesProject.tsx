@@ -26,6 +26,7 @@ import imgDatavizHover5 from '../assets/dataviz-hover-5.png';
 import imgDatavizPadding6 from '../assets/dataviz-padding-6.png';
 import imgDatavizClick7 from '../assets/dataviz-click-7.png';
 import imgDatavizClick8 from '../assets/dataviz-click-8.png';
+import imgChoosingYourLibraryDecisionMap from '../assets/choosing-your-library-decision-map.png';
 
 type ClosingUseCaseCarouselSlide = {
   src: string;
@@ -251,6 +252,7 @@ const DEFAULT_STARTING_POINT_GOALS: string[] = [
 const DEFAULT_STARTING_POINT_OUTCOMES: string[] = [
   'Cohesive platform-level plan',
   'Reduce confusion and complexity in data visualization implementations',
+  'Figma plug-in that generates charts with standardized colors and styles—less time building charts for design deliverables',
 ];
 
 /** Default 8-up grid: first three match Aurora audit; remaining cells use representative thumbnails until you swap assets. */
@@ -416,6 +418,20 @@ function parseVimeoVideoId(input: string): string {
   return trimmed;
 }
 
+/** Full `player.vimeo.com` embed URL; supports unlisted links `vimeo.com/ID/privacyHash`. */
+function vimeoPlayerEmbedSrc(input: string): string | null {
+  const trimmed = input.trim();
+  const withPath = trimmed.match(/vimeo\.com\/(?:video\/)?(\d+)(?:\/([a-f0-9]+))?/i);
+  if (withPath) {
+    const [, id, h] = withPath;
+    return h ? `https://player.vimeo.com/video/${id}?h=${h}` : `https://player.vimeo.com/video/${id}`;
+  }
+  if (/^\d+$/.test(trimmed)) {
+    return `https://player.vimeo.com/video/${trimmed}`;
+  }
+  return null;
+}
+
 interface ChartingPalettesProjectProps {
   heroTitle?: string;
   heroTags?: string[];
@@ -458,11 +474,10 @@ interface ChartingPalettesProjectProps {
   unifiedStyleGuideLeadTitle?: string;
   /** Subtitle under the main title (Roboto Slab, dark). */
   unifiedStyleGuideLeadSubtitle?: string;
-  /** Body paragraph under the subtitle. */
+  /** Shown after prototype media: closing lead (e.g. three specialized palettes). */
   unifiedStyleGuideLeadBody?: string;
   /**
-   * When true (default), shows the compact `h3` under the unified style-guide hero title (`styleGuideSectionTitle`).
-   * Set false on the Data Viz case study to omit that line only.
+   * When true (default), `unifiedStyleGuideLeadSubtitle` renders as `h3`. When false, as a styled `p` (same visual weight).
    */
   showStyleGuideLeadSubtitleHeading?: boolean;
   /**
@@ -479,6 +494,17 @@ interface ChartingPalettesProjectProps {
   mvpPrototypeSectionTitle?: string;
   /** Captions under each embedded video, in order (e.g. left / right). */
   mvpPrototypeVideoCaptions?: string[];
+  /**
+   * When `mvpPrototypeVimeoIds` is empty: if true, prototype row is a wide left column (Vimeo or first image)
+   * and two stacked images on the right (`md:grid-cols-3` with `md:col-span-2` on the left). If false, three equal columns.
+   * @default true
+   */
+  colorAccessibilityPrototypeHeroLayout?: boolean;
+  /**
+   * Vimeo ID or full vimeo.com URL for the left column when `colorAccessibilityPrototypeHeroLayout` is true.
+   * If omitted, the first default prototype image is shown on the left until you pass a link.
+   */
+  colorAccessibilityPrototypeLeftVimeoId?: string;
   /** When false, hides the “Updated accessible color palette” heading and swatch row (default: true). */
   showAccessiblePaletteSwatches?: boolean;
   /** Heading above the style-guide intro (default: “Style Guide (for Aurora Library)”). */
@@ -675,8 +701,8 @@ export function ChartingPalettesProject({
   colorPaletteSectionTitle = 'Colors',
   colorPaletteParentSectionTitle,
   colorPaletteIntroParagraphs = [
-    'To ensure alignment, I organized a selection committee comprised of designers each representing a product pillar.',
-    'To support the decision-making process, I created several Loveable prototypes to evaluate palette options, simulate color blindness conditions, and preview them across common chart types.',
+    'To ensure alignment, I organized a selection committee of designers each representing their product pillar.',
+    'To support the decision-making process, I created several color accessibility tools in Loveable to evaluate palette options, simulate color blindness conditions and preview them across common chart types.',
   ],
   showUnifiedStyleGuideLead = true,
   unifiedStyleGuideLeadTitle = DEFAULT_UNIFIED_STYLE_GUIDE_LEAD_TITLE,
@@ -687,6 +713,8 @@ export function ChartingPalettesProject({
   mvpPrototypeVimeoIds,
   mvpPrototypeSectionTitle,
   mvpPrototypeVideoCaptions,
+  colorAccessibilityPrototypeHeroLayout = true,
+  colorAccessibilityPrototypeLeftVimeoId,
   showAccessiblePaletteSwatches = true,
   styleGuideSectionTitle = 'Style Guide (for Aurora Library)',
   styleGuideSectionIntro = 'During my charting audit, I discovered three distinct implementations of the Workday charting library — each with its own styles and patterns. Rather than defaulting to one over the others, I synthesized the common ground across all three to propose a standardized style guide that could work for everyone.',
@@ -713,6 +741,11 @@ export function ChartingPalettesProject({
   const [paletteTab, setPaletteTab] = useState<PaletteTabId>('categorical');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const mvpVimeoIds = (mvpPrototypeVimeoIds ?? []).map((s) => s.trim()).filter(Boolean);
+  const colorAccessibilityLeftVimeoRaw = (colorAccessibilityPrototypeLeftVimeoId ?? '').trim();
+  const colorAccessibilityLeftVimeoEmbedSrc =
+    colorAccessibilityLeftVimeoRaw.length > 0
+      ? vimeoPlayerEmbedSrc(colorAccessibilityLeftVimeoRaw)
+      : null;
   const [userReply, setUserReply] = useState<string | null>(null);
 
   const fragmentationCells = fragmentationAuditCells ?? DEFAULT_FRAGMENTATION_AUDIT_CELLS;
@@ -731,6 +764,18 @@ export function ChartingPalettesProject({
 
   /** Aurora 3-up: fragmentation case study always; other case studies when explicitly enabled. */
   const showAuroraLibraryTriptych = showFragmentationAuditGrid || showAuroraThroughChartSelection;
+
+  /** Tighter top margin after the Usage Guidelines + decision-map block on the Data Viz case study. */
+  const platformSectionHeadingSpacing = showFragmentationAuditGrid
+    ? 'mt-10 md:mt-12'
+    : showAuroraLibraryTriptych
+      ? 'mt-14 md:mt-16'
+      : 'mt-8 md:mt-10';
+  const platformSectionLeadSpacing = showFragmentationAuditGrid
+    ? 'my-10 md:my-12'
+    : showAuroraLibraryTriptych
+      ? 'my-14 md:my-16'
+      : 'my-8 md:my-10';
 
   const track2ClosingSubheadingDisplay =
     closingInterstitialSubheading ?? 'Track 1: Working Within the Platform Constraints';
@@ -891,7 +936,7 @@ export function ChartingPalettesProject({
                     <h4 className="mb-4 font-['Roboto_Slab',serif] text-[20px] font-semibold leading-[1.25] text-[#2e2e2e] md:text-[22px]">
                       Goals
                     </h4>
-                    <ul className="list-disc space-y-2.5 pl-5 font-['Inter',sans-serif] text-[14px] leading-[1.5] text-[#333333] marker:text-[#333333]">
+                    <ul className="list-disc space-y-2 pl-5 font-['Inter',sans-serif] text-[14px] leading-[1.5] text-[#333333] marker:text-[#333333]">
                       {startingPointGoals.map((g) => (
                         <li key={g}>{g}</li>
                       ))}
@@ -901,7 +946,7 @@ export function ChartingPalettesProject({
                     <h4 className="mb-4 font-['Roboto_Slab',serif] text-[20px] font-semibold leading-[1.25] text-[#2e2e2e] md:text-[22px]">
                       Outcomes
                     </h4>
-                    <ul className="list-disc space-y-2.5 pl-5 font-['Inter',sans-serif] text-[14px] leading-[1.5] text-[#333333] marker:text-[#333333]">
+                    <ul className="list-disc space-y-2 pl-5 font-['Inter',sans-serif] text-[14px] leading-[1.5] text-[#333333] marker:text-[#333333]">
                       {startingPointOutcomes.map((o) => (
                         <li key={o}>{o}</li>
                       ))}
@@ -992,15 +1037,37 @@ export function ChartingPalettesProject({
                       >
                         {unifiedStyleGuideLeadTitle}
                       </h2>
-                      <p
-                        className={`max-w-4xl font-['Inter',sans-serif] leading-[1.55] md:leading-[1.5] ${
-                          showFragmentationAuditGrid
-                            ? 'text-[16px] text-[#333333] md:text-[17px]'
-                            : 'w-full max-w-none text-[14px] text-[rgba(0,0,0,0.72)]'
-                        }`}
-                      >
-                        {unifiedStyleGuideLeadBody}
-                      </p>
+                      {unifiedStyleGuideLeadSubtitle ? (
+                        showStyleGuideLeadSubtitleHeading ? (
+                          <h3
+                            className={`mb-3 font-['Roboto_Slab',serif] text-[22px] font-semibold leading-[1.25] tracking-[0.35px] text-[#2e2e2e] md:mb-4 md:text-[24px] md:tracking-[0.4px] ${
+                              showFragmentationAuditGrid ? '' : 'mt-1'
+                            }`}
+                          >
+                            {unifiedStyleGuideLeadSubtitle}
+                          </h3>
+                        ) : (
+                          <p
+                            className={`mb-3 font-['Roboto_Slab',serif] text-[22px] font-semibold leading-[1.25] tracking-[0.35px] text-[#2e2e2e] md:mb-4 md:text-[24px] md:tracking-[0.4px] ${
+                              showFragmentationAuditGrid ? '' : 'mt-1'
+                            }`}
+                          >
+                            {unifiedStyleGuideLeadSubtitle}
+                          </p>
+                        )
+                      ) : null}
+                      {colorPaletteIntroParagraphs.map((paragraph, index) => (
+                        <p
+                          key={index}
+                          className={`max-w-4xl font-['Inter',sans-serif] leading-[1.55] md:leading-[1.5] ${
+                            showFragmentationAuditGrid
+                              ? 'text-[16px] text-[#333333] md:text-[17px]'
+                              : 'w-full max-w-none text-[14px] text-[rgba(0,0,0,0.72)]'
+                          } ${index < colorPaletteIntroParagraphs.length - 1 ? 'mb-3' : 'mb-6'}`}
+                        >
+                          {paragraph}
+                        </p>
+                      ))}
                     </div>
                   ) : null}
                   {colorPaletteParentSectionTitle ? (
@@ -1008,35 +1075,157 @@ export function ChartingPalettesProject({
                       {colorPaletteParentSectionTitle}
                     </h2>
                   ) : null}
-                  <h3
-                    className={`font-['Roboto_Slab',serif] text-[28px] tracking-[0.4px] case-study-h3-pad-5 text-[#2e2e2e] leading-[1.2] ${
-                      colorPaletteParentSectionTitle ? 'mt-2' : showUnifiedStyleGuideLead ? 'mt-2 md:mt-3' : ''
-                    }`}
-                  >
-                    {colorPaletteSectionTitle}
-                  </h3>
-
-                  {colorPaletteIntroParagraphs.map((paragraph, index) => (
-                    <p
-                      key={index}
-                      className={`font-['Inter',sans-serif] text-[14px] leading-[1.45] text-black ${
-                        index < colorPaletteIntroParagraphs.length - 1 ? 'mb-3' : 'mb-6'
+                  {!showUnifiedStyleGuideLead ? (
+                    <h3
+                      className={`font-['Roboto_Slab',serif] text-[28px] tracking-[0.4px] case-study-h3-pad-5 text-[#2e2e2e] leading-[1.2] ${
+                        colorPaletteParentSectionTitle ? 'mt-2' : ''
                       }`}
                     >
-                      {paragraph}
+                      {colorPaletteSectionTitle}
+                    </h3>
+                  ) : null}
+
+                  {!showUnifiedStyleGuideLead
+                    ? colorPaletteIntroParagraphs.map((paragraph, index) => (
+                        <p
+                          key={index}
+                          className={`font-['Inter',sans-serif] text-[14px] leading-[1.45] text-black ${
+                            index < colorPaletteIntroParagraphs.length - 1 ? 'mb-3' : 'mb-6'
+                          }`}
+                        >
+                          {paragraph}
+                        </p>
+                      ))
+                    : null}
+
+                  {/* Prototype media: Vimeo embeds (Reporting) or image thumbnails (default) */}
+                  {mvpVimeoIds.length > 0 ? (
+                    <div className="mb-6 py-2">
+                      {mvpPrototypeSectionTitle ? (
+                        <h4 className="text-[18px] font-medium text-[#2e2e2e] mb-4">
+                          {mvpPrototypeSectionTitle}
+                        </h4>
+                      ) : null}
+                      <div
+                        className={`grid gap-4 ${
+                          mvpVimeoIds.length === 1
+                            ? 'grid-cols-1 max-w-4xl mx-auto'
+                            : 'grid-cols-1 md:grid-cols-2'
+                        }`}
+                      >
+                        {mvpVimeoIds.map((rawId, i) => {
+                          const embedSrc = vimeoPlayerEmbedSrc(rawId) ?? `https://player.vimeo.com/video/${parseVimeoVideoId(rawId)}`;
+                          const caption = mvpPrototypeVideoCaptions?.[i];
+                          return (
+                            <div key={`${embedSrc}-${i}`} className="flex flex-col gap-2">
+                              <div className="overflow-hidden rounded-lg border border-gray-200 shadow-sm bg-black aspect-video">
+                                <iframe
+                                  src={embedSrc}
+                                  title={`Prototype video ${i + 1}`}
+                                  className="h-full w-full"
+                                  allow="autoplay; fullscreen; picture-in-picture"
+                                  allowFullScreen
+                                />
+                              </div>
+                              {caption ? (
+                                <p className="font-['Inter',sans-serif] text-sm text-center text-[#2e2e2e] leading-snug">
+                                  {caption}
+                                </p>
+                              ) : null}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ) : colorAccessibilityPrototypeHeroLayout ? (
+                    <div className="mb-6 grid grid-cols-1 gap-8 py-2 md:grid-cols-3 md:items-stretch md:gap-x-10 md:gap-y-0">
+                      <div className="min-h-0 md:col-span-2">
+                        {colorAccessibilityLeftVimeoEmbedSrc ? (
+                          <div className="relative w-full overflow-hidden rounded-lg border border-gray-200 bg-black shadow-md aspect-[16/11] min-h-[320px] max-h-[800px] md:aspect-[16/10] md:min-h-[420px]">
+                            <iframe
+                              src={colorAccessibilityLeftVimeoEmbedSrc}
+                              title="Color accessibility prototype walkthrough"
+                              className="absolute inset-0 h-full w-full"
+                              allow="autoplay; fullscreen; picture-in-picture"
+                              allowFullScreen
+                            />
+                          </div>
+                        ) : (
+                          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[2px] border border-gray-200 shadow-sm md:aspect-[16/10]">
+                            <img
+                              src={imgPrototype1}
+                              alt="Color blindness simulator and palette tooling in Loveable"
+                              draggable={false}
+                              className="pointer-events-none absolute inset-0 h-full w-full object-cover object-top select-none"
+                            />
+                          </div>
+                        )}
+                      </div>
+                      <div className="flex min-h-0 flex-col gap-4 md:col-span-1">
+                        {[imgPrototype2, imgPrototype3].map((img, i) => {
+                          const thumbAlt =
+                            i === 0
+                              ? 'Palette applied to charts in reporting previews'
+                              : 'Color ramps and simulations in Loveable';
+                          return (
+                            <button
+                              key={i}
+                              type="button"
+                              onClick={() => setSelectedImage(img)}
+                              className="group relative min-h-[140px] w-full flex-1 cursor-pointer overflow-hidden rounded-lg border border-gray-200 bg-white text-left shadow-md transition-shadow hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3e6b89] md:min-h-0"
+                              aria-label={`Open full size: ${thumbAlt}`}
+                            >
+                              <img
+                                src={img}
+                                alt=""
+                                draggable={false}
+                                className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center select-none transition-opacity group-hover:opacity-95"
+                              />
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="mb-6 grid grid-cols-1 gap-4 py-2 md:grid-cols-3">
+                      {[imgPrototype1, imgPrototype2, imgPrototype3].map((img, i) => (
+                        <div
+                          key={i}
+                          className="flex-1 cursor-default overflow-hidden rounded-[2px] border border-gray-200"
+                        >
+                          <img
+                            src={img}
+                            alt={`Prototype ${i + 1}`}
+                            draggable={false}
+                            className="pointer-events-none h-full w-full object-cover select-none"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {showUnifiedStyleGuideLead ? (
+                    <p
+                      className={`max-w-4xl font-['Inter',sans-serif] leading-[1.55] md:leading-[1.5] ${
+                        showFragmentationAuditGrid
+                          ? 'mb-6 mt-2 text-[16px] text-[#333333] md:text-[17px]'
+                          : 'mb-6 mt-2 w-full max-w-none text-[14px] text-[rgba(0,0,0,0.72)]'
+                      }`}
+                    >
+                      {unifiedStyleGuideLeadBody}
                     </p>
-                  ))}
+                  ) : null}
 
                   {showAccessiblePaletteSwatches ? (
-                    <div className="mb-6">
+                    <div className="mb-6 mt-2">
                       {!showUnifiedStyleGuideLead ? (
                         <h4 className="mb-3 py-2 text-[18px] font-medium text-[#2e2e2e]">
                           Updated accessible color palette
                         </h4>
                       ) : null}
-                      <div className="border-b border-[#e8eaed]">
+                      <div className="relative z-10 border-b border-[#e8eaed] bg-white">
                         <div
-                          className="flex flex-wrap justify-center gap-1"
+                          className="relative z-10 flex flex-wrap justify-center gap-1"
                           role="tablist"
                           aria-label="Palette type"
                         >
@@ -1050,9 +1239,8 @@ export function ChartingPalettesProject({
                                 id={`palette-tab-${def.id}`}
                                 aria-selected={isActive}
                                 aria-controls={`palette-panel-${def.id}`}
-                                tabIndex={isActive ? 0 : -1}
                                 onClick={() => setPaletteTab(def.id)}
-                                className={`rounded-t-lg px-4 py-2.5 font-['Inter',sans-serif] text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3e6b89] ${
+                                className={`relative z-10 rounded-t-lg px-4 py-2.5 font-['Inter',sans-serif] text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3e6b89] ${
                                   isActive
                                     ? 'bg-[#3e6b89] text-white'
                                     : 'bg-transparent text-[#5c5c5c] hover:bg-[#f5f6f8] hover:text-[#2e2e2e]'
@@ -1084,7 +1272,7 @@ export function ChartingPalettesProject({
                             role="tabpanel"
                             id={`palette-panel-${activeDef.id}`}
                             aria-labelledby={`palette-tab-${activeDef.id}`}
-                            className="border-b border-[#e8eaed] pt-4 pb-6"
+                            className="relative z-0 border-b border-[#e8eaed] pt-4 pb-6"
                           >
                             <div className="mb-6 overflow-x-auto text-center">
                               <p className="inline-block whitespace-nowrap font-['Inter',sans-serif] text-[14px] leading-[1.55] text-[#333333]">
@@ -1113,68 +1301,6 @@ export function ChartingPalettesProject({
                       })()}
                     </div>
                   ) : null}
-
-                  {/* Prototype media: Vimeo embeds (Reporting) or image thumbnails (default) */}
-                  {mvpVimeoIds.length > 0 ? (
-                    <div className="mb-4 py-2">
-                      {mvpPrototypeSectionTitle ? (
-                        <h4 className="text-[18px] font-medium text-[#2e2e2e] mb-4">
-                          {mvpPrototypeSectionTitle}
-                        </h4>
-                      ) : null}
-                      <div
-                        className={`grid gap-4 ${
-                          mvpVimeoIds.length === 1
-                            ? 'grid-cols-1 max-w-4xl mx-auto'
-                            : 'grid-cols-1 md:grid-cols-2'
-                        }`}
-                      >
-                        {mvpVimeoIds.map((rawId, i) => {
-                          const id = parseVimeoVideoId(rawId);
-                          const caption = mvpPrototypeVideoCaptions?.[i];
-                          return (
-                            <div key={`${id}-${i}`} className="flex flex-col gap-2">
-                              <div className="overflow-hidden rounded-lg border border-gray-200 shadow-sm bg-black aspect-video">
-                                <iframe
-                                  src={`https://player.vimeo.com/video/${id}`}
-                                  title={`Prototype video ${i + 1}`}
-                                  className="h-full w-full"
-                                  allow="autoplay; fullscreen; picture-in-picture"
-                                  allowFullScreen
-                                />
-                              </div>
-                              {caption ? (
-                                <p className="font-['Inter',sans-serif] text-sm text-center text-[#2e2e2e] leading-snug">
-                                  {caption}
-                                </p>
-                              ) : null}
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  ) : (
-                    <>
-                      <p className="mb-3 font-['Inter',sans-serif] text-[14px] leading-[1.55] text-[#333333]">
-                        I used Loveable to create several accessibility checking tools.
-                      </p>
-                      <div className="mb-4 grid grid-cols-1 gap-4 py-2 md:grid-cols-3">
-                      {[imgPrototype1, imgPrototype2, imgPrototype3].map((img, i) => (
-                        <div
-                          key={i}
-                          className="flex-1 cursor-default overflow-hidden rounded-[2px] border border-gray-200"
-                        >
-                          <img
-                            src={img}
-                            alt={`Prototype ${i + 1}`}
-                            draggable={false}
-                            className="pointer-events-none h-full w-full object-cover select-none"
-                          />
-                        </div>
-                      ))}
-                      </div>
-                    </>
-                  )}
                 </>
               ) : null}
 
@@ -1258,27 +1384,47 @@ export function ChartingPalettesProject({
                 </div>
               ) : null}
 
+              {showFragmentationAuditGrid ? (
+                <div className="mt-14 md:mt-16">
+                  <h3 className="font-['Roboto_Slab',serif] text-[28px] tracking-[0.4px] case-study-h3-pad-2 text-[#2e2e2e] leading-[1.2]">
+                    Usage Guidelines
+                  </h3>
+                  <p className="mt-2 max-w-4xl font-['Inter',sans-serif] text-[14px] leading-[1.45] text-black md:text-[15px] md:leading-[1.5]">
+                    I evaluated all the implementations of the Aurora charting library and created a &lsquo;Choose your
+                    library&rsquo; decision map to help designers understand their options based on the type of chart they
+                    wanted and where the data is coming from.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedImage(imgChoosingYourLibraryDecisionMap)}
+                    className="mt-6 w-full cursor-pointer overflow-hidden rounded-lg border border-gray-200 text-left shadow-md transition-shadow hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3e6b89]"
+                    aria-label="Open full size: Choose your library decision map"
+                  >
+                    <img
+                      src={imgChoosingYourLibraryDecisionMap}
+                      alt="Decision map: choosing a charting library from data source, chart type, and interactions to RXP wrapper, GWT wrapper, Hub Cards framework, or API implementations."
+                      className="block h-auto w-full object-contain"
+                      draggable={false}
+                    />
+                  </button>
+                </div>
+              ) : null}
+
               {platformSectionLead ? (
                 <p
-                  className={`w-full font-['Inter',sans-serif] text-[14px] leading-[1.45] text-black ${
-                    showAuroraLibraryTriptych ? 'my-14 md:my-16' : 'my-8 md:my-10'
-                  }`}
+                  className={`w-full font-['Inter',sans-serif] text-[14px] leading-[1.45] text-black ${platformSectionLeadSpacing}`}
                 >
                   {platformSectionLead}
                 </p>
               ) : platformSectionTitleAsH4 ? (
                 <h4
-                  className={`text-[18px] font-medium text-[#2e2e2e] mb-4 ${
-                    showAuroraLibraryTriptych ? 'mt-14 md:mt-16' : 'mt-8 md:mt-10'
-                  }`}
+                  className={`text-[18px] font-medium text-[#2e2e2e] mb-4 ${platformSectionHeadingSpacing}`}
                 >
                   {platformSectionTitle}
                 </h4>
               ) : (
                 <h3
-                  className={`font-['Roboto_Slab',serif] text-[28px] tracking-[0.4px] case-study-h3-pad-2 text-[#2e2e2e] leading-[1.2] ${
-                    showAuroraLibraryTriptych ? 'mt-14 md:mt-16' : 'mt-8 md:mt-10'
-                  }`}
+                  className={`font-['Roboto_Slab',serif] text-[28px] tracking-[0.4px] case-study-h3-pad-2 text-[#2e2e2e] leading-[1.2] ${platformSectionHeadingSpacing}`}
                 >
                   {platformSectionTitle}
                 </h3>
@@ -1327,7 +1473,7 @@ export function ChartingPalettesProject({
                     an organizational and architectural one. The scope raised hard questions across every layer.
                   </p>
 
-                  {/* Usage Guidelines */}
+                  {/* Platform scope: accent rows under “The Platform-Level Problem” */}
                   <div className="mx-auto mt-6 w-full max-w-[min(100%,68rem)] space-y-5 px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20">
                     {[
                       {

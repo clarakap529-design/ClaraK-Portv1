@@ -7,7 +7,7 @@ export default function Colors() {
       <div className="absolute bg-[#92ad6e] left-[342px] size-[80px] top-[210px]" />
       <div className="absolute bg-[#2e2e2e] left-[779px] size-[80px] top-[210px]" />
       <div className="absolute bg-white left-[75px] size-[80px] top-[57px]" />
-      <div className="absolute bg-[#e8eef5] left-[179px] size-[80px] top-[57px]" />
+      <div className="absolute bg-[#E0E8F0] left-[179px] size-[80px] top-[57px]" />
       <div className="absolute bg-[#6b96ac] left-[283px] size-[80px] top-[57px]" />
       <div className="absolute bg-[#2d6383] left-[387px] size-[80px] top-[57px]" />
       <div className="absolute bg-[#dfebeb] left-[491px] size-[80px] top-[57px]" />

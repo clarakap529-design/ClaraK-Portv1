@@ -4,7 +4,11 @@
   import tailwindcss from '@tailwindcss/vite';
   import path from 'path';
 
-  export default defineConfig({
+  /** GitHub Pages project site: `https://<user>.github.io/<repo>/` — keep in sync with the GitHub repo name. */
+  const GITHUB_PAGES_REPO = 'ClaraK-Portv1';
+
+  export default defineConfig(({ command }) => ({
+    base: command === 'serve' ? '/' : `/${GITHUB_PAGES_REPO}/`,
     publicDir: 'public',
     plugins: [react(), tailwindcss()],
     resolve: {
@@ -99,4 +103,4 @@
       strictPort: true,
       open: true,
     },
-  });
+  }));

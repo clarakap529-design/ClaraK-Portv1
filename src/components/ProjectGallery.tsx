@@ -32,7 +32,7 @@ const featuredProjects = [
     title: 'Report Authoring',
     tags: ['#reporting', '#research', '#agentic'],
     description:
-      'Same persona, same workflows, same product, two separate teams.',
+      'Data Source Findability and Report Authoring 2.0—same user and workflows, separate teams—until research and an end-to-end journey map made the gap visible.',
     image: reportAuthoringImg,
     alt: 'Report Authoring',
     path: '/project/report-authoring',

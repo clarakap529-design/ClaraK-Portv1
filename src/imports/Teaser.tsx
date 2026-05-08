@@ -31,7 +31,7 @@ function Container() {
 
 function TopNav({ className }: { className?: string }) {
   return (
-    <div className={className || "bg-[#e8eef5] h-[72px] relative shrink-0 w-full"} data-name="top nav">
+    <div className={className || "bg-[#E0E8F0] h-[72px] relative shrink-0 w-full"} data-name="top nav">
       <div className="flex flex-row items-center size-full">
         <div className="content-stretch flex gap-[921.492px] items-center px-[40px] relative size-full">
           <Button />
