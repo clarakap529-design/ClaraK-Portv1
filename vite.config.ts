@@ -8,7 +8,7 @@
   const GITHUB_PAGES_REPO = 'ClaraK-Portv1';
 
   export default defineConfig(({ command }) => ({
-    base: command === 'serve' ? '/' : `/${GITHUB_PAGES_REPO}/`,
+    base: '/',
     publicDir: 'public',
     plugins: [react(), tailwindcss()],
     resolve: {
