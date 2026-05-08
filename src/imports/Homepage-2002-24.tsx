@@ -58,7 +58,7 @@ function Frame() {
 
 export default function Homepage() {
   return (
-    <div className="bg-[#e8eef5] relative size-full" data-name="Homepage">
+    <div className="bg-[#E0E8F0] relative size-full" data-name="Homepage">
       <MaskGroup />
       <Frame />
       <div className="absolute font-['Inter:Medium',sans-serif] font-medium h-[98px] leading-[1.65] left-[24px] not-italic text-[14px] text-black top-[39px] tracking-[-0.42px] w-[62px]">

@@ -73,7 +73,7 @@ export function Hero() {
   return (
     <motion.section 
       id="hero" 
-      className="bg-[#e8eef5] relative w-full overflow-hidden pt-0 pb-0 flex items-center justify-center h-[480px]"
+      className="bg-[#E0E8F0] relative w-full overflow-hidden flex items-center justify-center min-h-[480px] py-8 -mt-[40px]"
     >
       {/* Centered content container */}
       <div className="hidden lg:flex items-center gap-[56px] max-w-[1440px] mx-auto px-[160px]" style={{ width: '1050px', marginLeft: 'calc(50% - 525px - 164px)' }}>
@@ -101,7 +101,9 @@ export function Hero() {
         >
           {/* Intro Text */}
           <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full" data-name="Intro">
-            <p className="font-['Caveat:Bold',sans-serif] font-bold leading-[1.25] relative shrink-0 text-[#2d6383] text-[40px] tracking-[1.6px] w-full">Hi, my name is Clara. I'm good at making complex data feel friendly.</p>
+            <h1 className="relative w-full font-['Noteworthy',serif] text-[36px] font-bold leading-[1.25] tracking-[0.72px] text-[#2d6383]">
+              Hi, my name is Clara. I'm good at making complex data feel friendly.
+            </h1>
             
             {/* Divider line */}
             <motion.div 
@@ -125,13 +127,10 @@ export function Hero() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="flex flex-col font-['Roboto:Italic',sans-serif] font-normal h-full italic justify-center leading-[0] relative shrink-0 text-[#2e2e2e] text-[14px] tracking-[-0.42px] w-[113px]" style={{ fontVariationSettings: "'wdth' 100" }}>
-                  <p className="leading-[1.25]">Suggested prompt:</p>
-                </div>
                 <div className="relative">
                   <motion.button
                     onClick={handlePromptClick}
-                    className="bg-[#2d6383] box-border content-stretch flex gap-[10px] items-center justify-center px-[16px] py-[8px] relative rounded-[16px] shrink-0 hover:bg-[#3d7393] transition-colors cursor-pointer"
+                    className="bg-[#2d6383] box-border content-stretch flex gap-[10px] items-center justify-center px-8 py-3 relative rounded-[12px] shrink-0 hover:bg-[#2d6383]/90 transition-colors cursor-pointer"
                     animate={{
                       boxShadow: [
                         '0 0 0 0px rgba(199, 97, 41, 0)',
@@ -146,7 +145,7 @@ export function Hero() {
                     }}
                   >
                     <div className="flex flex-col font-['Roboto:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[14px] text-nowrap text-white tracking-[-0.42px]" style={{ fontVariationSettings: "'wdth' 100" }}>
-                      <p className="leading-[1.25] whitespace-pre">Why is she a great candidate?</p>
+                      <p className="leading-[1.25] whitespace-pre font-['Inter',sans-serif] text-[18px]">Why is she a great candidate?</p>
                     </div>
                   </motion.button>
                 </div>
@@ -204,7 +203,7 @@ export function Hero() {
       </div>
 
       {/* Responsive version for smaller screens */}
-      <div className="lg:hidden flex flex-col items-center justify-center min-h-screen px-6 py-12">
+      <div className="lg:hidden flex flex-col items-center justify-start min-h-[520px] px-6 pt-3 pb-12">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -212,7 +211,7 @@ export function Hero() {
           className="mb-8"
         >
           <div 
-            className="w-[280px] h-[280px] mx-auto mask-alpha mask-intersect mask-no-clip mask-no-repeat" 
+            className="w-[220px] h-[220px] md:w-[240px] md:h-[240px] mx-auto mask-alpha mask-intersect mask-no-clip mask-no-repeat" 
             style={{ 
               maskImage: `url('${imgClarakProfile2}')`,
               maskSize: 'contain',
@@ -232,23 +231,83 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="w-full max-w-lg"
+          className="w-full max-w-xl flex flex-col items-center text-center"
         >
-          <h1 className="font-['Source_Serif_Pro:SemiBold',sans-serif] leading-[1.25] text-[28px] md:text-[36px] text-[#2d6383] tracking-[-1.08px] mb-6">
+          <h1 className="font-['Noteworthy',serif] text-[30px] md:text-[34px] font-bold leading-[1.25] tracking-[0.72px] text-[#2d6383] mb-6">
             Hi, my name is Clara. I'm good at making complex data feel friendly.
           </h1>
 
-          <div className="flex gap-[8px] items-center">
-            <p className="font-['Roboto:Italic',sans-serif] italic text-[#2e2e2e] text-[14px] tracking-[-0.42px]">
-              Suggested prompt:
-            </p>
-            <button
-              onClick={handlePromptClick}
-              className="bg-[#2d6383] px-[16px] py-[8px] rounded-[16px] text-white text-[14px] hover:bg-[#3d7393] transition-colors"
-            >
-              Why is she a great candidate?
-            </button>
-          </div>
+          <AnimatePresence>
+            {!isClicked && (
+              <motion.div
+                className="flex flex-wrap justify-center gap-[8px] items-center"
+                initial={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.25 }}
+              >
+                <p className="font-['Roboto:Italic',sans-serif] italic text-[#2e2e2e] text-[14px] tracking-[-0.42px]">
+                  Suggested prompt:
+                </p>
+                <button
+                  onClick={handlePromptClick}
+                  className="bg-[#2d6383] px-8 py-3 rounded-[12px] text-white font-['Inter',sans-serif] text-[18px] hover:bg-[#2d6383]/90 transition-colors"
+                >
+                  Why is she a great candidate?
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <AnimatePresence>
+            {isClicked && (
+              <motion.div
+                className="mt-1 self-end bg-white px-4 py-2 rounded-[12px] w-fit max-w-full text-right"
+                initial={{ opacity: 0, scale: 0.9, y: -10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: -10 }}
+                transition={{ duration: 0.35 }}
+              >
+                <p className="font-['Inter',sans-serif] text-[15px] text-[#2e2e2e]">
+                  Why is she a great candidate?
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <AnimatePresence>
+            {isLoading && (
+              <motion.div
+                className="mt-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+              >
+                <LoadingSparkle />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <AnimatePresence>
+            {showResponse && (
+              <motion.div
+                className="mt-4 text-left w-full"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 8 }}
+                transition={{ duration: 0.4 }}
+              >
+                <p className="font-['Roboto_Slab',serif] text-[16px] leading-[1.45] text-[#2d6383]">
+                  With over 12 years in UX design, Clara has extensive experience crafting enterprise solutions and
+                  AI-driven products at scale.
+                </p>
+                <p className="mt-2 font-['Roboto_Slab',serif] text-[16px] leading-[1.45] text-[#2d6383]">
+                  She specializes in Reporting & Analytics with a strong focus on Data Visualization and excels at
+                  making complex systems approachable.
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
       </div>
     </motion.section>

@@ -1,8 +1,9 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { ArrowLeft } from 'lucide-react';
-import { ChartingPalettesProject } from './ChartingPalettesProject';
+import { DataVizCaseStudyPage } from './DataVizCaseStudyPage';
 import { DebuggingProject } from './DebuggingProject';
+import { ReportingInsightsCaseStudyPage } from './ReportingInsightsCaseStudyPage';
+import { ReportAuthoringProject } from './ReportAuthoringProject';
 
 const projectDetails = {
   'analytics-agent': {
@@ -51,20 +52,22 @@ const projectDetails = {
     category: 'Reporting',
     tags: ['Reporting', 'Analytics'],
     backgroundColor: '#dfebeb',
-    overview: 'A collaborative platform for creating, editing, and sharing data-driven reports with intelligent automation.',
-    challenge: 'Creating professional reports was time-consuming and required jumping between multiple tools.',
-    solution: 'We built an integrated authoring experience with AI-assisted writing, automatic data updates, and real-time collaboration.',
+    overview:
+      'Report authoring in Workday spans two dated screens while Data Source Findability and Report Authoring 2.0 advanced on parallel roadmaps—research and journey mapping surfaced the real problems.',
+    challenge:
+      'Two teams owned overlapping report-authoring workflows with no shared map of handoffs, friction, or end-to-end experience.',
+    solution:
+      'Recruited internal users, ran interviews, and synthesized findings into a five-phase journey map so both initiatives could be judged against the same reality.',
     impact: [
-      'Report creation time reduced by 50%',
-      'Collaboration efficiency improved by 80%',
-      'Template reuse increased by 200%'
+      'Single end-to-end journey map spanning five phases',
+      'Shared framing for two parallel product initiatives',
+      'Research grounded in implementers, analysts, builders, and consumers',
     ],
     features: [
-      'Drag-and-drop report builder',
-      'AI-powered content suggestions',
-      'Real-time collaboration',
-      'Automated data refresh'
-    ]
+      'Cross-role interviews across the authoring workflow',
+      'Participant mapping for implementers vs. internal analysts',
+      'Journey synthesis for requirements through consumption',
+    ],
   },
   'data-visualization': {
     title: 'Data Visualization',
@@ -152,8 +155,18 @@ export function ProjectDetail() {
   }
 
   // Use custom layout for charting palettes project
+  if (projectId === 'analytics-agent') {
+    return <ReportingInsightsCaseStudyPage />;
+  }
+
+  // Use custom layout for report authoring project
+  if (projectId === 'report-authoring') {
+    return <ReportAuthoringProject />;
+  }
+
+  // Data Viz — shared ChartingPalettes shell; no Track 1–2 / closing interstitial after the end CTA.
   if (projectId === 'charting-palettes') {
-    return <ChartingPalettesProject />;
+    return <DataVizCaseStudyPage />;
   }
 
   // Use custom layout for debugging project
@@ -170,37 +183,28 @@ export function ProjectDetail() {
       style={{ backgroundColor: project.backgroundColor }}
     >
       {/* Hero Section */}
-      <div className="pt-32 pb-16 px-8 lg:px-22 max-w-7xl mx-auto">
-        <motion.button
-          onClick={() => navigate('/')}
-          className="flex items-center gap-2 mb-8 text-black hover:underline"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.2 }}
-        >
-          <ArrowLeft className="size-5" />
-          <span className="font-['Inter',sans-serif] text-[16px]">Back to Projects</span>
-        </motion.button>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-        >
-          <div className="flex gap-2 mb-4">
-            {project.tags.map((tag, index) => (
-              <p key={index} className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab] inline-block">
-                #{tag}
-              </p>
-            ))}
-          </div>
-          <h1 className="font-['Roboto_Slab',serif] text-[64px] tracking-[1.6px] mb-6 text-[#2e2e2e]">
-            {project.title}
-          </h1>
-          <p className="font-['Inter',sans-serif] text-[24px] leading-[1.5] text-[rgba(0,0,0,0.7)] max-w-3xl">
-            {project.overview}
-          </p>
-        </motion.div>
+      <div className="pt-[88px] pb-16 bg-white">
+        <div className="max-w-5xl mx-auto px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          >
+            <div className="flex gap-2 mb-4">
+              {project.tags.map((tag, index) => (
+                <p key={index} className="font-['Inter',sans-serif] text-[14px] tracking-[2px] uppercase text-[#2d6383] font-[Roboto_Slab] inline-block">
+                  #{tag}
+                </p>
+              ))}
+            </div>
+            <h2 className="font-['Roboto_Slab',serif] text-[64px] tracking-[1.6px] mb-6 text-[#2e2e2e]">
+              {project.title}
+            </h2>
+            <p className="font-['Inter',sans-serif] text-[24px] leading-[1.5] text-[rgba(0,0,0,0.7)] max-w-3xl">
+              {project.overview}
+            </p>
+          </motion.div>
+        </div>
       </div>
 
       {/* Project Image Placeholder */}
@@ -208,9 +212,12 @@ export function ProjectDetail() {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="max-w-7xl mx-auto px-8 lg:px-22 mb-20"
+        style={{ backgroundColor: project.backgroundColor }}
+        className="pb-20"
       >
-        <div className="bg-white h-[500px] rounded-[24px] shadow-[0px_4px_20px_4px_rgba(0,0,0,0.15)] w-full" />
+        <div className="max-w-5xl mx-auto px-8">
+          <div className="bg-white h-[500px] rounded-[24px] shadow-[0px_4px_20px_4px_rgba(0,0,0,0.15)] w-full" />
+        </div>
       </motion.div>
 
       {/* Content Sections */}
@@ -297,7 +304,7 @@ export function ProjectDetail() {
             transition={{ duration: 0.6 }}
             className="text-center pt-12 border-t border-gray-200"
           >
-            <h3 className="font-['Roboto_Slab',serif] text-[32px] tracking-[1.6px] mb-6 text-[#2e2e2e]">
+            <h3 className="font-['Roboto_Slab',serif] text-[28px] tracking-[1.6px] mb-6 text-[#2e2e2e]">
               Interested in learning more?
             </h3>
             <button
@@ -307,7 +314,7 @@ export function ProjectDetail() {
                   document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
                 }, 100);
               }}
-              className="bg-[#2d6383] text-white px-8 py-4 rounded-[12px] font-['Inter',sans-serif] text-[18px] hover:bg-[#3d7393] transition-colors"
+              className="bg-[#2d6383] text-white px-8 py-3 rounded-[12px] font-['Inter',sans-serif] text-[18px] hover:bg-[#2d6383]/90 transition-colors"
             >
               Get in Touch
             </button>

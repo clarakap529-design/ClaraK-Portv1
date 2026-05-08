@@ -18,10 +18,6 @@ const contextualMessages = {
   about: {
     message: "🤖 Want to know more? Try the 'Ask Me Anything' section - I can answer questions about the designer's work!",
     delay: 2000
-  },
-  contact: {
-    message: "📬 Ready to connect? I'll help you send a message in a conversational way.",
-    delay: 2000
   }
 };
 
@@ -59,8 +55,7 @@ export function AICompanion({ currentSection }: AICompanionProps) {
 
   const quickActions = [
     { label: 'View Projects', action: () => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }) },
-    { label: 'About Me', action: () => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }) },
-    { label: 'Get in Touch', action: () => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }) }
+    { label: 'About Me', action: () => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }) }
   ];
 
   return (

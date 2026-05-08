@@ -59,9 +59,8 @@ export function Contact() {
 
   return (
     <section id="contact" className="py-20 px-6 bg-white">
-      <div className="max-w-3xl mx-auto">
-        <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl p-8 shadow-xl">
-          <div className="bg-white rounded-xl p-6 min-h-[400px] flex flex-col">
+      <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl p-8 shadow-xl">
+        <div className="bg-white rounded-xl p-6 min-h-[400px] flex flex-col">
             <div className="flex-1 space-y-4 mb-6">
               <AnimatePresence mode="wait">
                 {!isSubmitted ? (
@@ -130,7 +129,9 @@ export function Contact() {
                     <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                       <Sparkles className="w-8 h-8 text-green-600" />
                     </div>
-                    <h3 className="mb-2">Thanks for reaching out!</h3>
+                    <h3 className="font-['Roboto_Slab',serif] text-[28px] tracking-[0.4px] leading-[1.2] text-[#2e2e2e] mb-2">
+                      Thanks for reaching out!
+                    </h3>
                     <p className="text-slate-600 mb-6">
                       I'll get back to you soon, {formData.name}!
                     </p>
@@ -173,7 +174,6 @@ export function Contact() {
                 </button>
               </form>
             )}
-          </div>
         </div>
       </div>
     </section>

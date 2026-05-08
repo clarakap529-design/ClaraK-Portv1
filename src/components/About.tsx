@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { Sparkles, Brain, Heart, Zap } from 'lucide-react';
+import { Sparkles, Heart, Zap } from 'lucide-react';
 
 const aiQuestions = [
   {
@@ -41,24 +41,23 @@ export function About() {
   };
 
   return (
-    <section id="about" className="py-20 px-6 bg-slate-50">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+    <footer id="about" className="py-20 bg-gray-100">
+      <div className="mx-auto w-full max-w-5xl px-4 md:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-[minmax(0,220px)_1fr] lg:grid-cols-[minmax(0,260px)_1fr] gap-x-8 gap-y-6 md:gap-x-12 lg:gap-x-16 items-start">
+          <h2 className="mb-0 md:pt-1">About Me</h2>
           <div>
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full mb-6 shadow-sm">
-              <Brain className="w-4 h-4 text-blue-600" />
-              <span className="text-sm text-slate-600">Get to know me</span>
-            </div>
-            
-            <h2 className="mb-6">About Me</h2>
-            
-            <p className="text-slate-600 mb-6">
-              I'm a product designer with 6+ years of experience creating digital experiences 
-              that people love. I specialize in UX/UI design, design systems, and recently, 
-              designing for AI-powered products.
+            <p className="text-slate-600 mb-3">
+              Hi, thanks for visiting my site. I have 12+ years crafting enterprise solutions and most
+              recently designing AI-driven products at scale. I specialize in Reporting & Analytics and Data
+              Visualization, and I'm endlessly curious about what it means to design for the agentic AI era.
+            </p>
+            <p className="text-slate-600 mb-0">
+              I'm an AI enthusiast who builds as much as I design — regularly using Figma Make and Loveable
+              as part of my design workflow. Lately I've been expanding into Cursor, using it to build a
+              chart-generating Figma plugin and this portfolio site.
             </p>
 
-            <div className="space-y-4 mb-8">
+            <div className="space-y-4 mt-10">
               <div className="flex items-start gap-3">
                 <div className="p-2 bg-blue-100 rounded-lg">
                   <Heart className="w-5 h-5 text-blue-600" />
@@ -90,10 +89,8 @@ export function About() {
               </div>
             </div>
           </div>
-
-          {/* Removed Ask Me Anything section */}
         </div>
       </div>
-    </section>
+    </footer>
   );
 }

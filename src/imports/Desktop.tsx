@@ -406,7 +406,7 @@ function Group4() {
 
 function Text3() {
   return (
-    <div className="bg-[#e8eef5] max-w-[1500px] relative shrink-0 w-full" data-name="Text">
+    <div className="bg-[#E0E8F0] max-w-[1500px] relative shrink-0 w-full" data-name="Text">
       <div className="flex flex-col justify-center max-w-[inherit] size-full">
         <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] p-[48px] relative w-full">
           <div className="flex flex-col font-['Roboto_Slab:Medium',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[32px] text-black text-center tracking-[-0.96px] w-full">
@@ -470,7 +470,7 @@ function Tabs1() {
 
 function DebugAccessibilityTabs() {
   return (
-    <div className="bg-[#e8eef5] h-[700px] relative shrink-0 w-[1280px]" data-name="debug accessibility tabs">
+    <div className="bg-[#E0E8F0] h-[700px] relative shrink-0 w-[1280px]" data-name="debug accessibility tabs">
       <Tabs1 />
       <div className="absolute aspect-[948/613.237] bottom-[16px] left-[calc(50%-4px)] top-[50px] translate-x-[-50%]" data-name="Snapshot 1">
         <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgSnapshot1} />

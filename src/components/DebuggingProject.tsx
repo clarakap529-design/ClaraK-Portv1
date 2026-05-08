@@ -1,6 +1,5 @@
 import { motion } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
 import svgPaths from "../imports/svg-dlwaci8ljv";
 import imgLineage2 from "figma:asset/ce7b9d9fdb9f2d058383f92ad930c1382017cff7.png";
 import imgScreenshot20241008At35946Pm1 from "figma:asset/150944f4a29ca5630873f2f6789c568508774473.png";
@@ -25,18 +24,7 @@ export function DebuggingProject() {
     >
       {/* Hero Section */}
       <header className="bg-[#f2f2f7] w-full pt-32 pb-16">
-        <div className="max-w-7xl mx-auto px-8 lg:px-22">
-          <motion.button
-            onClick={() => navigate('/')}
-            className="flex items-center gap-2 mb-8 text-black hover:underline"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            <ArrowLeft className="size-5" />
-            <span className="font-['Inter',sans-serif] text-[16px]">Back to Projects</span>
-          </motion.button>
-
+        <div className="max-w-5xl mx-auto px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -124,7 +112,7 @@ export function DebuggingProject() {
         transition={{ duration: 0.6 }}
         className="bg-[#dfebeb] py-10"
       >
-        <div className="max-w-7xl mx-auto px-12">
+        <div className="mx-auto max-w-5xl px-12">
           <h2 className="font-['Roboto_Slab',sans-serif] font-medium text-[32px] text-[#2d6383] text-center tracking-[-0.96px] leading-[1.25] mb-10">
             Known Technical Constraints
           </h2>
@@ -186,7 +174,7 @@ export function DebuggingProject() {
         transition={{ duration: 0.6 }}
         className="bg-white py-12"
       >
-        <div className="max-w-7xl mx-auto px-12">
+        <div className="mx-auto max-w-5xl px-12">
           <h2 className="font-['Roboto_Slab',sans-serif] font-medium text-[32px] text-center tracking-[-0.96px] leading-[1.25] mb-12">
             Considerations for UX Patterns
           </h2>
@@ -278,7 +266,7 @@ export function DebuggingProject() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="bg-[#e8eef5]"
+        className="bg-[#E0E8F0]"
       >
         <div className="py-12 px-12">
           <h2 className="font-['Roboto_Slab',sans-serif] font-medium text-[32px] text-center tracking-[-0.96px] leading-[1.25] mb-8">
@@ -333,7 +321,7 @@ export function DebuggingProject() {
         transition={{ duration: 0.6 }}
         className="bg-white py-12"
       >
-        <div className="max-w-7xl mx-auto px-12">
+        <div className="mx-auto max-w-5xl px-12">
           <h2 className="font-['Roboto_Slab',sans-serif] font-medium text-[32px] text-center tracking-[-0.96px] leading-[1.25] mb-8">
             Final Deliverable & Implemented Designs
           </h2>
@@ -360,7 +348,7 @@ export function DebuggingProject() {
         transition={{ duration: 0.6 }}
         className="bg-white text-center py-16 border-t border-gray-200"
       >
-        <h3 className="font-['Roboto_Slab',serif] text-[32px] tracking-[1.6px] mb-6 text-[#2e2e2e]">
+        <h3 className="font-['Roboto_Slab',serif] text-[28px] tracking-[1.6px] mb-6 text-[#2e2e2e]">
           Interested in learning more?
         </h3>
         <button
@@ -370,7 +358,7 @@ export function DebuggingProject() {
               document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
             }, 100);
           }}
-          className="bg-[#2d6383] text-white px-8 py-4 rounded-[12px] font-['Inter',sans-serif] text-[18px] hover:bg-[#3d7393] transition-colors"
+          className="bg-[#2d6383] text-white px-8 py-3 rounded-[12px] font-['Inter',sans-serif] text-[18px] hover:bg-[#2d6383]/90 transition-colors"
         >
           Get in Touch
         </button>
