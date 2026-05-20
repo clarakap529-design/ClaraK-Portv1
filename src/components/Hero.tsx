@@ -3,9 +3,19 @@ import svgPaths from '../imports/svg-vfavi83d5q';
 import arrowPaths from '../imports/svg-xh95ytaewt';
 import sparklePaths from '../imports/svg-hmqide8qyf';
 import arrowGraphic from '../imports/svg-7be7ktdsr5';
-import imgClarakProfile3 from "figma:asset/ef54086b5aa301178f7e14564626f3e8237bb488.png";
-import { imgClarakProfile2 } from "../imports/svg-6jk4k";
+import claraHeroProfile from '../assets/clara-hero-profile.png';
 import { useState } from 'react';
+
+/** Ease-out curve for UI fades and layout — reads smoother than default easeOut. */
+const smoothOut = [0.22, 1, 0.36, 1] as const;
+
+const fadeQuick = { duration: 0.28, ease: smoothOut };
+
+/** Artificial “thinking” pause before AI copy (was 2s; sparkles carry the motion). */
+const THINK_MS = 900;
+
+/** Desktop text column sits slightly above vertical center (px as translateY). */
+const HERO_DESKTOP_TEXT_LIFT = -18;
 
 function CoreSend() {
   return (
@@ -24,7 +34,7 @@ function Sparkle({ opacity = 0.4, pathKey }: { opacity?: number; pathKey: 'p2fd5
     <motion.div
       className="relative shrink-0 size-[12px]"
       animate={{ scale: [1, 1.2, 1], opacity: [opacity, opacity * 1.5, opacity] }}
-      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+      transition={{ duration: 0.72, repeat: Infinity, ease: 'easeInOut' }}
     >
       <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 12 12">
         <path clipRule="evenodd" d={sparklePaths[pathKey]} fill="var(--fill-0, #022043)" fillRule="evenodd" opacity={opacity} />
@@ -43,16 +53,6 @@ function LoadingSparkle() {
   );
 }
 
-function MaskGroup() {
-  return (
-    <div className="absolute contents left-[160px] top-[88px]" data-name="Mask group">
-      <div className="absolute h-[340.355px] left-[98.44px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[61.56px_11.495px] mask-size-[320px_320px] top-[76.5px] w-[498.96px]" data-name="Clarak-profile 2" style={{ maskImage: `url('${imgClarakProfile2}')` }}>
-        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none size-full" src={imgClarakProfile3} />
-      </div>
-    </div>
-  );
-}
-
 export function Hero() {
   const [isClicked, setIsClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -61,106 +61,109 @@ export function Hero() {
   const handlePromptClick = () => {
     setIsClicked(true);
     setIsLoading(true);
-    console.log('Prompt clicked');
-    
-    // Show loading for 2 seconds, then show response
     setTimeout(() => {
       setIsLoading(false);
       setShowResponse(true);
-    }, 2000);
+    }, THINK_MS);
   };
 
   return (
     <motion.section 
       id="hero" 
-      className="bg-[#E0E8F0] relative w-full overflow-hidden flex items-center justify-center min-h-[480px] py-8 -mt-[40px]"
+      className="bg-[#E0E8F0] relative flex min-h-[480px] w-full items-start justify-center overflow-hidden py-8 -mt-[40px]"
     >
       {/* Centered content container */}
-      <div className="hidden lg:flex items-center gap-[56px] max-w-[1440px] mx-auto px-[160px]" style={{ width: '1050px', marginLeft: 'calc(50% - 525px - 164px)' }}>
+      <div className="mx-auto hidden max-w-[1440px] items-start gap-[56px] px-[160px] lg:flex" style={{ width: '1050px', marginLeft: 'calc(50% - 525px - 164px)' }}>
         {/* Profile Image */}
-        <div className="relative shrink-0" data-name="Mask group">
-          <div className="h-[340.355px] w-[382px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[61.56px_11.495px] mask-size-[320px_320px]" data-name="Clarak-profile 2" style={{ maskImage: `url('${imgClarakProfile2}')` }}>
-            <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" style={{ objectPosition: '30% 30%' }} src={imgClarakProfile3} />
-          </div>
+        <div className="relative size-[320px] shrink-0 overflow-hidden rounded-full" data-name="Mask group">
+          <img
+            alt=""
+            className="pointer-events-none size-full object-cover object-center"
+            src={claraHeroProfile}
+          />
         </div>
 
         {/* Main Content */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 26 }}
           animate={{ 
             opacity: 1, 
-            y: showResponse ? -40 : 0
+            y: HERO_DESKTOP_TEXT_LIFT,
+            width: isClicked ? 611 : 561,
+            gap: 0,
           }}
-          transition={{ duration: 0.8 }}
+          transition={{
+            opacity: { duration: 0.75, ease: smoothOut },
+            y: { duration: 0.75, ease: smoothOut },
+            width: { duration: 0.55, ease: smoothOut },
+          }}
           className="content-stretch flex flex-col"
           style={{ 
-            gap: isClicked ? '24px' : '27px',
             alignItems: isClicked ? 'end' : 'start',
-            width: isClicked ? 611 : 561
           }}
         >
-          {/* Intro Text */}
-          <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full" data-name="Intro">
+          <motion.div
+            className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full pb-6"
+            data-name="Intro"
+            initial={{ opacity: 0, y: 72 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: smoothOut, delay: 0.06 }}
+          >
             <h1 className="relative w-full font-['Noteworthy',serif] text-[36px] font-bold leading-[1.25] tracking-[0.72px] text-[#2d6383]">
               Hi, my name is Clara. I'm good at making complex data feel friendly.
             </h1>
-            
-            {/* Divider line */}
-            <motion.div 
-              className="h-0 relative shrink-0 w-full"
+
+            {/* In-flow 1px rule so flex gap below is real space (h-0 + absolute SVG painted into the gap). */}
+            <motion.div
+              className="relative h-px shrink-0 self-start bg-[#6B96AC]"
               animate={{ width: isClicked ? 611 : 561 }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="absolute bottom-[-0.5px] left-0 right-0 top-[-0.5px]">
-                <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox={isClicked ? "0 0 611 1" : "0 0 561 1"}>
-                  <path d={isClicked ? "M0 0.5H611" : "M0 0.5H561"} stroke="var(--stroke-0, #6B96AC)" />
-                </svg>
-              </div>
-            </motion.div>
-          </div>
+              transition={{ duration: 0.55, ease: smoothOut }}
+            />
+          </motion.div>
 
-          {/* Suggested Prompt - fades out when clicked */}
-          <AnimatePresence>
-            {!isClicked && (
-              <motion.div 
-                className="content-stretch flex gap-[8px] items-center relative shrink-0"
+          {/* Suggested prompt → user bubble: wait avoids overlap jank; spring softens the bubble. */}
+          <AnimatePresence mode="wait">
+            {!isClicked ? (
+              <motion.div
+                key="hero-suggested-prompt"
+                className="flex w-full shrink-0 items-start justify-start"
+                initial={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.24, ease: smoothOut }}
               >
-                <div className="relative">
-                  <motion.button
-                    onClick={handlePromptClick}
-                    className="bg-[#2d6383] box-border content-stretch flex gap-[10px] items-center justify-center px-8 py-3 relative rounded-[12px] shrink-0 hover:bg-[#2d6383]/90 transition-colors cursor-pointer"
-                    animate={{
-                      boxShadow: [
-                        '0 0 0 0px rgba(199, 97, 41, 0)',
-                        '0 0 0 4px rgba(199, 97, 41, 0.4)',
-                        '0 0 0 0px rgba(199, 97, 41, 0)'
-                      ]
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
+                <motion.button
+                  type="button"
+                  onClick={handlePromptClick}
+                  className="bg-[#2d6383] box-border flex w-fit max-w-full cursor-pointer items-center justify-center rounded-[12px] px-[16px] py-[8px] text-left hover:bg-[#2d6383]/90"
+                  animate={{
+                    boxShadow: [
+                      '0px 4px 10px 2px rgba(0,0,0,0.08), 0 0 0 0px rgba(199, 97, 41, 0)',
+                      '0px 4px 10px 2px rgba(0,0,0,0.08), 0 0 0 4px rgba(199, 97, 41, 0.4)',
+                      '0px 4px 10px 2px rgba(0,0,0,0.08), 0 0 0 0px rgba(199, 97, 41, 0)',
+                    ],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
+                >
+                  <div
+                    className="flex flex-col justify-center font-['Roboto:Regular',sans-serif] text-[16px] font-normal leading-[0] tracking-[-0.48px] text-nowrap text-white"
+                    style={{ fontVariationSettings: "'wdth' 100" }}
                   >
-                    <div className="flex flex-col font-['Roboto:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[14px] text-nowrap text-white tracking-[-0.42px]" style={{ fontVariationSettings: "'wdth' 100" }}>
-                      <p className="leading-[1.25] whitespace-pre font-['Inter',sans-serif] text-[18px]">Why is she a great candidate?</p>
-                    </div>
-                  </motion.button>
-                </div>
+                    <p className="leading-[1.25] whitespace-pre">Why is she a great candidate?</p>
+                  </div>
+                </motion.button>
               </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* User Response - appears when clicked */}
-          <AnimatePresence>
-            {isClicked && (
-              <motion.div 
-                className="bg-white content-stretch flex items-center justify-end px-[16px] py-[8px] relative rounded-bl-[12px] rounded-br-[12px] rounded-tl-[12px] shrink-0"
-                initial={{ opacity: 0, scale: 0.8, y: -20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
+            ) : (
+              <motion.div
+                key="hero-user-reply"
+                layout={false}
+                className="box-border flex w-fit max-w-full shrink-0 items-center justify-end rounded-bl-[12px] rounded-br-[12px] rounded-tl-[12px] bg-white px-[16px] py-[8px] shadow-sm"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={fadeQuick}
               >
                 <div className="flex flex-col font-['Roboto:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#2e2e2e] text-[16px] text-nowrap text-right tracking-[-0.48px]" style={{ fontVariationSettings: "'wdth' 100" }}>
                   <p className="leading-[1.25] whitespace-pre">Why is she a great candidate?</p>
@@ -173,11 +176,11 @@ export function Hero() {
           <AnimatePresence>
             {isLoading && (
               <motion.div 
-                className="content-stretch flex flex-col gap-[10px] items-start justify-center relative shrink-0 w-full"
+                className="content-stretch mt-6 flex min-h-[20px] flex-col gap-[10px] items-start justify-center relative shrink-0 w-full"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.22, ease: smoothOut }}
               >
                 <LoadingSparkle />
               </motion.div>
@@ -188,10 +191,10 @@ export function Hero() {
           <AnimatePresence>
             {showResponse && (
               <motion.div 
-                className="basis-0 font-['Roboto_Slab:Regular',sans-serif] font-normal grow leading-[1.25] min-h-px min-w-full relative shrink-0 text-[#2d6383] text-[16px] tracking-[-0.48px] w-[min-content]"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="relative mt-6 w-full min-w-0 shrink-0 font-['Roboto_Slab:Regular',sans-serif] text-[16px] font-normal leading-[1.25] tracking-[-0.48px] text-[#2d6383]"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4, ease: smoothOut }}
               >
                 <p className="mb-0">{`With over 12 years in UX design, Clara has extensive experience crafting enterprise solutions and AI-driven products at scale. `}</p>
                 <p className="mb-0">&nbsp;</p>
@@ -210,62 +213,69 @@ export function Hero() {
           transition={{ duration: 0.8 }}
           className="mb-8"
         >
-          <div 
-            className="w-[220px] h-[220px] md:w-[240px] md:h-[240px] mx-auto mask-alpha mask-intersect mask-no-clip mask-no-repeat" 
-            style={{ 
-              maskImage: `url('${imgClarakProfile2}')`,
-              maskSize: 'contain',
-              maskPosition: 'center'
-            }}
-          >
-            <img 
-              alt="Profile" 
-              className="w-full h-full object-cover" 
-              style={{ objectPosition: '40% 30%' }}
-              src={imgClarakProfile3} 
+          <div className="mx-auto size-[220px] overflow-hidden rounded-full md:size-[240px]">
+            <img
+              alt="Profile"
+              className="size-full object-cover object-center"
+              src={claraHeroProfile}
             />
           </div>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          initial={{ opacity: 0, y: 20, gap: 44 }}
+          animate={{
+            opacity: 1,
+            y: 0,
+            gap: 44,
+          }}
+          transition={{
+            opacity: { duration: 0.8, delay: 0.2, ease: smoothOut },
+            y: { duration: 0.8, delay: 0.2, ease: smoothOut },
+          }}
           className="w-full max-w-xl flex flex-col items-center text-center"
         >
-          <h1 className="font-['Noteworthy',serif] text-[30px] md:text-[34px] font-bold leading-[1.25] tracking-[0.72px] text-[#2d6383] mb-6">
-            Hi, my name is Clara. I'm good at making complex data feel friendly.
-          </h1>
+          <motion.div
+            className="w-full"
+            initial={{ opacity: 0, y: 56 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.95, ease: smoothOut, delay: 0.14 }}
+          >
+            <h1 className="font-['Noteworthy',serif] text-[30px] md:text-[34px] font-bold leading-[1.25] tracking-[0.72px] text-[#2d6383]">
+              Hi, my name is Clara. I'm good at making complex data feel friendly.
+            </h1>
+          </motion.div>
 
-          <AnimatePresence>
-            {!isClicked && (
+          <AnimatePresence mode="wait">
+            {!isClicked ? (
               <motion.div
+                key="hero-mobile-prompt"
                 className="flex flex-wrap justify-center gap-[8px] items-center"
                 initial={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.25 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.24, ease: smoothOut }}
               >
                 <p className="font-['Roboto:Italic',sans-serif] italic text-[#2e2e2e] text-[14px] tracking-[-0.42px]">
                   Suggested prompt:
                 </p>
                 <button
+                  type="button"
                   onClick={handlePromptClick}
-                  className="bg-[#2d6383] px-8 py-3 rounded-[12px] text-white font-['Inter',sans-serif] text-[18px] hover:bg-[#2d6383]/90 transition-colors"
+                  className="w-fit max-w-full rounded-[12px] bg-[#2d6383] px-4 py-2 text-left font-['Roboto:Regular',sans-serif] text-[16px] font-normal tracking-[-0.48px] text-white hover:bg-[#2d6383]/90"
+                  style={{ fontVariationSettings: "'wdth' 100" }}
                 >
                   Why is she a great candidate?
                 </button>
               </motion.div>
-            )}
-          </AnimatePresence>
-
-          <AnimatePresence>
-            {isClicked && (
+            ) : (
               <motion.div
-                className="mt-1 self-end bg-white px-4 py-2 rounded-[12px] w-fit max-w-full text-right"
-                initial={{ opacity: 0, scale: 0.9, y: -10 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.9, y: -10 }}
-                transition={{ duration: 0.35 }}
+                key="hero-mobile-reply"
+                layout={false}
+                className="self-end bg-white px-4 py-2 rounded-[12px] w-fit max-w-full text-right shadow-sm"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={fadeQuick}
               >
                 <p className="font-['Inter',sans-serif] text-[15px] text-[#2e2e2e]">
                   Why is she a great candidate?
@@ -277,11 +287,11 @@ export function Hero() {
           <AnimatePresence>
             {isLoading && (
               <motion.div
-                className="mt-4"
+                className="mt-4 flex min-h-[20px] items-center justify-center"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.25 }}
+                transition={{ duration: 0.22, ease: smoothOut }}
               >
                 <LoadingSparkle />
               </motion.div>
@@ -292,10 +302,10 @@ export function Hero() {
             {showResponse && (
               <motion.div
                 className="mt-4 text-left w-full"
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 8 }}
-                transition={{ duration: 0.4 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4, ease: smoothOut }}
               >
                 <p className="font-['Roboto_Slab',serif] text-[16px] leading-[1.45] text-[#2d6383]">
                   With over 12 years in UX design, Clara has extensive experience crafting enterprise solutions and

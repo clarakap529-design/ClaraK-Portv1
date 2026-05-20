@@ -832,6 +832,10 @@ export function ChartingPalettesProject({
             insights.
           </li>
         </ul>
+
+        <h3 className="font-['Roboto_Slab',serif] text-[28px] tracking-[0.4px] case-study-h3-pad-5 text-[#2e2e2e] leading-[1.2] mt-10 md:mt-12">
+          Interested in seeing what happened? Let&apos;s chat!
+        </h3>
       </>
     );
   }
@@ -1313,7 +1317,7 @@ export function ChartingPalettesProject({
                     : 'mt-8 md:mt-10'
                 }`}
               >
-                Style Guide
+                The Research
               </h3>
               <p className="font-['Inter',sans-serif] text-[14px] leading-[1.45] text-black mt-2 mb-4">{styleGuideSectionIntro}</p>
               {showStyleGuideCarousel && styleGuideCarouselSlidesResolved.length > 0 ? (

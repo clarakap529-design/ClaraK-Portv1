@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { About } from './About';
-import imgClarakProfile3 from "figma:asset/ef54086b5aa301178f7e14564626f3e8237bb488.png";
+import claraHeroProfile from '../assets/clara-hero-profile.png';
 import { Lock, Unlock } from 'lucide-react';
 import {
   Dialog,
@@ -146,10 +146,9 @@ export function Layout({ children }: LayoutProps) {
             className="flex items-center gap-[8px] font-['Inter',sans-serif] font-medium text-[14px] text-black tracking-[-0.42px] hover:opacity-70 transition-opacity"
           >
             <img
-              src={imgClarakProfile3}
+              src={claraHeroProfile}
               alt="Clara K."
-              className="w-[28px] h-[28px] rounded-full object-cover"
-              style={{ objectPosition: '40% 20%' }}
+              className="h-[28px] w-[28px] rounded-full object-cover object-center"
             />
             Clara K.
           </button>

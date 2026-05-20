@@ -113,7 +113,7 @@ export function ProjectGallery() {
               className="mx-auto max-w-3xl text-center font-['Roboto',sans-serif] text-[16px] tracking-[-0.48px] text-[#2e2e2e]"
               style={{ fontVariationSettings: "'wdth' 100" }}
             >
-              These projects highlight the breadth of my enterprise work - from shaping agentic AI product vision to
+              These projects highlight my recent enterprise work - from shaping agentic AI product vision to
               navigating complex platform-level design challenges. Grounded in 12+ years of UX experience, and a
               constant curiosity to learn, adapt, and push the work further.
             </p>
