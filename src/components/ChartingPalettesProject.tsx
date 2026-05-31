@@ -960,9 +960,9 @@ export function ChartingPalettesProject({
               </>
             ) : (
               <>
-                <h3 className="font-['Roboto_Slab',serif] text-[28px] tracking-[0.4px] case-study-h3-pad-5 text-[#2e2e2e] leading-[1.2]">
+                <h2 className={CASE_STUDY_HERO_BLUE_TITLE_CLASS}>
                   The Starting Point
-                </h3>
+                </h2>
                 <div className="mb-6 space-y-3 font-['Inter',sans-serif] text-[14px] leading-[1.5] text-black md:mb-7 md:leading-[1.45]">
                   {startingPointParagraphs.map((paragraph, index) => (
                     <p key={index}>{paragraph}</p>
