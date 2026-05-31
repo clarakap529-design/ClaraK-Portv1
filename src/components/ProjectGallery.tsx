@@ -113,9 +113,10 @@ export function ProjectGallery() {
               className="mx-auto max-w-3xl text-center font-['Roboto',sans-serif] text-[16px] tracking-[-0.48px] text-[#2e2e2e]"
               style={{ fontVariationSettings: "'wdth' 100" }}
             >
-              These projects highlight my recent enterprise work - from shaping agentic AI product vision to
-              navigating complex platform-level design challenges. Grounded in 12+ years of UX experience, and a
-              constant curiosity to learn, adapt, and push the work further.
+              Three reporting projects where the product team framed the problem — and I found what was underneath
+              it. Each one required digging deeper than the original ask, identifying underlying issues, and
+              connecting the dots across teams and platforms that weren't talking to each other. That's the work
+              that doesn't show up in a brief.
             </p>
           </div>
 

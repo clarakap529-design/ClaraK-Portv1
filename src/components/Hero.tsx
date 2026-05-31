@@ -70,10 +70,10 @@ export function Hero() {
   return (
     <motion.section 
       id="hero" 
-      className="bg-[#E0E8F0] relative flex min-h-[480px] w-full items-start justify-center overflow-hidden py-8"
+      className="bg-[#E0E8F0] relative flex min-h-[480px] w-full items-start justify-center overflow-hidden pt-10 pb-16"
     >
       {/* Centered content container */}
-      <div className="mx-auto hidden max-w-[1440px] items-start gap-[56px] px-[160px] lg:flex" style={{ width: '1050px', marginLeft: 'calc(50% - 525px - 164px)' }}>
+      <div className="mx-auto hidden w-full max-w-[987px] items-start justify-start gap-[56px] px-4 lg:flex">
         {/* Profile Image */}
         <div className="relative size-[320px] shrink-0 overflow-hidden rounded-full" data-name="Mask group">
           <img
@@ -89,7 +89,7 @@ export function Hero() {
           animate={{ 
             opacity: 1, 
             y: HERO_DESKTOP_TEXT_LIFT,
-            width: isClicked ? 611 : 561,
+            width: 561,
             gap: 0,
           }}
           transition={{
@@ -97,7 +97,7 @@ export function Hero() {
             y: { duration: 0.75, ease: smoothOut },
             width: { duration: 0.55, ease: smoothOut },
           }}
-          className="content-stretch flex flex-col"
+          className="content-stretch flex flex-col self-start"
           style={{ 
             alignItems: isClicked ? 'end' : 'start',
           }}
@@ -114,11 +114,7 @@ export function Hero() {
             </h1>
 
             {/* In-flow 1px rule so flex gap below is real space (h-0 + absolute SVG painted into the gap). */}
-            <motion.div
-              className="relative h-px shrink-0 self-start bg-[#6B96AC]"
-              animate={{ width: isClicked ? 611 : 561 }}
-              transition={{ duration: 0.55, ease: smoothOut }}
-            />
+            <div className="relative h-px w-[561px] max-w-full shrink-0 self-start bg-[#6B96AC]" />
           </motion.div>
 
           {/* Suggested prompt → user bubble: wait avoids overlap jank; spring softens the bubble. */}
@@ -196,9 +192,9 @@ export function Hero() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.4, ease: smoothOut }}
               >
-                <p className="mb-0">{`With over 12 years in UX design, Clara has extensive experience crafting enterprise solutions and AI-driven products at scale. `}</p>
+                <p className="mb-0">{`Clara specializes in technically complex, large-scale problem spaces — enterprise reporting & analytics, AI agents, and security workflows.`}</p>
                 <p className="mb-0">&nbsp;</p>
-                <p>{`She specializes in Reporting & Analytics with a strong focus on Data Visualization. She excels at untangling complex problems and creating intuitive designs that serve real human needs.`}</p>
+                <p>{`With 12+ years in enterprise UX, she has the experience to untangle problems that only reveal themselves when you understand the whole system.`}</p>
               </motion.div>
             )}
           </AnimatePresence>
@@ -308,12 +304,12 @@ export function Hero() {
                 transition={{ duration: 0.4, ease: smoothOut }}
               >
                 <p className="font-['Roboto_Slab',serif] text-[16px] leading-[1.45] text-[#2d6383]">
-                  With over 12 years in UX design, Clara has extensive experience crafting enterprise solutions and
-                  AI-driven products at scale.
+                  Clara specializes in technically complex, large-scale problem spaces — enterprise reporting &
+                  analytics, AI agents, and security workflows.
                 </p>
                 <p className="mt-2 font-['Roboto_Slab',serif] text-[16px] leading-[1.45] text-[#2d6383]">
-                  She specializes in Reporting & Analytics with a strong focus on Data Visualization and excels at
-                  making complex systems approachable.
+                  With 12+ years in enterprise UX, she has the experience to untangle problems that only reveal
+                  themselves when you understand the whole system.
                 </p>
               </motion.div>
             )}
