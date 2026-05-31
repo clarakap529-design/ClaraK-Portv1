@@ -323,4 +323,3 @@ export function Hero() {
     </motion.section>
   );
 }
-}
